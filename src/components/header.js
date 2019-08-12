@@ -1,34 +1,52 @@
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import styled from 'styled-components';
+import MountainImage from '../images/mountain.svg';
+import Stars from './stars';
+
+const Mountain = styled.div`
+  background: url(${MountainImage});
+  width: 100%;
+  height: 500px;
+  bottom: 0;
+  position: absolute;
+  background-position: bottom;
+  background-size: 100% 100%;
+  margin-bottom: -140px;
+  z-index: 2;
+`;
+
+const HeaderWrapper = styled.header`
+  margin: 0;
+  background: ${props => props.theme.primary};
+  background: radial-gradient(circle,${props => props.theme.primary},${props => props.theme.primaryDark});
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  height: 70vh;
+  overflow: hidden;
+`;
+
+const Sunset = styled.section`
+  width: 100%;
+  height: 80%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  background-image: linear-gradient(180deg,hsla(0,0%,100%,0), ${props => props.theme.accent});
+  background-repeat: repeat-x;
+  opacity: .38;
+  z-index: 1;
+`;
+
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
+  <HeaderWrapper>
+    <Sunset></Sunset>
+    <Stars></Stars>
+    <Mountain></Mountain>
+  </HeaderWrapper>
 )
 
 Header.propTypes = {
