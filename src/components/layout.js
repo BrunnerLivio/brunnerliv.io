@@ -13,10 +13,11 @@ import theme from "../theme/theme";
 
 import Header from "./header"
 import "./layout.css"
+import Navigation from "./navigation";
 
 const MainWrapper = styled.main`
-  color: rgba(255, 255, 255, 0.8);
-  `;
+
+`;
 
 const Container = styled.div`
   padding: 0px 1.0875rem 1.45rem;
@@ -58,6 +59,7 @@ const Layout = ({ children }) => {
         <Header siteTitle={data.site.siteMetadata.title} />
         <Container>
           <Content>
+            <Navigation />
             <main>{children}</main>
             <footer>
               © {new Date().getFullYear()}, Built with

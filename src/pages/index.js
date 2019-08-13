@@ -2,16 +2,22 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import styled from 'styled-components';
+
+const EgoSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et congue justo. Duis ut metus tincidunt, aliquet nunc sed, scelerisque erat. Sed et eros ipsum. In luctus ultrices leo, quis ultricies tortor ornare et. Aliquam erat turpis, tempus a volutpat vel, finibus sed nulla. Vestibulum eget nisi ante. Vivamus id orci ac urna imperdiet luctus facilisis euismod odio. Praesent dignissim pretium odio, vel efficitur nulla. Donec rhoncus eleifend lacus. Aliquam sit amet magna gravida, sollicitudin mi at, consequat tellus. Morbi aliquam diam vitae justo dignissim, nec facilisis sapien venenatis. Aenean ultricies dictum purus sit amet facilisis. Morbi tristique lectus a metus malesuada efficitur. Vivamus id purus sem. Suspendisse eu cursus eros. Duis nec augue a purus luctus suscipit eu ut nisl.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et congue justo. Duis ut metus tincidunt, aliquet nunc sed, scelerisque erat. Sed et eros ipsum. In luctus ultrices leo, quis ultricies tortor ornare et. Aliquam erat turpis, tempus a volutpat vel, finibus sed nulla. Vestibulum eget nisi ante. Vivamus id orci ac urna imperdiet luctus facilisis euismod odio. Praesent dignissim pretium odio, vel efficitur nulla. Donec rhoncus eleifend lacus. Aliquam sit amet magna gravida, sollicitudin mi at, consequat tellus. Morbi aliquam diam vitae justo dignissim, nec facilisis sapien venenatis. Aenean ultricies dictum purus sit amet facilisis. Morbi tristique lectus a metus malesuada efficitur. Vivamus id purus sem. Suspendisse eu cursus eros. Duis nec augue a purus luctus suscipit eu ut nisl.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et congue justo. Duis ut metus tincidunt, aliquet nunc sed, scelerisque erat. Sed et eros ipsum. In luctus ultrices leo, quis ultricies tortor ornare et. Aliquam erat turpis, tempus a volutpat vel, finibus sed nulla. Vestibulum eget nisi ante. Vivamus id orci ac urna imperdiet luctus facilisis euismod odio. Praesent dignissim pretium odio, vel efficitur nulla. Donec rhoncus eleifend lacus. Aliquam sit amet magna gravida, sollicitudin mi at, consequat tellus. Morbi aliquam diam vitae justo dignissim, nec facilisis sapien venenatis. Aenean ultricies dictum purus sit amet facilisis. Morbi tristique lectus a metus malesuada efficitur. Vivamus id purus sem. Suspendisse eu cursus eros. Duis nec augue a purus luctus suscipit eu ut nisl.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et congue justo. Duis ut metus tincidunt, aliquet nunc sed, scelerisque erat. Sed et eros ipsum. In luctus ultrices leo, quis ultricies tortor ornare et. Aliquam erat turpis, tempus a volutpat vel, finibus sed nulla. Vestibulum eget nisi ante. Vivamus id orci ac urna imperdiet luctus facilisis euismod odio. Praesent dignissim pretium odio, vel efficitur nulla. Donec rhoncus eleifend lacus. Aliquam sit amet magna gravida, sollicitudin mi at, consequat tellus. Morbi aliquam diam vitae justo dignissim, nec facilisis sapien venenatis. Aenean ultricies dictum purus sit amet facilisis. Morbi tristique lectus a metus malesuada efficitur. Vivamus id purus sem. Suspendisse eu cursus eros. Duis nec augue a purus luctus suscipit eu ut nisl.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin et congue justo. Duis ut metus tincidunt, aliquet nunc sed, scelerisque erat. Sed et eros ipsum. In luctus ultrices leo, quis ultricies tortor ornare et. Aliquam erat turpis, tempus a volutpat vel, finibus sed nulla. Vestibulum eget nisi ante. Vivamus id orci ac urna imperdiet luctus facilisis euismod odio. Praesent dignissim pretium odio, vel efficitur nulla. Donec rhoncus eleifend lacus. Aliquam sit amet magna gravida, sollicitudin mi at, consequat tellus. Morbi aliquam diam vitae justo dignissim, nec facilisis sapien venenatis. Aenean ultricies dictum purus sit amet facilisis. Morbi tristique lectus a metus malesuada efficitur. Vivamus id purus sem. Suspendisse eu cursus eros. Duis nec augue a purus luctus suscipit eu ut nisl.</p>
+    <EgoSection>
+      <div>
+        <h1>Livio Brunner</h1>
+      </div>
+    </EgoSection>
   </Layout>
 )
 

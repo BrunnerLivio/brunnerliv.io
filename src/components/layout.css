@@ -617,6 +617,11 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+
+h1, h2, h3, h4, h5, h6, p, footer, li, a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
