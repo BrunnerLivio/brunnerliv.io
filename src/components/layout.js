@@ -15,16 +15,17 @@ import Header from "./header"
 import "./layout.css"
 import Navigation from "./navigation";
 
-const MainWrapper = styled.main`
-
+const MainWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `;
 
 const Container = styled.div`
-  padding: 0px 1.0875rem 1.45rem;
-  padding-top: 0;
   display: flex;
   justify-content: center;
   background: ${props => props.theme.primaryDarker};
+  flex: 1;
   &&:before {
     max-height: 500px;
     height: 100%;
@@ -37,9 +38,9 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  width: 800px;
   position: relative;
-  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Layout = ({ children }) => {
@@ -60,11 +61,8 @@ const Layout = ({ children }) => {
         <Container>
           <Content>
             <Navigation />
-            <main>{children}</main>
+            {children}
             <footer>
-              © {new Date().getFullYear()}, Built with
-              {` `}
-              <a href="https://www.gatsbyjs.org">Gatsby</a>
             </footer>
           </Content>
         </Container>

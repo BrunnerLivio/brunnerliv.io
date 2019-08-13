@@ -619,7 +619,7 @@ pre tt:after {
 }
 
 h1, h2, h3, h4, h5, h6, p, footer, li, a {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 1);
 }
 
 @media only screen and (max-width: 480px) {
