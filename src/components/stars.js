@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect } from "react"
 import styled from "styled-components"
 import color from "color"
 import theme from "../theme/theme"
@@ -54,14 +54,23 @@ const Stars = () => {
   const starsLayerThreeRef = useRef(null);
   const starsLayerFourRef = useRef(null);
 
-  // Do not use hooks because we do not want to
-  // rerender the bubbles
-  window.addEventListener("mousemove", e => {
+  const updateStars = (e) => {
     const x = e.pageX - starsLayerOneRef.current.offsetLeft;
     starsLayerFourRef.current.style.left = `-${x * 0.01}px`;
     starsLayerThreeRef.current.style.left = `-${x * 0.008}px`;
     starsLayerTwoRef.current.style.left = `-${x * 0.005}px`;
     starsLayerOneRef.current.style.left = `-${x * 0.001}px`;
+  };
+
+  // Do not use hooks because we do not want to
+  // rerender the bubbles
+  if (typeof window !== 'undefined') {
+    window.addEventListener("mousemove", e => updateStars(e));
+  }
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener("mousemove", updateStars);
+    }
   });
   return (
     <>

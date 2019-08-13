@@ -24,13 +24,13 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  height: 70vh;
+  height: 30vh;
   overflow: hidden;
 `;
 
 const Sunset = styled.section`
   width: 100%;
-  height: 80%;
+  height: 90%;
   display: block;
   position: absolute;
   bottom: 0;
