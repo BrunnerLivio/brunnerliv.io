@@ -23,7 +23,8 @@
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "react-static-plugin-styled-components": "^7.0.10",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "styled-components-breakpoint": "^2.1.1"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
