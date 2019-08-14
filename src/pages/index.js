@@ -1,6 +1,5 @@
 import React from "react"
 
-import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -57,7 +56,7 @@ const SocialButton = styled.a`
 `
 
 const IndexPage = () => (
-  <Layout>
+  <>
     <SEO title="Home" />
     <EgoSection>
       <h1>Livio Brunner</h1>
@@ -92,7 +91,7 @@ const IndexPage = () => (
         </SocialButton>
       </Wrapper>
     </EgoSection>
-  </Layout>
+  </>
 )
 
 export default IndexPage

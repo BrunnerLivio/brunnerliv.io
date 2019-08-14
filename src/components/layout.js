@@ -7,19 +7,20 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import styled, { ThemeProvider } from "styled-components";
-import theme from "../theme/theme";
+import styled, { ThemeProvider } from "styled-components"
+import theme from "../theme/theme"
 
 import Header from "./header"
 import "./layout.css"
-import Navigation from "./navigation";
+import Navigation from "./navigation"
+import { Location } from "@reach/router"
+import { useStaticQuery, graphql } from "gatsby";
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-`;
+`
 
 const Container = styled.div`
   display: flex;
@@ -30,40 +31,49 @@ const Container = styled.div`
     max-height: 500px;
     min-height: 60vh;
     width: 100%;
-    content: '';
+    content: "";
     display: block;
     position: absolute;
-    background: linear-gradient(180deg,${props => props.theme.primary} 0%, ${props => props.theme.primaryDarker} 100%);
+    background: linear-gradient(
+      180deg,
+      ${props => props.theme.primary} 0%,
+      ${props => props.theme.primaryDarker} 100%
+    );
   }
-`;
+`
 
 const Content = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-`;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query NavigationQuery {
       site {
         siteMetadata {
-          title
+          navigation {
+            name
+            to
+          }
         }
       }
     }
-  `)
-
+  `);
   return (
     <ThemeProvider theme={theme}>
       <MainWrapper>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header />
         <Container>
           <Content>
-            <Navigation />
+            <Location>
+              {({ location }) => {
+                return <Navigation navigation={data.site.siteMetadata.navigation} active={location.pathname} />
+              }}
+            </Location>
             {children}
-            <footer>
-            </footer>
+            <footer></footer>
           </Content>
         </Container>
       </MainWrapper>

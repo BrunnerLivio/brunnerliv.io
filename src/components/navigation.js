@@ -6,14 +6,14 @@ import color from "color"
 const Nav = styled.nav`
   display: flex;
   justify-content: center;
-`;
+`
 
 const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: row;
   margin: 0;
-`;
+`
 
 const Li = styled.li`
   margin-right: 20px;
@@ -22,56 +22,85 @@ const Li = styled.li`
     color: ${props => props.theme.accent};
     text-transform: uppercase;
   }
-`;
+`
 
 const Underline = styled.hr`
   background-color: ${props => props.theme.accent};
   width: 45px;
   height: 2px;
   display: block;
-  box-shadow: 0px 0px 8px ${props => color(props.theme.accent).darken(0.2).toString()}, 0px 0px 16px ${props => props.theme.accent};
-  transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
-`;
+  box-shadow: 0px 0px 8px
+      ${props =>
+        color(props.theme.accent)
+          .darken(0.2)
+          .toString()},
+    0px 0px 16px ${props => props.theme.accent};
+  &.loaded {
+    transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
+  }
+`
 
 class Navigation extends Component {
-
   constructor(props) {
-    super(props);
-    this.underlineRef = React.createRef();
-    this.wrapperRef = React.createRef();
+    super(props)
+    this.navigation = props.navigation.map(nav => ({
+      ...nav,
+      ref: React.createRef(),
+    }))
+    this.underlineRef = React.createRef()
+    this.wrapperRef = React.createRef()
+    this.state = { isLoaded: false }
   }
 
-  onLinkHover(event) {
-    const $underline = this.underlineRef.current;
-    const $li =  event.target;
-    const $wrapper = this.wrapperRef.current;
-    const offset = $li.offsetLeft - $wrapper.offsetLeft;
-    $underline.style.transform = `translateX(${offset}px)`;
-    $underline.style.width = $li.getBoundingClientRect().width + 'px';
+  activateNavItem(name = this.navigation[0].name) {
+    const navItem =
+      this.navigation.find(
+        nav =>
+          nav.name === name ||
+          nav.to.replace(/\//gi, "") === name.replace(/\//gi, "")
+      ) || this.navigation[0]
+    const $underline = this.underlineRef.current
+    const $li = navItem.ref.current
+    const $wrapper = this.wrapperRef.current
+    const offset = $li.offsetLeft - $wrapper.offsetLeft
+    $underline.style.transform = `translateX(${offset}px)`
+    $underline.style.width = `${$li.getBoundingClientRect().width}px`
   }
 
-  onLinkMouseOut() {
-    const $underline = this.underlineRef.current;
-    $underline.style.transform = `translateX(0px)`;
-    $underline.style.width = '45px';
+  componentDidMount() {
+    this.activateNavItem(this.props.active)
+    setTimeout(() => this.setState({ isLoaded: true }), 0)
+  }
+
+  componentDidUpdate() {
+    this.activateNavItem(this.props.active)
   }
 
   render() {
-    const onLinkHover = this.onLinkHover.bind(this);
-    const onLinkMouseOut = this.onLinkMouseOut.bind(this);
+    const activateNavItem = this.activateNavItem.bind(this)
     return (
-    <Nav>
-      <div ref={this.wrapperRef}>
-        <Ul onMouseOut={onLinkMouseOut}>
-          <Li onMouseEnter={onLinkHover}><Link to="/">Home</Link></Li>
-          <Li onMouseEnter={onLinkHover}><Link to="/page-2">Projects</Link></Li>
-          <Li onMouseEnter={onLinkHover}><Link to="">Articles</Link></Li>
-        </Ul>
-        <Underline ref={this.underlineRef} />
-      </div>
-    </Nav>
+      <Nav>
+        <div ref={this.wrapperRef}>
+          <Ul onMouseOut={() => activateNavItem(this.props.active)}>
+            {this.navigation.map((nav, key) => (
+              <Li
+                className={this.props.active === nav.name ? "active" : ""}
+                onMouseEnter={() => activateNavItem(nav.name)}
+                ref={nav.ref}
+                key={key}
+              >
+                <Link to={nav.to}>{nav.name}</Link>
+              </Li>
+            ))}
+          </Ul>
+          <Underline
+            className={this.state.isLoaded ? "loaded" : ""}
+            ref={this.underlineRef}
+          />
+        </div>
+      </Nav>
     )
   }
 }
 
-export default Navigation;
+export default Navigation

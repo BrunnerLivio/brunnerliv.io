@@ -3,6 +3,20 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    navigation: [
+      {
+        to: "/",
+        name: "Home",
+      },
+      {
+        to: "/page-2",
+        name: "Projects",
+      },
+      {
+        to: "/articles",
+        name: "Articles",
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -35,6 +49,12 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout.js`),
       },
     },
   ],

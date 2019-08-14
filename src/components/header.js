@@ -42,7 +42,7 @@ const Sunset = styled.section`
 `;
 
 
-const Header = ({ siteTitle }) => (
+const _Header = () => (
   <HeaderWrapper>
     <Sunset></Sunset>
     <Stars></Stars>
@@ -50,12 +50,7 @@ const Header = ({ siteTitle }) => (
   </HeaderWrapper>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
+// Do not rerender if not needed
+const Header = React.memo(_Header, () => true)
 
 export default Header

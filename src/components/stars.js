@@ -68,11 +68,12 @@ const Stars = () => {
   if (typeof window !== "undefined") {
     window.addEventListener("mousemove", e => updateStars(e))
   }
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.removeEventListener("mousemove", updateStars)
     }
-  })
+  }, [])
   return (
     <>
       <StarsLayerOne ref={starsLayerOneRef} />

@@ -9,7 +9,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-import theme from "../theme/theme";
 
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
@@ -39,10 +38,6 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `description`,
           content: metaDescription,
-        },
-        {
-          name: `theme-color`,
-          content: theme.primary,
         },
         {
           property: `og:title`,
