@@ -16,47 +16,48 @@ const EgoSection = styled.section`
 
 const Wrapper = styled.section`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
+
+  ${breakpoint("md")`
+    flex-direction: row;
+  `}
 `
 
 const TitleIntroduction = styled.h3`
   padding-right: 20px;
-  text-align: right;
-  width: 50%;
+  width: 100%;
   font-size: 1.8em;
-  ${breakpoint("sm")`
-    width: 250px;
-    font-size: 2em;
-  `}
+  text-align: center;
+  max-width: 500px;
   ${breakpoint("md")`
-    width: 300px;
+    text-align: right;
+    max-width: 300px;
     font-size: 2.5em;
   `}
   ${breakpoint("lg")`
-    width: 400px;
+    max-width: 400px;
   `}
   ${breakpoint("xl")`
-    width: 500px;
+    max-width: 500px;
   `}
 `
 
 const ParagrahIntroduction = styled.p`
   padding-right: 20px;
   font-size: 1em;
-  width: 50%;
-  ${breakpoint("sm")`
-    width: 250px;
-  `}
+  width: 100%;
+  text-align: center;
+  max-width: 500px;
   ${breakpoint("md")`
-    width: 300px;
+    max-width: 300px;
     font-size: 1.2em;
   `}
   ${breakpoint("lg")`
-    width: 400px;
+    max-width: 400px;
   `}
   ${breakpoint("xl")`
-    width: 500px;
+    max-width: 500px;
   `}
 `
 

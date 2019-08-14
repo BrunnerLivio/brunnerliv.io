@@ -3,6 +3,7 @@ import React from "react"
 import styled from 'styled-components';
 import MountainImage from '../images/mountain.svg';
 import Stars from './stars';
+import breakpoint from "styled-components-breakpoint"
 
 const Mountain = styled.div`
   background: url(${MountainImage});
@@ -24,7 +25,8 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  height: 30vh;
+  height: 40vh;
+  min-height: 300px;
   overflow: hidden;
 `;
 
