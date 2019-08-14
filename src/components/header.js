@@ -9,8 +9,8 @@ const Mountain = styled.div`
   height: 500px;
   bottom: 0;
   position: absolute;
-  background-position: bottom;
-  background-size: 100% 100%;
+  background-position: -30px bottom;
+  background-size: calc(100% + 30px) 100%;
   margin-bottom: -140px;
   z-index: 2;
 `;
