@@ -23,6 +23,7 @@ const ProjectList = styled.section`
   padding: 20px;
   h1 {
     margin-bottom: 2rem;
+    color: ${props => props.theme.text};
   }
 `
 

@@ -12,7 +12,8 @@ const ProjectSection = styled.section`
   padding-right: 30px;
   margin-bottom: 8px;
   h2,
-  p {
+  p,
+  a {
     color: ${props => props.theme.text};
   }
   p {

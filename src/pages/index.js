@@ -22,6 +22,7 @@ const EgoSection = styled.section`
   min-height: 300px;
   h1 {
     font-size: 3em;
+    color: ${props => props.theme.text};
   }
   p {
     color: ${props =>
