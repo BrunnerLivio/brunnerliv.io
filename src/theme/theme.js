@@ -6,6 +6,8 @@ export default {
   primaryDarker: color('#4038a5').darken(0.4).toString(),
   accent: '#FF7779',
   accentLight: '#FFA5A7',
+  text: '#FFFFFF',
+  textInvert: '#000000',
   breakpoints: { 
     xs: 0,
     sm: 576,

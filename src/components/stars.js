@@ -6,15 +6,15 @@ import theme from "../theme/theme"
 const rand = (min, max) => Math.floor(Math.random() * max + min)
 
 const generateStarsBoxShadow = color => {
-  let boxShadow = ""
-  const starsAmount = 200
+  let boxShadow = "";
+  const starsAmount = 400;
   for (let i = 1; i <= starsAmount; i++) {
-    boxShadow += `${i * rand(1, 50)}px ${i * rand(1, 50)}px ${color}`
+    boxShadow += `${rand(1, 3000)}px ${rand(1, 10000)}px ${color}`
     if (i !== starsAmount) {
-      boxShadow += ", "
+      boxShadow += ", ";
     }
   }
-  return boxShadow
+  return boxShadow;
 }
 
 const generateStarsLayer = (size, col, duration) => styled.figure`
