@@ -78,6 +78,13 @@ class Navigation extends Component {
 
   render() {
     const activateNavItem = this.activateNavItem.bind(this)
+
+    const link = nav =>
+      nav.to.startsWith("http") ? (
+        <a href={nav.to}>{nav.name}</a>
+      ) : (
+        <Link to={nav.to}>{nav.name}</Link>
+      )
     return (
       <Nav>
         <div ref={this.wrapperRef}>
@@ -89,7 +96,7 @@ class Navigation extends Component {
                 ref={nav.ref}
                 key={key}
               >
-                <Link to={nav.to}>{nav.name}</Link>
+                {link(nav)}
               </Li>
             ))}
           </Ul>

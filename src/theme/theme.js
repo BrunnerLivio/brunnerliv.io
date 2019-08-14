@@ -5,6 +5,7 @@ export default {
   primaryDark: '#38248b',
   primaryDarker: color('#4038a5').darken(0.4).toString(),
   accent: '#FF7779',
+  accentDark: color('#FF7779').darken(0.08).toString(),
   accentLight: '#FFA5A7',
   text: '#FFFFFF',
   textInvert: '#000000',
