@@ -16,7 +16,9 @@ const Ul = styled.ul`
 `
 
 const Li = styled.li`
-  margin-right: 20px;
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
   a {
     text-decoration: none;
     color: ${props => props.theme.accent};

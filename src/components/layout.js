@@ -9,6 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled, { ThemeProvider } from "styled-components"
 import theme from "../theme/theme"
+import color from "color";
 
 import Header from "./header"
 import "./layout.css"
@@ -48,6 +49,16 @@ const Content = styled.div`
   flex-direction: column;
 `
 
+const Footer = styled.footer`
+  color: ${props => color(props.theme.text).alpha(0.5).toString()};
+  a {
+    color: ${props => color(props.theme.text).alpha(0.5).toString()};
+  }
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 0.8em;
+`;
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -73,7 +84,7 @@ const Layout = ({ children }) => {
               }}
             </Location>
             {children}
-            <footer></footer>
+            <Footer>Design by Livio - Mountain by <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> - Built with <a href="https://www.gatsbyjs.org">GatsbyJS</a> </Footer>
           </Content>
         </Container>
       </MainWrapper>

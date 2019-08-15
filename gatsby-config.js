@@ -15,7 +15,7 @@ module.exports = {
       {
         to: "https://dev.to/brunnerlivio",
         name: "Articles",
-      },
+      }
     ],
     projects: [
       {
