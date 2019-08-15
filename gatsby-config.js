@@ -91,6 +91,12 @@ module.exports = {
     //     path: `${__dirname}/src/content`,
     //   },
     // },
+     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-78529910-1",
+      },
+    },
     `react-static-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
