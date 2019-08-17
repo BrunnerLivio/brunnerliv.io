@@ -1,0 +1,23 @@
+[
+  {
+    "sourceCode": "https://github.com/angular/dgeni",
+    "name": "Dgeni",
+    "description":
+      "Flexible JavaScript documentation generator used by AngularJS, Protractor and other JS projects.",
+    "languages": ["JavaScript", "TypeScript"]
+  },
+  {
+    "sourceCode": "https://github.com/nestjs/nest",
+    "name": "NestJS",
+    "description":
+      "A progressive Node.js framework for building efficient and scalable server-side applications.",
+    "languages": ["TypeScript", "NestJS"]
+  },
+  {
+    "sourceCode": "https://github.com/molior-dbs/molior",
+    "name": "Molior",
+    "description":
+      "A debian build system.",
+    "languages": ["TypeScript", "Python"]
+  }
+]

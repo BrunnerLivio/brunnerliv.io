@@ -1,0 +1,14 @@
+[
+  {
+    "to": "/",
+    "name": "Home"
+  },
+  {
+    "to": "/projects",
+    "name": "Projects"
+  },
+  {
+    "to": "https://dev.to/brunnerlivio",
+    "name": "Articles"
+  }
+]
