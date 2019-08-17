@@ -22,21 +22,23 @@ const Badge = styled.span`
     color: rgba(255, 255, 255, 0.7);
   }
   &.lang-nestjs {
-    background: #E0234E;
+    background: #e0234e;
     color: rgba(255, 255, 255, 0.7);
   }
   &.lang-vuejs {
-    background: #34495E;
+    background: #34495e;
     color: rgba(255, 255, 255, 0.7);
   }
   &.lang-react {
-    background: #61DAFB;
+    background: #61dafb;
     color: rgba(0, 0, 0, 0.7);
   }
 `
 
 const LanguageBadge = ({ language }) => (
-  <Badge className={`lang-${language.toLowerCase().replace(/\./g, '')}`}>{language}</Badge>
+  <Badge className={`lang-${language.toLowerCase().replace(/\./g, "")}`}>
+    {language}
+  </Badge>
 )
 
 export default LanguageBadge

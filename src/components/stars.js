@@ -6,22 +6,22 @@ import theme from "../theme/theme"
 const rand = (min, max) => Math.floor(Math.random() * max + min)
 
 const generateStarsBoxShadow = color => {
-  let boxShadow = "";
-  const starsAmount = 400;
+  let boxShadow = ""
+  const starsAmount = 400
   for (let i = 1; i <= starsAmount; i++) {
     boxShadow += `${rand(1, 3000)}px ${rand(1, 10000)}px ${color}`
     if (i !== starsAmount) {
-      boxShadow += ", ";
+      boxShadow += ", "
     }
   }
-  return boxShadow;
+  return boxShadow
 }
 
 const generateStarsLayer = (size, col, duration) => styled.figure`
   animation: animStar linear infinite;
   border-radius: 200px;
   position: relative;
-  box-shadow: ${props => generateStarsBoxShadow(col)};
+  box-shadow: ${generateStarsBoxShadow(col)};
   width: ${size}px;
   height: ${size}px;
   animation-duration: ${duration}s;

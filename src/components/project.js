@@ -58,7 +58,9 @@ const Project = ({ project }) => (
       <h2>
         <a href={project.sourceCode}>{project.name}</a>
       </h2>
-      {project.languages.map(language => <LanguageBadge language={language}></LanguageBadge>)}
+      {project.languages.map(language => (
+        <LanguageBadge language={language}></LanguageBadge>
+      ))}
     </TitleWrapper>
     <p>{project.description}</p>
   </ProjectSection>

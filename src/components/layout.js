@@ -9,13 +9,13 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled, { ThemeProvider } from "styled-components"
 import theme from "../theme/theme"
-import color from "color";
+import color from "color"
 
 import Header from "./header"
 import "./layout.css"
 import Navigation from "./navigation"
 import { Location } from "@reach/router"
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -50,14 +50,20 @@ const Content = styled.div`
 `
 
 const Footer = styled.footer`
-  color: ${props => color(props.theme.text).alpha(0.5).toString()};
+  color: ${props =>
+    color(props.theme.text)
+      .alpha(0.5)
+      .toString()};
   a {
-    color: ${props => color(props.theme.text).alpha(0.5).toString()};
+    color: ${props =>
+      color(props.theme.text)
+        .alpha(0.5)
+        .toString()};
   }
   text-align: center;
   margin-bottom: 40px;
   font-size: 0.8em;
-`;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -71,7 +77,7 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `);
+  `)
   return (
     <ThemeProvider theme={theme}>
       <MainWrapper>
@@ -80,11 +86,20 @@ const Layout = ({ children }) => {
           <Content>
             <Location>
               {({ location }) => {
-                return <Navigation navigation={data.site.siteMetadata.navigation} active={location.pathname} />
+                return (
+                  <Navigation
+                    navigation={data.site.siteMetadata.navigation}
+                    active={location.pathname}
+                  />
+                )
               }}
             </Location>
             {children}
-            <Footer>Design by Livio - Mountain by <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> - Built with <a href="https://www.gatsbyjs.org">GatsbyJS</a> </Footer>
+            <Footer>
+              Design by Livio - Mountain by{" "}
+              <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> -
+              Built with <a href="https://www.gatsbyjs.org">GatsbyJS</a>{" "}
+            </Footer>
           </Content>
         </Container>
       </MainWrapper>
