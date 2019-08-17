@@ -46,8 +46,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "predeploy": "gatsby build --prefix-paths",
-    "deploy": "gh-pages -d public"
+    "build:prod": "gatsby build --prefix-paths"
   },
   "repository": {
     "type": "git",

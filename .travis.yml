@@ -2,23 +2,19 @@ language: node_js
 
 node_js:
   - "stable"
+
+env:
+  global:
+    - "GITHUB_REF=github.com/BrunnerLivio/brunnerliv.io.git"
+
 cache:
   directories:
   - node_modules
-
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local_dir: public
-  keep-history: true
-  on:
-    branch: master
 
 install:
   - "yarn add gatsby --global"
   - "yarn --frozen-lockfile"
 script:
-  - "yarn run build"
+  - "yarn run build:prod"
 after_success:
-  - "yarn run deploy"
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./bin/deploy-gh-pages.sh; fi
