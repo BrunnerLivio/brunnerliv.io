@@ -1,9 +1,11 @@
 language: node_js
+
 node_js:
   - "stable"
 cache:
   directories:
   - node_modules
+
 deploy:
   provider: pages
   skip-cleanup: true
@@ -12,8 +14,11 @@ deploy:
   keep-history: true
   on:
     branch: master
-before_script:
-  - "yarn i -g gatsby"
-  - "yarn i"
+
+install:
+  - "yarn add gatsby --global"
+  - "yarn --frozen-lockfile"
+script:
+  - "yarn run build"
 after_success:
-  - "npm run deploy"
+  - "yarn run deploy"
