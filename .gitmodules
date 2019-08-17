@@ -1,0 +1,3 @@
+[submodule "content/articles"]
+	path = content/articles
+	url = https://github.com/BrunnerLivio/articles.git
