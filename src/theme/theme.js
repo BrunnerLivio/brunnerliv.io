@@ -1,6 +1,9 @@
 import color from "color"
 
 export default {
+  primaryLight: color("#4038a5")
+    .lighten(0.7)
+    .toString(),
   primary: "#4038a5",
   primaryDark: "#38248b",
   primaryDarker: color("#4038a5")

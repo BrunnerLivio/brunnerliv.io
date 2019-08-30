@@ -3,11 +3,43 @@ import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import SEO from "../components/seo"
-import Content from "../components/content"
+import breakpoint from "styled-components-breakpoint"
 
 const Article = styled.article`
   margin-top: 28px;
   padding: 20px;
+  width: calc(100vw - 40px);
+  ${breakpoint("md")`
+    width: 740px;
+  `}
+  pre {
+    font-size: 12px !important;
+    ${breakpoint("sm")`
+      font-size: 14px !important;
+    `}
+    ${breakpoint("md")`
+      font-size: 16px !important;
+    `}
+    overflow-x: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  .gatsby-highlight {
+    margin: 32px 0;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    line-height: 26px;
+    font-size: 1rem;
+  }
 `
 
 export default function Template({
@@ -19,10 +51,8 @@ export default function Template({
     <>
       <SEO title={frontmatter.title} />
       <Article>
-        <Content>
-          <h1>{frontmatter.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
-        </Content>
+        <h1>{frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </Article>
     </>
   )
