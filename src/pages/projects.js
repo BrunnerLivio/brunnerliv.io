@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import Project from "../components/project"
 import styled from "styled-components"
-import Content from '../components/content'
+import Content from "../components/content"
 
 const ProjectList = styled.main`
   margin-top: 28px;
@@ -24,14 +24,14 @@ const Projects = ({ data }) => {
       <SEO title="Projects" />
       <h1 id="latest-repos">Latest Repos</h1>
       <Content>
-        {(projects || []).map(project => (
-          <Project project={project}></Project>
+        {(projects || []).map((project, index) => (
+          <Project key={index} project={project}></Project>
         ))}
       </Content>
       <h1 id="latest-contributions">Latest Contributions</h1>
       <Content>
-        {(contributions || []).map(project => (
-          <Project project={project}></Project>
+        {(contributions || []).map((project, index) => (
+          <Project key={index} project={project}></Project>
         ))}
       </Content>
     </ProjectList>

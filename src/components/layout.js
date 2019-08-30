@@ -16,6 +16,7 @@ import "./layout.css"
 import Navigation from "./navigation"
 import { Location } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
+import Transition from "./transition"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -102,7 +103,11 @@ const Layout = ({ children }) => {
                 )
               }}
             </Location>
-            {children}
+            <Location>
+              {({ location }) => {
+                return <Transition location={location}>{children}</Transition>
+              }}
+            </Location>
             <Footer>
               Design by Livio - Mountain by{" "}
               <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> -

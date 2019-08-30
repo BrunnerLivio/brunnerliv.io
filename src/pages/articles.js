@@ -26,7 +26,7 @@ const Articles = ({
 }) => {
   const posts = edges
     .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-    .map(edge => <ArticleLink key={edge.node.id} post={edge.node} />)
+    .map((edge, index) => <ArticleLink key={index} post={edge.node} />)
   return (
     <ArticleList>
       <h1>Latest Articles</h1>
