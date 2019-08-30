@@ -13,8 +13,15 @@ export default {
   accentLight: "#FFA5A7",
   text: "#FFFFFF",
   textInvert: "#000000",
+  textSecondary: color("#FFFFFF")
+    .alpha(0.7)
+    .toString(),
+  linkHover: color("#FFFFFF")
+    .alpha(0.6)
+    .toString(),
   breakpoints: {
     xs: 0,
+    xsm: 400,
     sm: 576,
     md: 768,
     lg: 992,

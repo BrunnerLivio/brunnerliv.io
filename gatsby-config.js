@@ -1,18 +1,18 @@
-const siteMetadata = require('./content/site-metadata');
+const siteMetadata = require("./content/site-metadata")
 
 module.exports = {
   siteMetadata: siteMetadata,
   plugins: [
     `gatsby-plugin-styled-components`,
-    // `gatsby-transformer-remark`,
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `content`,
-    //     path: `${__dirname}/src/content`,
-    //   },
-    // },
-     {
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/content/articles/articles`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-78529910-1",

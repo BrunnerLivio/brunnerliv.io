@@ -7,8 +7,8 @@ const Badge = styled.span`
   margin-left: 6px;
   border-radius: 8px;
   padding: 4px 8px;
-  margin-top: -5px;
   font-weight: 500;
+  display: block;
   &.lang-javascript {
     background: rgb(241, 224, 90);
     color: rgba(0, 0, 0, 0.7);
@@ -32,6 +32,14 @@ const Badge = styled.span`
   &.lang-react {
     background: #61dafb;
     color: rgba(0, 0, 0, 0.7);
+  }
+  &.lang-nodejs {
+    background: #026E00;
+    color: #eaf5e9;
+  }
+  &.lang-angular {
+    background: #DD0031;
+    color: #fff;
   }
 `
 

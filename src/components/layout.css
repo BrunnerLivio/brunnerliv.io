@@ -68,7 +68,7 @@ h1 {
   margin: 0.67em 0;
 }
 p {
-  font-size: 1.3em;
+  font-size: 1em;
 }
 mark {
   background-color: #ff0;
@@ -619,9 +619,6 @@ pre tt:after {
   content: "";
 }
 
-h1, h2, h3, h4, h5, h6, p, footer, li, a {
-  color: rgba(255, 255, 255, 1);
-}
 
 @media only screen and (max-width: 480px) {
   html {

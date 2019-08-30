@@ -21,7 +21,7 @@ const Li = styled.li`
   }
   a {
     text-decoration: none;
-    color: ${props => props.theme.accent};
+    color: ${props => props.theme.accent} !important;
     text-transform: uppercase;
   }
 `

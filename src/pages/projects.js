@@ -4,21 +4,9 @@ import { graphql } from "gatsby"
 import SEO from "../components/seo"
 import Project from "../components/project"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import Content from '../components/content'
 
-const ProjectWrapper = styled.section`
-  margin-bottom: 48px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  ${breakpoint("md")`
-    flex-direction: row;
-    width: 700px;
-  `}
-`
-
-const ProjectList = styled.section`
+const ProjectList = styled.main`
   margin-top: 28px;
   padding: 20px;
   h1 {
@@ -35,17 +23,17 @@ const Projects = ({ data }) => {
     <ProjectList>
       <SEO title="Projects" />
       <h1 id="latest-repos">Latest Repos</h1>
-      <ProjectWrapper>
+      <Content>
         {(projects || []).map(project => (
           <Project project={project}></Project>
         ))}
-      </ProjectWrapper>
+      </Content>
       <h1 id="latest-contributions">Latest Contributions</h1>
-      <ProjectWrapper>
+      <Content>
         {(contributions || []).map(project => (
           <Project project={project}></Project>
         ))}
-      </ProjectWrapper>
+      </Content>
     </ProjectList>
   )
 }

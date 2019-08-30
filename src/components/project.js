@@ -1,7 +1,6 @@
 import React from "react"
 
 import styled from "styled-components"
-import color from "color"
 import LanguageBadge from "./language-badge"
 
 const ProjectSection = styled.section`
@@ -18,10 +17,7 @@ const ProjectSection = styled.section`
   }
   p {
     font-size: 1rem;
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.7)
-        .toString()};
+    color: ${props => props.theme.textSecondary};
     margin-top: 4px;
   }
 `
@@ -29,26 +25,13 @@ const ProjectSection = styled.section`
 const TitleWrapper = styled.header`
   display: flex;
   align-items: center;
+  margin-bottom: 0.2rem;
   h2 {
-    margin-bottom: 0.2rem;
     display: inline-block;
     padding-bottom: 2px;
     font-size: 1.4rem;
     margin-right: 8px;
-    a {
-      text-decoration: none;
-      &:hover {
-        color: ${props =>
-          color(props.theme.text)
-            .alpha(0.6)
-            .toString()};
-      }
-      &:after {
-        display: block;
-        content: "";
-        margin-top: 2px;
-      }
-    }
+    margin-bottom: 0;
   }
 `
 

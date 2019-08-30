@@ -21,6 +21,14 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  color: ${props => props.theme.text};
+  a {
+    color: ${props => props.theme.text};
+    text-decoration: none;
+    &:hover {
+      color: ${props => props.theme.linkHover};
+    }
+  }
 `
 
 const Container = styled.div`
