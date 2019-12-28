@@ -1,5 +1,12 @@
 [
   {
+    "sourceCode": "https://github.com/TypeStrong/ts-node",
+    "name": "ts-node",
+    "description":
+      "TypeScript execution and REPL for node.js",
+    "languages": ["TypeScript"]
+  },
+  {
     "sourceCode": "https://github.com/angular/dgeni",
     "name": "Dgeni",
     "description":
