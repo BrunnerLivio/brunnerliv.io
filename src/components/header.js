@@ -2,17 +2,21 @@ import React from "react"
 import styled from "styled-components"
 import MountainImage from "../images/mountain.svg"
 import Stars from "./stars"
+import breakpoint from "styled-components-breakpoint"
 
 const Mountain = styled.div`
   background: url(${MountainImage});
   width: 100%;
-  height: 500px;
+  height: 350px;
   bottom: 0;
   position: absolute;
   background-position: -30px bottom;
   background-size: calc(100% + 30px) 100%;
   margin-bottom: -140px;
   z-index: 2;
+  ${breakpoint("sm")`
+    height: 500px;
+  `}
 `
 
 const HeaderWrapper = styled.header`
@@ -27,8 +31,11 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  height: 40vh;
-  min-height: 300px;
+  height: 120px;
+  ${breakpoint("sm")`
+    height: 40vh;
+    min-height: 300px;
+  `}
   overflow: hidden;
 `
 
