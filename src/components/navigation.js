@@ -92,7 +92,7 @@ class Navigation extends Component {
     return (
       <Nav>
         <div ref={this.wrapperRef}>
-          <Ul onMouseOut={() => activateNavItem(this.props.active)} onBlur={() => activateNavItem(this.props.active)}>
+          <Ul onMouseOut={() => activateNavItem(this.props.active)}>
             {this.navigation.map((nav, key) => (
               <Li
                 className={this.props.active === nav.name ? "active" : ""}
