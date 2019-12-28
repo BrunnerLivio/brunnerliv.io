@@ -1,17 +1,14 @@
 import React from "react"
 import styled from "styled-components"
-import MountainImage from "../images/mountain.svg"
 import Stars from "./stars"
 import breakpoint from "styled-components-breakpoint"
+import MountainPaths from "./mountain"
 
-const Mountain = styled.div`
-  background: url(${MountainImage});
+const Mountain = styled.svg`
   width: 100%;
   height: 350px;
   bottom: 0;
   position: absolute;
-  background-position: -30px bottom;
-  background-size: calc(100% + 30px) 100%;
   margin-bottom: -140px;
   z-index: 2;
   ${breakpoint("sm")`
@@ -57,9 +54,11 @@ const Sunset = styled.section`
 
 const _Header = () => (
   <HeaderWrapper>
-    <Sunset></Sunset>
-    <Stars></Stars>
-    <Mountain></Mountain>
+    <Sunset />
+    <Stars />
+    <Mountain svg x="0px" y="0px" viewBox="0 0 457.76 251.52">
+      <MountainPaths></MountainPaths>
+    </Mountain>
   </HeaderWrapper>
 )
 
