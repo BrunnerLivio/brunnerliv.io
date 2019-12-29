@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import styled, { withTheme, createGlobalStyle } from "styled-components"
 import color from "color"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Header from "./header"
 import "./layout.css"
@@ -20,6 +21,7 @@ import Transition from "./transition"
 import Toggle from "./toggle"
 import sun from "../images/sun.png"
 import moon from "../images/moon.png"
+import Footer from "./footer"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -60,28 +62,33 @@ const Content = styled.div`
   flex-direction: column;
 `
 
-const Footer = styled.footer`
-  color: ${props =>
-    color(props.theme.text)
-      .alpha(0.5)
-      .toString()};
-  a {
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.5)
-        .toString()};
-  }
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 0.8em;
-`
-
 const GlobalStyle = createGlobalStyle`
   body {
     background: ${props => props.theme.primaryDarker};
   }
 `
 
+const FontAwesomeIcon = styled(_FontAwesomeIcon)`
+  color: ${props => props.theme.primaryDark};
+`
+const EgoSection = styled.section`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  flex-direction: column;
+  margin-bottom: 16px;
+  h1 {
+    font-size: 3em;
+    color: ${props => props.theme.text};
+  }
+  p {
+    color: ${props =>
+      color(props.theme.text)
+        .alpha(0.7)
+        .toString()};
+  }
+`
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -143,10 +150,7 @@ const Layout = withTheme(({ children }) => {
               return <Transition location={location}>{children}</Transition>
             }}
           </Location>
-          <Footer>
-            Design by Livio - Mountain by{" "}
-            <a href="https://www.instagram.com/tanjabailiff/">Tanja</a>
-          </Footer>
+          <Footer />
         </Content>
       </Container>
     </MainWrapper>

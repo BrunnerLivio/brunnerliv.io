@@ -3,87 +3,56 @@ import React from "react"
 import SEO from "../components/seo"
 import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
-import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faTwitter,
-  faGithubAlt,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons"
-import { faPen } from "@fortawesome/free-solid-svg-icons"
-import color from "color"
 
-const FontAwesomeIcon = styled(_FontAwesomeIcon)`
-  color: ${props => props.theme.primaryDark};
-`
-const EgoSection = styled.section`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0;
-  flex-direction: column;
-  margin-top: 64px;
-  margin-bottom: 96px;
+import { graphql } from "gatsby"
+import ArticleLink from "../components/article-link"
+
+const ArticleList = styled.main`
+  margin-top: 28px;
+  padding: 20px;
+  width: 100%;
+  ${breakpoint("md")`
+    width: 740px;
+  `}
   h1 {
-    font-size: 3em;
+    margin-bottom: 2rem;
     color: ${props => props.theme.text};
   }
-  p {
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.7)
-        .toString()};
-  }
 `
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: row;
-`
-
-const SocialButton = styled.a`
-  background: ${props => props.theme.text};
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-  border: 0;
-  cursor: pointer;
-  &:hover {
-    background: ${props =>
-      color(props.theme.text)
-        .alpha(0.7)
-        .toString()};
-  }
-`
-
-const IndexPage = () => (
-  <>
-    <SEO title="Home" />
-    <EgoSection>
-      <h1>Livio Brunner</h1>
-      <p>Likes Open Source, Node.js and Dogs.</p>
-      <Wrapper>
-        <SocialButton href="https://github.com/brunnerlivio" target="_blank">
-          <FontAwesomeIcon size="1x" icon={faGithubAlt} />
-        </SocialButton>
-        <SocialButton href="https://twitter.com/brunnerlivio" target="_blank">
-          <FontAwesomeIcon size="1x" icon={faTwitter} />
-        </SocialButton>
-        <SocialButton href="https://dev.to/brunnerlivio" target="_blank">
-          <FontAwesomeIcon size="1x" icon={faPen} />
-        </SocialButton>
-        <SocialButton
-          href="https://www.linkedin.com/in/livio-brunner-151667165/"
-          target="_blank"
-        >
-          <FontAwesomeIcon size="1x" icon={faLinkedin} />
-        </SocialButton>
-      </Wrapper>
-    </EgoSection>
-  </>
-)
+const IndexPage = ({
+  data: {
+    allMarkdownRemark: { edges },
+  },
+}) => {
+  const posts = edges
+    .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
+    .map((edge, index) => <ArticleLink key={index} post={edge.node} />)
+  return (
+    <>
+      <SEO title="Home" />
+      <ArticleList>{posts}</ArticleList>
+    </>
+  )
+}
 
 export default IndexPage
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 250)
+          timeToRead
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            path
+            title
+            description
+            tags
+          }
+        }
+      }
+    }
+  }
+`

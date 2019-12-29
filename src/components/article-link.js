@@ -68,21 +68,18 @@ const ArticleLink = ({ post }) => {
     .map(tag => <Badge language={tag}></Badge>)
   return (
     <ArticleItem>
+      <Link to={post.frontmatter.path}>
+        <h2>{post.frontmatter.title}</h2>
+      </Link>
       <ArticleHeader>
         {tags}
         <span className="date">{post.frontmatter.date}</span>
         <span className="divider">-</span>
         <span className="read-time">{post.timeToRead} min read</span>
       </ArticleHeader>
-
-      <Link to={post.frontmatter.path}>
-        <h2>{post.frontmatter.title}</h2>
-      </Link>
       <ArticleBody>
-        <p>{post.excerpt}</p>
-        <Link className="read-more" to={post.frontmatter.path}>Read more</Link>
+        <p>{post.frontmatter.description}</p>
       </ArticleBody>
-      <hr />
     </ArticleItem>
   )
 }

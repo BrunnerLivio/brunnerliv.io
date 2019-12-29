@@ -1,14 +1,10 @@
 [
   {
     "to": "/",
-    "name": "Home"
+    "name": "Articles"
   },
   {
     "to": "/projects",
     "name": "Projects"
-  },
-  {
-    "to": "/articles",
-    "name": "Articles"
   }
 ]
