@@ -3,8 +3,6 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
 
-import Badge from "./language-badge"
-
 const ArticleItem = styled.article`
   h2 {
     margin-bottom: 8px;
@@ -60,10 +58,6 @@ const ArticleBody = styled.section`
 `
 
 const ArticleLink = ({ post }) => {
-  const tags = post.frontmatter.tags
-    .split(",")
-    .map(tag => tag.trim())
-    .map(tag => <Badge language={tag}></Badge>)
   return (
     <ArticleItem>
       <Link to={post.frontmatter.path}>

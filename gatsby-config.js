@@ -69,5 +69,11 @@ module.exports = {
         dark: require(`${__dirname}/src/theme.js`).darkTheme,
       },
     },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/`, `/articles/*`, `projects`],
+      },
+    },
   ],
 }
