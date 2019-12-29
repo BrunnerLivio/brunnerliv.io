@@ -2,6 +2,7 @@ import React from "react"
 
 import SEO from "../components/seo"
 import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
 import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faTwitter,
@@ -21,7 +22,7 @@ const EgoSection = styled.section`
   padding: 0;
   flex-direction: column;
   margin-top: 64px;
-  min-height: 300px;
+  margin-bottom: 96px;
   h1 {
     font-size: 3em;
     color: ${props => props.theme.text};

@@ -54,8 +54,8 @@ const Sunset = styled.section`
 
 const HeaderContent = styled.div`
   position: absolute;
-  right: 32px;
-  top: 32px;
+  right: 16px;
+  top: 16px;
   z-index: 4;
 `
 

@@ -7,7 +7,7 @@
 
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
-import styled, { withTheme } from "styled-components"
+import styled, { withTheme, createGlobalStyle } from "styled-components"
 import color from "color"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
@@ -76,6 +76,12 @@ const Footer = styled.footer`
   font-size: 0.8em;
 `
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: ${props => props.theme.primaryDarker};
+  }
+`
+
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -93,6 +99,7 @@ const Layout = withTheme(({ children }) => {
 
   return (
     <MainWrapper>
+      <GlobalStyle />
       <Header>
         <Toggle
           icons={{
@@ -138,8 +145,7 @@ const Layout = withTheme(({ children }) => {
           </Location>
           <Footer>
             Design by Livio - Mountain by{" "}
-            <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> - Built
-            with <a href="https://www.gatsbyjs.org">GatsbyJS</a>{" "}
+            <a href="https://www.instagram.com/tanjabailiff/">Tanja</a>
           </Footer>
         </Content>
       </Container>
