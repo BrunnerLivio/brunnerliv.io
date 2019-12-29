@@ -79,7 +79,7 @@ const Footer = () => (
         <SocialButton
           href="https://github.com/brunnerlivio"
           target="_blank"
-          rel="nofollow"
+          rel="noreferrer"
           aria-label="Goto Livios Github"
         >
           <FontAwesomeIcon size="1x" icon={faGithubAlt} />
@@ -87,7 +87,7 @@ const Footer = () => (
         <SocialButton
           href="https://twitter.com/brunnerlivio"
           target="_blank"
-          rel="nofollow"
+          rel="noreferrer"
           aria-label="Goto Livios Twitter"
         >
           <FontAwesomeIcon size="1x" icon={faTwitter} />
@@ -95,7 +95,7 @@ const Footer = () => (
         <SocialButton
           href="https://dev.to/brunnerlivio"
           target="_blank"
-          rel="nofollow"
+          rel="noreferrer"
           aria-label="Goto Livios Articles on dev.to"
         >
           <FontAwesomeIcon size="1x" icon={faPen} />
@@ -103,7 +103,7 @@ const Footer = () => (
         <SocialButton
           href="https://www.linkedin.com/in/livio-brunner-151667165/"
           target="_blank"
-          rel="nofollow"
+          rel="noreferrer"
           aria-label="Goto Livios LinkedIn"
         >
           <FontAwesomeIcon size="1x" icon={faLinkedin} />
