@@ -25,15 +25,13 @@ const ArticleHeader = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 50px;
+  margin: 16px 0 8px 0;
 
   span {
     margin-right: 8px;
     margin-left: 0%;
     color: ${props => props.theme.textSecondary};
-    &.date {
-      margin-left: 16px;
-    }
+    font-size: 13px;
     &.divider,
     &.read-time {
       display: none;
@@ -72,9 +70,8 @@ const ArticleLink = ({ post }) => {
         <h2>{post.frontmatter.title}</h2>
       </Link>
       <ArticleHeader>
-        {tags}
         <span className="date">{post.frontmatter.date}</span>
-        <span className="divider">-</span>
+        <span className="divider">•</span>
         <span className="read-time">{post.timeToRead} min read</span>
       </ArticleHeader>
       <ArticleBody>

@@ -17,20 +17,13 @@ const ProjectList = styled.main`
 
 const Projects = ({ data }) => {
   const projects = data.site.siteMetadata.projects
-  const contributions = data.site.siteMetadata.contributions
 
   return (
     <ProjectList>
       <SEO title="Projects" />
-      <h1 id="latest-repos">Latest Repos</h1>
+      <h2 id="latest-repos">Latest Repos</h2>
       <Content>
         {(projects || []).map((project, index) => (
-          <Project key={index} project={project}></Project>
-        ))}
-      </Content>
-      <h1 id="latest-contributions">Latest Contributions</h1>
-      <Content>
-        {(contributions || []).map((project, index) => (
           <Project key={index} project={project}></Project>
         ))}
       </Content>

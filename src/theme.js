@@ -44,6 +44,9 @@ const darkTheme = {
     .toString(),
   accentLight: "#9fa8da",
   text: "#000000",
+  textSecondary: color("#000000")
+    .alpha(0.7)
+    .toString(),
   textInvert: "#FFFFFF",
   breakpoints: {
     xs: 0,

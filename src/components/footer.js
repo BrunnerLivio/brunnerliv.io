@@ -27,7 +27,7 @@ const FooterWrapper = styled.footer`
 `
 
 const FontAwesomeIcon = styled(_FontAwesomeIcon)`
-  color: ${props => props.theme.primaryDark};
+  color: ${props => props.theme.primary};
 `
 const EgoSection = styled.section`
   display: flex;
@@ -76,18 +76,35 @@ const Footer = () => (
   <>
     <EgoSection>
       <Wrapper>
-        <SocialButton href="https://github.com/brunnerlivio" target="_blank">
+        <SocialButton
+          href="https://github.com/brunnerlivio"
+          target="_blank"
+          rel="nofollow"
+          aria-label="Goto Livios Github"
+        >
           <FontAwesomeIcon size="1x" icon={faGithubAlt} />
         </SocialButton>
-        <SocialButton href="https://twitter.com/brunnerlivio" target="_blank">
+        <SocialButton
+          href="https://twitter.com/brunnerlivio"
+          target="_blank"
+          rel="nofollow"
+          aria-label="Goto Livios Twitter"
+        >
           <FontAwesomeIcon size="1x" icon={faTwitter} />
         </SocialButton>
-        <SocialButton href="https://dev.to/brunnerlivio" target="_blank">
+        <SocialButton
+          href="https://dev.to/brunnerlivio"
+          target="_blank"
+          rel="nofollow"
+          aria-label="Goto Livios Articles on dev.to"
+        >
           <FontAwesomeIcon size="1x" icon={faPen} />
         </SocialButton>
         <SocialButton
           href="https://www.linkedin.com/in/livio-brunner-151667165/"
           target="_blank"
+          rel="nofollow"
+          aria-label="Goto Livios LinkedIn"
         >
           <FontAwesomeIcon size="1x" icon={faLinkedin} />
         </SocialButton>

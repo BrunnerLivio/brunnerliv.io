@@ -14,9 +14,11 @@ const ArticleList = styled.main`
   ${breakpoint("md")`
     width: 740px;
   `}
-  h1 {
-    margin-bottom: 2rem;
+  h2 {
     color: ${props => props.theme.text};
+    &:hover {
+      color: ${props => props.theme.textSecondary}
+    }
   }
 `
 const IndexPage = ({

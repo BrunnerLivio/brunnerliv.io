@@ -15,15 +15,15 @@ const Badge = styled.span`
   }
   &.lang-typescript {
     background: rgb(0, 122, 204);
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255);
   }
   &.lang-python {
     background: rgb(53, 110, 158);
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
   }
   &.lang-nestjs {
     background: #e0234e;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
   }
   &.lang-vuejs {
     background: #34495e;
