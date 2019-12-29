@@ -30,19 +30,6 @@ const ArticleHeader = styled.header`
     margin-left: 0%;
     color: ${props => props.theme.textSecondary};
     font-size: 13px;
-    &.divider,
-    &.read-time {
-      display: none;
-      ${breakpoint("sm")`
-        display: inline;
-      `}
-    }
-    &.date {
-      display: none;
-      ${breakpoint("xsm")`
-        display: inline;
-      `}
-    }
   }
 `
 
