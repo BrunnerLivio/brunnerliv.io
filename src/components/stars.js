@@ -28,7 +28,7 @@ const generateStarsLayer = (size, col, duration) => styled.figure`
   animation-duration: ${duration}s;
 `
 
-const Stars = () => {
+const _Stars = () => {
   const themeContext = useContext(ThemeManagerContext)
   const starsLayerOneRef = useRef(null)
   const starsLayerTwoRef = useRef(null)
@@ -90,4 +90,4 @@ const Stars = () => {
   )
 }
 
-export default Stars
+export default React.memo(_Stars)
