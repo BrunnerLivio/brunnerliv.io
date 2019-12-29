@@ -1,6 +1,6 @@
-import color from "color"
+const color = require("color")
 
-export default {
+const lightTheme = {
   primaryLight: color("#4038a5")
     .lighten(0.7)
     .toString(),
@@ -32,21 +32,26 @@ export default {
   },
 }
 
-// WIP: Light Theme
-// export default {
-//   primary: '#eceff1',
-//   primaryDark: '#b0bec5',
-//   primaryDarker: color('#FFFFFF').darken(0.2).toString(),
-//   accent: '#5c6bc0',
-//   accentDark: color('#5c6bc0').darken(0.08).toString(),
-//   accentLight: '#9fa8da',
-//   text: '#000000',
-//   textInvert: '#FFFFFF',
-//   breakpoints: {
-//     xs: 0,
-//     sm: 576,
-//     md: 768,
-//     lg: 992,
-//     xl: 1200
-//   },
-// };
+const darkTheme = {
+  primary: "#eceff1",
+  primaryDark: "#b0bec5",
+  primaryDarker: color("#FFFFFF")
+    .darken(0.2)
+    .toString(),
+  accent: "#5c6bc0",
+  accentDark: color("#5c6bc0")
+    .darken(0.08)
+    .toString(),
+  accentLight: "#9fa8da",
+  text: "#000000",
+  textInvert: "#FFFFFF",
+  breakpoints: {
+    xs: 0,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+  },
+}
+
+module.exports = { lightTheme, darkTheme }

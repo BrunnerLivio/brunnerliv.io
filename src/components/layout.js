@@ -5,11 +5,11 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
-import styled, { ThemeProvider } from "styled-components"
-import theme from "../theme/theme"
+import styled, { withTheme } from "styled-components"
 import color from "color"
+import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import Header from "./header"
 import "./layout.css"
@@ -17,6 +17,9 @@ import Navigation from "./navigation"
 import { Location } from "@reach/router"
 import { useStaticQuery, graphql } from "gatsby"
 import Transition from "./transition"
+import Toggle from "./toggle"
+import sun from "../images/sun.png"
+import moon from "../images/moon.png"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -73,7 +76,7 @@ const Footer = styled.footer`
   font-size: 0.8em;
 `
 
-const Layout = ({ children }) => {
+const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
       site {
@@ -86,38 +89,63 @@ const Layout = ({ children }) => {
       }
     }
   `)
+  const themeContext = useContext(ThemeManagerContext)
+
   return (
-    <ThemeProvider theme={theme}>
-      <MainWrapper>
-        <Header />
-        <Container>
-          <Content>
-            <Location>
-              {({ location }) => {
-                return (
-                  <Navigation
-                    navigation={data.site.siteMetadata.navigation}
-                    active={location.pathname}
-                  />
-                )
-              }}
-            </Location>
-            <Location>
-              {({ location }) => {
-                return <Transition location={location}>{children}</Transition>
-              }}
-            </Location>
-            <Footer>
-              Design by Livio - Mountain by{" "}
-              <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> -
-              Built with <a href="https://www.gatsbyjs.org">GatsbyJS</a>{" "}
-            </Footer>
-          </Content>
-        </Container>
-      </MainWrapper>
-    </ThemeProvider>
+    <MainWrapper>
+      <Header>
+        <Toggle
+          icons={{
+            checked: (
+              <img
+                src={moon}
+                width="16"
+                height="16"
+                role="presentation"
+                style={{ pointerEvents: "none" }}
+              />
+            ),
+            unchecked: (
+              <img
+                src={sun}
+                width="16"
+                height="16"
+                role="presentation"
+                style={{ pointerEvents: "none" }}
+              />
+            ),
+          }}
+          checked={themeContext.isDark}
+          onChange={e => themeContext.toggleDark()}
+        />
+      </Header>
+      <Container>
+        <Content>
+          <Location>
+            {({ location }) => {
+              return (
+                <Navigation
+                  navigation={data.site.siteMetadata.navigation}
+                  active={location.pathname}
+                />
+              )
+            }}
+          </Location>
+          <Location>
+            {({ location }) => {
+              return <Transition location={location}>{children}</Transition>
+            }}
+          </Location>
+          <Footer>
+            Design by Livio - Mountain by{" "}
+            <a href="https://www.instagram.com/tanjabailiff/">Tanja</a> - Built
+            with <a href="https://www.gatsbyjs.org">GatsbyJS</a>{" "}
+          </Footer>
+        </Content>
+      </Container>
+    </MainWrapper>
   )
-}
+})
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

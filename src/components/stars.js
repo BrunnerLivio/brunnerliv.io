@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useContext } from "react"
 import styled from "styled-components"
 import color from "color"
-import theme from "../theme/theme"
+import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import { lightTheme, darkTheme } from "../theme"
 
 const rand = (min, max) => Math.floor(Math.random() * max + min)
 
@@ -27,32 +28,37 @@ const generateStarsLayer = (size, col, duration) => styled.figure`
   animation-duration: ${duration}s;
 `
 
-const StarsLayerOne = generateStarsLayer(4, color(theme.accent).alpha(0.4), 200)
-const StarsLayerTwo = generateStarsLayer(
-  8,
-  color(theme.primary)
-    .alpha(0.4)
-    .lighten(0.2),
-  160
-)
-const StarsLayerThree = generateStarsLayer(
-  12,
-  color(theme.accent).alpha(0.2),
-  120
-)
-const StarsLayerFour = generateStarsLayer(
-  16,
-  color(theme.primary)
-    .alpha(0.8)
-    .lighten(0.2),
-  100
-)
-
 const Stars = () => {
+  const themeContext = useContext(ThemeManagerContext)
   const starsLayerOneRef = useRef(null)
   const starsLayerTwoRef = useRef(null)
   const starsLayerThreeRef = useRef(null)
   const starsLayerFourRef = useRef(null)
+  const theme = themeContext.isDark ? darkTheme : lightTheme
+  const StarsLayerOne = generateStarsLayer(
+    4,
+    color(theme.accent).alpha(0.4),
+    200
+  )
+  const StarsLayerTwo = generateStarsLayer(
+    8,
+    color(theme.primary)
+      .alpha(0.4)
+      .lighten(0.2),
+    160
+  )
+  const StarsLayerThree = generateStarsLayer(
+    12,
+    color(theme.accent).alpha(0.2),
+    120
+  )
+  const StarsLayerFour = generateStarsLayer(
+    16,
+    color(theme.primary)
+      .alpha(0.8)
+      .lighten(0.2),
+    100
+  )
 
   const updateStars = e => {
     if (!starsLayerOneRef.current) return

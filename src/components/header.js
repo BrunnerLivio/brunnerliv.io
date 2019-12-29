@@ -52,8 +52,16 @@ const Sunset = styled.section`
   z-index: 1;
 `
 
-const _Header = () => (
+const HeaderContent = styled.div`
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  z-index: 4;
+`
+
+const _Header = ({ children }) => (
   <HeaderWrapper>
+    <HeaderContent>{children}</HeaderContent>
     <Sunset />
     <Stars />
     <Mountain svg x="0px" y="0px" viewBox="0 0 457.76 251.52">
@@ -63,6 +71,5 @@ const _Header = () => (
 )
 
 // Do not rerender if not needed
-const Header = React.memo(_Header, () => true)
 
-export default Header
+export default _Header

@@ -2,16 +2,18 @@ import React from "react"
 
 import SEO from "../components/seo"
 import styled from "styled-components"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faTwitter,
   faGithubAlt,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
-import theme from "../theme/theme"
 import color from "color"
 
+const FontAwesomeIcon = styled(_FontAwesomeIcon)`
+  color: ${props => props.theme.primaryDark};
+`
 const EgoSection = styled.section`
   display: flex;
   align-items: center;
@@ -64,31 +66,19 @@ const IndexPage = () => (
       <p>Likes Open Source, Node.js and Dogs.</p>
       <Wrapper>
         <SocialButton href="https://github.com/brunnerlivio" target="_blank">
-          <FontAwesomeIcon
-            size="1x"
-            color={theme.primaryDark}
-            icon={faGithubAlt}
-          />
+          <FontAwesomeIcon size="1x" icon={faGithubAlt} />
         </SocialButton>
         <SocialButton href="https://twitter.com/brunnerlivio" target="_blank">
-          <FontAwesomeIcon
-            size="1x"
-            color={theme.primaryDark}
-            icon={faTwitter}
-          />
+          <FontAwesomeIcon size="1x" icon={faTwitter} />
         </SocialButton>
         <SocialButton href="https://dev.to/brunnerlivio" target="_blank">
-          <FontAwesomeIcon size="1x" color={theme.primaryDark} icon={faPen} />
+          <FontAwesomeIcon size="1x" icon={faPen} />
         </SocialButton>
         <SocialButton
           href="https://www.linkedin.com/in/livio-brunner-151667165/"
           target="_blank"
         >
-          <FontAwesomeIcon
-            size="1x"
-            color={theme.primaryDark}
-            icon={faLinkedin}
-          />
+          <FontAwesomeIcon size="1x" icon={faLinkedin} />
         </SocialButton>
       </Wrapper>
     </EgoSection>
