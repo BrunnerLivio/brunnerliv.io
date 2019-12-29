@@ -8,9 +8,7 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import styled, { withTheme, createGlobalStyle } from "styled-components"
-import color from "color"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
-import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Header from "./header"
 import "./layout.css"
@@ -67,28 +65,6 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.primaryDarker};
   }
 `
-
-const FontAwesomeIcon = styled(_FontAwesomeIcon)`
-  color: ${props => props.theme.primaryDark};
-`
-const EgoSection = styled.section`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0;
-  flex-direction: column;
-  margin-bottom: 16px;
-  h1 {
-    font-size: 3em;
-    color: ${props => props.theme.text};
-  }
-  p {
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.7)
-        .toString()};
-  }
-`
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -115,7 +91,7 @@ const Layout = withTheme(({ children }) => {
                 src={moon}
                 width="16"
                 height="16"
-                role="presentation"
+                alt="Moon"
                 style={{ pointerEvents: "none" }}
               />
             ),
@@ -124,7 +100,7 @@ const Layout = withTheme(({ children }) => {
                 src={sun}
                 width="16"
                 height="16"
-                role="presentation"
+                alt="Sun"
                 style={{ pointerEvents: "none" }}
               />
             ),
