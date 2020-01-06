@@ -23,6 +23,12 @@ yarn
 npm run start
 ```
 
+## 🦕 Deno?! 
+
+```bash
+deno https://brunnerliv.io/me
+```
+
 ## Credits
 
 Thanks Tanja for the [Rigi](https://www.rigi.ch/) SVG image <3
