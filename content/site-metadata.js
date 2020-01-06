@@ -1,6 +1,6 @@
-const projects = require('./projects.json');
-const contributions = require('./contributions.json');
-const navigation = require('./navigation.json');
+const projects = require("./projects.json")
+const contributions = require("./contributions.json")
+const navigation = require("./navigation.json")
 
 module.exports = {
   title: `brunnerliv.io`,
@@ -9,4 +9,22 @@ module.exports = {
   navigation: navigation,
   projects: projects,
   contributions: contributions,
-};
+  social: {
+    twitter: {
+      username: "brunnerlivio",
+      path: "https://twitter.com/BrunnerLivio/",
+    },
+    github: {
+      username: "brunnerlivio",
+      path: "https://github.com/BrunnerLivio/",
+    },
+    dev: {
+      username: "brunnerlivio",
+      path: "https://dev.to/BrunnerLivio/",
+    },
+    linkedIn: {
+      username: "Livio Brunner",
+      path: "https://www.linkedin.com/in/livio-brunner-151667165/",
+    },
+  },
+}
