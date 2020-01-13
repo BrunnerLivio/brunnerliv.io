@@ -28,14 +28,6 @@ const Article = styled.article`
     margin: 32px 0;
   }
 
-  h1 {
-    font-size: 1.7rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
   p {
     line-height: 26px;
     font-size: 1rem;

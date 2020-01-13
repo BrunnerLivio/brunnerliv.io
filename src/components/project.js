@@ -14,6 +14,7 @@ const ProjectSection = styled.section`
   p,
   a {
     color: ${props => props.theme.text};
+    text-decoration: none;
   }
   p {
     font-size: 1rem;

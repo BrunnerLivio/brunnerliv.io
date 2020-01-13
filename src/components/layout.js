@@ -24,14 +24,6 @@ import Footer from "./footer"
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  color: ${props => props.theme.text};
-  a {
-    color: ${props => props.theme.text};
-    text-decoration: none;
-    &:hover {
-      color: ${props => props.theme.linkHover};
-    }
-  }
 `
 
 const Container = styled.div`
@@ -63,6 +55,36 @@ const Content = styled.div`
 const GlobalStyle = createGlobalStyle`
   body {
     background: ${props => props.theme.primaryDarker};
+    color: ${props => props.theme.text};
+  }
+
+  blockquote {
+    border-left: 2px ${props => props.theme.accent} solid;
+    padding: 8px;
+    margin: 32px 0;
+  }
+
+  h1 {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 1.45rem;
+    color: inherit;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  a {
+    color: ${props => props.theme.accent};
+    &:hover {
+      text-decoration: none;
+    }
   }
 `
 const Layout = withTheme(({ children }) => {

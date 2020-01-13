@@ -4,6 +4,9 @@ import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
 
 const ArticleItem = styled.article`
+  a {
+    text-decoration: none;
+  }
   h2 {
     margin-bottom: 8px;
     margin-top: 8px;
