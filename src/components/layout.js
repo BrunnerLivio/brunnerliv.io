@@ -9,6 +9,7 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import styled, { withTheme, createGlobalStyle } from "styled-components"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import breakpoint from "styled-components-breakpoint"
 
 import Header from "./header"
 import "./layout.css"
@@ -65,19 +66,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
+    margin: 0.67em 0;
     color: inherit;
     font-weight: normal;
     text-rendering: optimizeLegibility;
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.1;
+    ${breakpoint("sm")`
+      font-size: 2.5rem;
+    `}
   }
 
   a {
