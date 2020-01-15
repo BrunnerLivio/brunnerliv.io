@@ -67,6 +67,10 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: "apple-mobile-web-app-capable",
+          content: "yes",
+        },
       ].concat(meta)}
     />
   )
