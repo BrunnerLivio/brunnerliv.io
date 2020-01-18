@@ -19,8 +19,8 @@ const MeWrapper = styled.div`
 
 const Avatar = styled.img`
   border-radius: 100%;
-  background: ${meImage};
-  margin: 0 0.875rem 0 0;
+  margin: 0;
+  margin-right: 0.875rem;
 `
 
 const Me = () => (
