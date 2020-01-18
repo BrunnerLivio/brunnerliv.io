@@ -33,6 +33,8 @@ const Container = styled.div`
   background: ${props => props.theme.primaryDarker};
   flex: 1;
   height: 100%;
+  position: relative;
+  z-index: 1;
   &:before {
     max-height: 500px;
     min-height: 60vh;
@@ -71,11 +73,14 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     font-weight: normal;
     text-rendering: optimizeLegibility;
-    font-size: 2rem;
-    line-height: 1.1;
+    font-size: 1.7em;
     ${breakpoint("sm")`
-      font-size: 2.5rem;
-    `}
+        font-size: 2em;
+      `}
+    ${breakpoint("md")`
+        font-size: 2.5em;
+      `}
+    font-weight: bold;
   }
 
   a {
