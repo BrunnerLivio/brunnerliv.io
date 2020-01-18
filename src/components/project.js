@@ -18,7 +18,7 @@ const ProjectSection = styled.section`
   }
   p {
     font-size: 1rem;
-    color: ${props => props.theme.textSecondary};
+    color: ${props => props.theme.text};
     margin-top: 4px;
   }
 `
