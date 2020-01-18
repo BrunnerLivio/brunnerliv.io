@@ -59,7 +59,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `brunnerliv.io`,
-        short_name: `bl`,
+        short_name: `Livios Blog`,
         start_url: `/`,
         background_color: `#4038a5`,
         theme_color: `#4038a5`,

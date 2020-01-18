@@ -8,6 +8,10 @@ import breakpoint from "styled-components-breakpoint"
 const Article = styled.article`
   padding: 20px;
   width: calc(100vw - 20px);
+  margin-top: 16px;
+  ${breakpoint("sm")`
+    margin-top: 0;
+  `}
   ${breakpoint("md")`
     width: 740px;
   `}

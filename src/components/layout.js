@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
 
   blockquote {
     border-left: 2px ${props => props.theme.accent} solid;
-    padding: 8px;
+    padding: 12px;
     margin: 32px 0;
   }
 

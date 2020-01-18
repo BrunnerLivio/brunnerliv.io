@@ -71,6 +71,10 @@ function SEO({ description, lang, meta, title }) {
           name: "apple-mobile-web-app-capable",
           content: "yes",
         },
+        {
+          name: "viewport",
+          content: "minimal-ui",
+        },
       ].concat(meta)}
     />
   )

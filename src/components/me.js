@@ -1,12 +1,17 @@
 import React from "react"
 import styled from "styled-components"
 import meImage from "../images/me.jpeg"
+import breakpoint from "styled-components-breakpoint"
 
 const MeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 3rem;
+  margin-top: 32px;
+  ${breakpoint("sm")`
+    margin-top: 0;
+  `}
   p {
     margin: 0;
   }

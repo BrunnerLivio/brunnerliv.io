@@ -29,7 +29,7 @@ const TitleWrapper = styled.header`
   flex-direction: column;
   margin-bottom: 0.2rem;
   h2 {
-    margin-bottom: 16px;
+    margin-bottom: 4px;
 
     font-weight: bold;
     font-size: 1.4em;
