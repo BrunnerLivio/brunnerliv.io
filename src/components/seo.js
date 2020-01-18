@@ -72,8 +72,16 @@ function SEO({ description, lang, meta, title }) {
           content: "yes",
         },
         {
+          name: "apple-mobile-web-app-status-bar-style",
+          content: "black",
+        },
+        {
           name: "viewport",
-          content: "minimal-ui",
+          content: "initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui",
+        },
+        {
+          name: "theme-color",
+          content: "#000000",
         },
       ].concat(meta)}
     />
