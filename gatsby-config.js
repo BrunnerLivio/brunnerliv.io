@@ -44,6 +44,14 @@ module.exports = {
         trackingId: "UA-78529910-1",
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Roboto']
+        }
+      }
+    },
     `react-static-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {

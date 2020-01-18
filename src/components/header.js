@@ -28,7 +28,13 @@ const HeaderWrapper = styled.header`
   padding: 0;
   height: 120px;
   ${breakpoint("sm")`
-    min-height: 140px;
+    min-height: 160px;
+  `}
+  ${breakpoint("md")`
+    min-height: 200px;
+  `}
+  ${breakpoint("lg")`
+    min-height: 250px;
   `}
   overflow: hidden;
 `
