@@ -11,9 +11,6 @@ const Mountain = styled.svg`
   position: absolute;
   margin-bottom: -140px;
   z-index: 2;
-  ${breakpoint("sm")`
-    height: 350px;
-  `}
 `
 
 const HeaderWrapper = styled.header`
@@ -57,15 +54,26 @@ const HeaderContent = styled.div`
   top: 16px;
   z-index: 4;
 `
+const HeaderBackground = styled.div`
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  width: 100vw;
+  height: 140px;
+  left: 0;
+  overflow: hidden;
+`
 
 const _Header = ({ children }) => (
   <HeaderWrapper>
     <HeaderContent>{children}</HeaderContent>
-    <Sunset />
-    <Stars />
     <Mountain svg x="0px" y="0px" viewBox="0 0 457.76 251.52">
       <MountainPaths></MountainPaths>
     </Mountain>
+    <HeaderBackground>
+      <Stars />
+      <Sunset />
+    </HeaderBackground>
   </HeaderWrapper>
 )
 

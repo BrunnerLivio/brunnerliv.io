@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
+html, body, #___gatsby, #gatsby-focus-wrapper{
+  height: 100%;
+}
 html {
   font-family: "Roboto", sans-serif;
   -ms-text-size-adjust: 100%;

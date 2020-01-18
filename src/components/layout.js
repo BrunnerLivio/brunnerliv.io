@@ -32,6 +32,7 @@ const Container = styled.div`
   justify-content: center;
   background: ${props => props.theme.primaryDarker};
   flex: 1;
+  height: 100%;
   &:before {
     max-height: 500px;
     min-height: 60vh;
