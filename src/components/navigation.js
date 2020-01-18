@@ -23,6 +23,7 @@ const Li = styled.li`
     text-decoration: none;
     color: ${props => props.theme.accent} !important;
     text-transform: uppercase;
+    font-weight: bold;
   }
 `
 
@@ -56,12 +57,10 @@ class Navigation extends Component {
 
   activateNavItem(name = this.navigation[0].name) {
     // Converts /articles/my-article to articles
-    const firstPathName = name.split('/').filter(item => !!item)[0];
+    const firstPathName = name.split("/").filter(item => !!item)[0]
     const navItem =
       this.navigation.find(
-        nav =>
-          nav.name === name ||
-          nav.to.replace(/\//gi, "") === firstPathName
+        nav => nav.name === name || nav.to.replace(/\//gi, "") === firstPathName
       ) || this.navigation[0]
     const $underline = this.underlineRef.current
     const $li = navItem.ref.current

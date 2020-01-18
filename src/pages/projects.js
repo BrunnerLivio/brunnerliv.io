@@ -5,13 +5,22 @@ import SEO from "../components/seo"
 import Project from "../components/project"
 import styled from "styled-components"
 import Content from "../components/content"
+import breakpoint from "styled-components-breakpoint"
+import Me from "../components/me"
 
 const ProjectList = styled.main`
-  margin-top: 28px;
   padding: 20px;
   h1 {
     margin-bottom: 2rem;
-    color: ${props => props.theme.text};
+    color: ${props => props.theme.accent} !important;
+    font-weight: bold;
+    font-size: 1.4em;
+    ${breakpoint("sm")`
+      font-size: 1.5em;
+    `}
+    ${breakpoint("md")`
+      font-size: 2em;
+    `}
   }
 `
 
@@ -21,7 +30,7 @@ const Projects = ({ data }) => {
   return (
     <ProjectList>
       <SEO title="Projects" />
-      <h2 id="latest-repos">Latest Repos</h2>
+      <Me />
       <Content>
         {(projects || []).map((project, index) => (
           <Project key={index} project={project}></Project>

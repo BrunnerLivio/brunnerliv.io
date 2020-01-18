@@ -4,10 +4,10 @@ import styled from "styled-components"
 
 const Badge = styled.span`
   font-size: 10px;
-  margin-left: 6px;
   border-radius: 8px;
   padding: 4px 8px;
   font-weight: 500;
+  margin-bottom: 8px;
   display: block;
   &.lang-javascript {
     background: rgb(241, 224, 90);

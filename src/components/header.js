@@ -12,7 +12,7 @@ const Mountain = styled.svg`
   margin-bottom: -140px;
   z-index: 2;
   ${breakpoint("sm")`
-    height: 400px;
+    height: 350px;
   `}
 `
 
@@ -30,7 +30,7 @@ const HeaderWrapper = styled.header`
   padding: 0;
   height: 120px;
   ${breakpoint("sm")`
-    min-height: 200px;
+    min-height: 140px;
   `}
   overflow: hidden;
 `

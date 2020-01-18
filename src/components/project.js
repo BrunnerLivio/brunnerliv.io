@@ -2,6 +2,7 @@ import React from "react"
 
 import styled from "styled-components"
 import LanguageBadge from "./language-badge"
+import breakpoint from "styled-components-breakpoint"
 
 const ProjectSection = styled.section`
   border-radius: 8px;
@@ -13,7 +14,6 @@ const ProjectSection = styled.section`
   h2,
   p,
   a {
-    color: ${props => props.theme.text};
     text-decoration: none;
   }
   p {
@@ -25,14 +25,26 @@ const ProjectSection = styled.section`
 
 const TitleWrapper = styled.header`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   margin-bottom: 0.2rem;
   h2 {
-    display: inline-block;
-    padding-bottom: 2px;
-    font-size: 1.4rem;
-    margin-right: 8px;
-    margin-bottom: 0;
+    margin-bottom: 16px;
+
+    font-weight: bold;
+    font-size: 1.4em;
+    ${breakpoint("sm")`
+      font-size: 1.5em;
+    `}
+    ${breakpoint("md")`
+      font-size: 2em;
+    `}
+  }
+  a {
+    color: ${props => props.theme.accent};
+    &:hover {
+      color: ${props => props.theme.accentDark};
+    }
   }
 `
 
@@ -42,9 +54,6 @@ const Project = ({ project }) => (
       <h2>
         <a href={project.sourceCode}>{project.name}</a>
       </h2>
-      {project.languages.map(language => (
-        <LanguageBadge language={language}></LanguageBadge>
-      ))}
     </TitleWrapper>
     <p>{project.description}</p>
   </ProjectSection>

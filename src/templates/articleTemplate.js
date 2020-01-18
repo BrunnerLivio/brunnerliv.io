@@ -6,7 +6,6 @@ import SEO from "../components/seo"
 import breakpoint from "styled-components-breakpoint"
 
 const Article = styled.article`
-  margin-top: 28px;
   padding: 20px;
   width: calc(100vw - 20px);
   ${breakpoint("md")`

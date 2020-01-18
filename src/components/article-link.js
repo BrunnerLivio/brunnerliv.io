@@ -7,21 +7,29 @@ const ArticleItem = styled.article`
   a {
     text-decoration: none;
   }
-  h2 {
-    margin-bottom: 8px;
-    margin-top: 8px;
-    font-size: 1.4em;
-    ${breakpoint("sm")`
-      font-size: 1.5em;
-    `}
-    ${breakpoint("md")`
-      font-size: 2em;
-    `}
-  }
+
   hr {
     background: rgba(255, 255, 255, 0.1);
   }
 `
+
+const ArticleTitle = styled.h2`
+  margin-bottom: 8px;
+  margin-top: 8px;
+  font-size: 1.4em;
+  ${breakpoint("sm")`
+      font-size: 1.5em;
+    `}
+  ${breakpoint("md")`
+      font-size: 2em;
+    `}
+  font-weight: bold;
+  color: ${props => props.theme.accent} !important;
+  &:hover {
+    color: ${props => props.theme.accentDark} !important;
+  }
+`
+
 const ArticleHeader = styled.header`
   display: flex;
   flex-direction: row;
@@ -51,7 +59,7 @@ const ArticleLink = ({ post }) => {
   return (
     <ArticleItem>
       <Link to={post.frontmatter.path}>
-        <h2>{post.frontmatter.title}</h2>
+        <ArticleTitle>{post.frontmatter.title}</ArticleTitle>
       </Link>
       <ArticleHeader>
         <span className="date">{post.frontmatter.date}</span>

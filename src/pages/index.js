@@ -6,20 +6,15 @@ import breakpoint from "styled-components-breakpoint"
 
 import { graphql } from "gatsby"
 import ArticleLink from "../components/article-link"
+import Me from "../components/me"
 
-const ArticleList = styled.main`
-  margin-top: 28px;
+const Main = styled.main`
   padding: 20px;
   width: 100%;
   ${breakpoint("md")`
     width: 740px;
   `}
-  h2 {
-    color: ${props => props.theme.text};
-    &:hover {
-      color: ${props => props.theme.textSecondary}
-    }
-  }
+  
 `
 const IndexPage = ({
   data: {
@@ -32,7 +27,11 @@ const IndexPage = ({
   return (
     <>
       <SEO title="Home" />
-      <ArticleList>{posts}</ArticleList>
+
+      <Main>
+        <Me />
+        {posts}
+      </Main>
     </>
   )
 }
