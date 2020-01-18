@@ -10,22 +10,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 
-const FooterWrapper = styled.footer`
-  color: ${props =>
-    color(props.theme.text)
-      .alpha(0.5)
-      .toString()};
-  a {
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.5)
-        .toString()};
-  }
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 0.8em;
-`
-
 const FontAwesomeIcon = styled(_FontAwesomeIcon)`
   color: ${props => props.theme.primary};
 `
@@ -54,7 +38,7 @@ const Wrapper = styled.section`
 `
 
 const SocialButton = styled.a`
-  background: ${props => props.theme.text};
+  background: ${props => props.theme.accent};
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -64,9 +48,15 @@ const SocialButton = styled.a`
   margin-right: 16px;
   border: 0;
   cursor: pointer;
+  box-shadow: 0px 0px 2px
+      ${props =>
+        color(props.theme.accent)
+          .darken(0.1)
+          .toString()},
+    0px 0px 14px ${props => props.theme.accent};
   &:hover {
     background: ${props =>
-      color(props.theme.text)
+      color(props.theme.accent)
         .alpha(0.7)
         .toString()};
   }
@@ -110,10 +100,6 @@ const Footer = () => (
         </SocialButton>
       </Wrapper>
     </EgoSection>
-    <FooterWrapper>
-      Design by Livio - Mountain by{" "}
-      <a href="https://www.instagram.com/tanjabailiff/">Tanja</a>
-    </FooterWrapper>
   </>
 )
 
