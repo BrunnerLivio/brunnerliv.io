@@ -91,6 +91,7 @@ class Navigation extends Component {
     return (
       <Nav>
         <div ref={this.wrapperRef}>
+          {/* eslint-disable-next-line */}
           <Ul onMouseOut={() => activateNavItem(this.props.active)}>
             {this.navigation.map((nav, key) => (
               <Li

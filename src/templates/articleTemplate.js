@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import SEO from "../components/seo"
 import breakpoint from "styled-components-breakpoint"
+import Me from "../components/me"
 
 const Article = styled.article`
   padding: 20px;
@@ -49,6 +50,7 @@ export default function Template({
         <h1>{frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </Article>
+      <Me />
     </>
   )
 }

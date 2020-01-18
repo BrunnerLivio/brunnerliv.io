@@ -1,7 +1,6 @@
 import React from "react"
 
 import styled from "styled-components"
-import LanguageBadge from "./language-badge"
 import breakpoint from "styled-components-breakpoint"
 
 const ProjectSection = styled.section`

@@ -62,6 +62,15 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.text};
   }
 
+  ::selection {
+    background: ${props => props.theme.accentLight};
+    color: ${props => props.theme.primary};
+  }
+  ::-moz-selection {
+    background: ${props => props.theme.accentLight};
+    color: ${props => props.theme.primary};
+  }
+
   blockquote {
     border-left: 2px ${props => props.theme.accent} solid;
     padding: 12px;

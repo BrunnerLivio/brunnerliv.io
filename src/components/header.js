@@ -8,6 +8,12 @@ import color from "color"
 const Mountain = styled.svg`
   width: 100%;
   height: 350px;
+  ${breakpoint("md")`
+    height: 380px;
+  `}
+  ${breakpoint("lg")`
+    height: 450px;
+  `}
   bottom: 0;
   position: absolute;
   margin-bottom: -140px;

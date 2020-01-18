@@ -1,14 +1,25 @@
 import React from "react"
-
-import Layout from "../components/layout"
 import SEO from "../components/seo"
+import styled from "styled-components"
+import oops from "../images/oops.png"
+import { Link } from "gatsby"
 
+const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const EscapeLink = styled(Link)`
+  font-size: 18px;
+  margin-bottom: 32px;
+`;
 const NotFoundPage = () => (
-  <Layout>
+  <Wrapper>
     <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
+    <h2>You are not supposed to see this...</h2>
+    <EscapeLink to="/">Let's get back, shall we?</EscapeLink>
+    <img height="300" src={oops} alt="Livio in a bra" />
+  </Wrapper>
 )
 
 export default NotFoundPage
