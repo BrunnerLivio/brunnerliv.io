@@ -1,6 +1,7 @@
 const color = require("color")
 
 const lightTheme = {
+  name: "dark",
   primaryLight: color("#4038a5")
     .lighten(0.7)
     .toString(),
@@ -33,13 +34,14 @@ const lightTheme = {
 }
 
 const darkTheme = {
+  name: "light",
   primary: "#eceff1",
   primaryDark: "#b0bec5",
   primaryDarker: color("#FFFFFF")
     .darken(0.2)
     .toString(),
-  accent: "#5c6bc0",
-  accentDark: color("#5c6bc0")
+  accent: "#404fa6",
+  accentDark: color("#404fa6")
     .darken(0.08)
     .toString(),
   accentLight: "#9fa8da",

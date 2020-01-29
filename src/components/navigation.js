@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import color from "color"
 
+const NAVITEM_HOR_PADDING = 8
+
 const Nav = styled.nav`
   display: flex;
   justify-content: center;
@@ -16,12 +18,10 @@ const Ul = styled.ul`
 `
 
 const Li = styled.li`
-  &:not(:last-child) {
-    margin-right: 20px;
-  }
   a {
     text-decoration: none;
     color: ${props => props.theme.accent} !important;
+    padding: 16px ${NAVITEM_HOR_PADDING}px;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -29,7 +29,7 @@ const Li = styled.li`
 
 const Underline = styled.hr`
   background-color: ${props => props.theme.accent};
-  width: 45px;
+  width: 87px;
   height: 2px;
   display: block;
   box-shadow: 0px 0px 8px
@@ -65,9 +65,11 @@ class Navigation extends Component {
     const $underline = this.underlineRef.current
     const $li = navItem.ref.current
     const $wrapper = this.wrapperRef.current
-    const offset = $li.offsetLeft - $wrapper.offsetLeft
+    const offset =
+      $li.offsetLeft - $wrapper.offsetLeft + NAVITEM_HOR_PADDING
+    const width = $li.getBoundingClientRect().width - NAVITEM_HOR_PADDING * 2
     $underline.style.transform = `translateX(${offset}px)`
-    $underline.style.width = `${$li.getBoundingClientRect().width}px`
+    $underline.style.width = `${width}px`
   }
 
   componentDidMount() {
