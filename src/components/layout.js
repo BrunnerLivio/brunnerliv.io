@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import styled, { withTheme, createGlobalStyle } from "styled-components"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
@@ -25,6 +25,8 @@ import Footer from "./footer"
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  transition: 0.3s ease-in-out opacity;
+  opacity: 0;
 `
 
 const Container = styled.div`
@@ -114,8 +116,11 @@ const Layout = withTheme(({ children }) => {
   `)
   const themeContext = useContext(ThemeManagerContext)
 
+  const [isMounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
-    <MainWrapper>
+    <MainWrapper style={{ opacity: isMounted ? 1 : 0 }}>
       <GlobalStyle />
       <Header>
         <Toggle
