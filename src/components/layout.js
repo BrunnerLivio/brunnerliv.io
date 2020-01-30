@@ -1,26 +1,20 @@
-/**
- * Layout component that queries for data
- * with Gatsby"s useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
+import { useStaticQuery, graphql } from "gatsby"
+import { Location } from "@reach/router"
 import React, { useContext, useEffect, useState } from "react"
-import PropTypes from "prop-types"
-import styled, { withTheme, createGlobalStyle } from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
-import breakpoint from "styled-components-breakpoint"
 
 import Header from "./header"
-import "./layout.css"
 import Navigation from "./navigation"
-import { Location } from "@reach/router"
-import { useStaticQuery, graphql } from "gatsby"
 import Transition from "./transition"
 import Toggle from "./toggle"
-import sun from "../images/sun.png"
-import moon from "../images/moon.png"
 import Footer from "./footer"
+import GlobalStyle from "./globalStyle"
+
+import moon from "../images/moon.png"
+import sun from "../images/sun.png"
+
+import "./layout.css"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -58,49 +52,6 @@ const Content = styled.div`
   flex-direction: column;
 `
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: ${props => props.theme.primaryDarker};
-    color: ${props => props.theme.text};
-  }
-
-  ::selection {
-    background: ${props => props.theme.accentLight};
-    color: ${props => props.theme.primary};
-  }
-  ::-moz-selection {
-    background: ${props => props.theme.accentLight};
-    color: ${props => props.theme.primary};
-  }
-
-  blockquote {
-    border-left: 2px ${props => props.theme.accent} solid;
-    padding: 12px;
-    margin: 32px 0;
-  }
-
-  h1 {
-    margin: 0.67em 0;
-    color: inherit;
-    font-weight: normal;
-    text-rendering: optimizeLegibility;
-    font-size: 1.7em;
-    ${breakpoint("sm")`
-        font-size: 2em;
-      `}
-    ${breakpoint("md")`
-        font-size: 2.5em;
-      `}
-    font-weight: bold;
-  }
-
-  a {
-    color: ${props => props.theme.accent};
-    &:hover {
-      text-decoration: none;
-    }
-  }
-`
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -141,29 +92,26 @@ const Layout = withTheme(({ children }) => {
                 height="16"
                 alt="Sun"
                 style={{ pointerEvents: "none" }}
+                
               />
             ),
           }}
           checked={themeContext.isDark}
-          onChange={e => themeContext.toggleDark()}
+          onChange={() => themeContext.toggleDark()}
         />
       </Header>
       <Container>
         <Content>
           <Location>
-            {({ location }) => {
-              return (
+            {({ location }) => (
+              <>
                 <Navigation
                   navigation={data.site.siteMetadata.navigation}
                   active={location.pathname}
                 />
-              )
-            }}
-          </Location>
-          <Location>
-            {({ location }) => {
-              return <Transition location={location}>{children}</Transition>
-            }}
+                <Transition location={location}>{children}</Transition>
+              </>
+            )}
           </Location>
           <Footer />
         </Content>
@@ -171,9 +119,5 @@ const Layout = withTheme(({ children }) => {
     </MainWrapper>
   )
 })
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout

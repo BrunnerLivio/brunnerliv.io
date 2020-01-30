@@ -1,10 +1,9 @@
 import React from "react"
-
-import SEO from "../components/seo"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
 
-import { graphql } from "gatsby"
+import SEO from "../components/seo"
 import ArticleLink from "../components/article-link"
 import Me from "../components/me"
 

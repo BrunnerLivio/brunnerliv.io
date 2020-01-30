@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
 
 import SEO from "../components/seo"
-import breakpoint from "styled-components-breakpoint"
 import Me from "../components/me"
 
 const Article = styled.article`

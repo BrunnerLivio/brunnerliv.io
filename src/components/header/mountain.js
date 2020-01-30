@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
 
 const PrimaryDarkPath = styled.path`
   fill: ${props => props.theme.primaryDark};
@@ -7,12 +8,11 @@ const PrimaryDarkPath = styled.path`
 const PrimaryPath = styled.path`
   fill: ${props => props.theme.primary};
 `
-
 const PrimaryDarkPolygon = styled.polygon`
   fill: ${props => props.theme.primaryDark};
 `
 
-const Mountain = () => (
+const MountainPaths = () => (
   <>
     <PrimaryDarkPath
       d="M230.97,75.02l0.16-17.01l0.17-3.73l0.78,0.08l1.01,20.98c0,0,11.1,4.11,21.76,7.44
@@ -79,6 +79,27 @@ const Mountain = () => (
  63.37,143.22 73.94,139.7 84.96,133.97 98.18,131.32 108.43,131.72 110.56,128.85 110.88,127.15 "
     />
   </>
+)
+
+const MountainSVG = styled.svg`
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  margin-bottom: -140px;
+  z-index: 2;
+  height: 350px;
+  ${breakpoint("md")`
+    height: 380px;
+  `}
+  ${breakpoint("lg")`
+    height: 450px;
+  `}
+`
+
+const Mountain = () => (
+  <MountainSVG x="0px" y="0px" viewBox="0 0 457.76 251.52">
+    <MountainPaths></MountainPaths>
+  </MountainSVG>
 )
 
 export default Mountain

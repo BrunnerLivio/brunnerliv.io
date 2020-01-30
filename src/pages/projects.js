@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
+import breakpoint from "styled-components-breakpoint"
+import styled from "styled-components"
 
 import SEO from "../components/seo"
 import Project from "../components/project"
-import styled from "styled-components"
 import Content from "../components/content"
-import breakpoint from "styled-components-breakpoint"
 import Me from "../components/me"
 
 const ProjectList = styled.main`
@@ -46,12 +46,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         projects {
-          sourceCode
-          name
-          description
-          languages
-        }
-        contributions {
           sourceCode
           name
           description

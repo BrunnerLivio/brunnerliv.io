@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import meImage from "../images/me.jpeg"
 import breakpoint from "styled-components-breakpoint"
+
+import meImage from "../images/me.jpeg"
 
 const MeWrapper = styled.div`
   display: flex;
