@@ -7,8 +7,8 @@ import SEO from "../components/seo"
 import Me from "../components/me"
 
 const Article = styled.article`
-  padding: 20px;
-  width: calc(100vw - 20px);
+  padding: 1.3125rem;
+  max-width: calc(100vw - 1rem);
   margin-top: 16px;
   ${breakpoint("sm")`
     margin-top: 0;
@@ -17,24 +17,36 @@ const Article = styled.article`
     width: 740px;
   `}
   pre {
-    font-size: 12px !important;
+    margin-left: 0 !important;
+    padding: 1.3125rem !important;
+    font-size: 14px !important;
+    border-radius: 0 !important;
+    overflow-x: auto !important;
+
     ${breakpoint("sm")`
-      font-size: 14px !important;
+      border-radius: 3px !important;
     `}
     ${breakpoint("md")`
       font-size: 16px !important;
     `}
-    overflow-x: auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  p > .language-text {
+    background: none;
+    color: ${props => props.theme.text};
   }
 
   .gatsby-highlight {
-    margin: 32px 0;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: -1.3125rem;
+    margin-right: -1.3125rem;
+
   }
 
   p {
-    line-height: 26px;
-    font-size: 1rem;
+    line-height: 28px;
+    font-size: 18px;
   }
 `
 
