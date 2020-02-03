@@ -14,7 +14,7 @@ const Article = styled.article`
     margin-top: 0;
   `}
   ${breakpoint("md")`
-    width: 740px;
+    width: 1000px;
   `}
   pre {
     margin-left: 0 !important;
@@ -41,7 +41,6 @@ const Article = styled.article`
     margin-bottom: 16px;
     margin-left: -1.3125rem;
     margin-right: -1.3125rem;
-
   }
 
   p {
@@ -49,6 +48,21 @@ const Article = styled.article`
     font-size: 18px;
   }
 `
+
+const CoverImage = styled.img`
+  margin: 48px 0;
+  min-height: 430px;
+`
+const ArticleTitle = styled.h1`
+  text-align: center;
+  margin-bottom: 0px;
+  color: ${props => props.theme.accent};
+`
+const ArticlePreview = styled.p`
+  text-align: center;
+  margin: 8px 0;
+  font-size: 22px !important;
+`;
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
@@ -59,7 +73,12 @@ export default function Template({
     <>
       <SEO title={frontmatter.title} />
       <Article>
-        <h1>{frontmatter.title}</h1>
+        <ArticleTitle>{frontmatter.title}</ArticleTitle>
+        <ArticlePreview>{frontmatter.description}</ArticlePreview>
+        <CoverImage
+          src={frontmatter.cover_image}
+          alt={`Cover of the article ${frontmatter.title}`}
+        />
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </Article>
       <Me />
@@ -74,6 +93,8 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         path
         title
+        description
+        cover_image
       }
     }
   }
