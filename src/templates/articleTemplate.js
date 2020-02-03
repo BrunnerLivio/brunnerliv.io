@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
@@ -14,7 +14,7 @@ const Article = styled.article`
     margin-top: 0;
   `}
   ${breakpoint("md")`
-    width: 1000px;
+    width: 900px;
   `}
   pre {
     margin-left: 0 !important;
@@ -50,8 +50,22 @@ const Article = styled.article`
 `
 
 const CoverImage = styled.img`
-  margin: 48px 0;
-  min-height: 430px;
+  box-shadow: 27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5),
+    16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
+  transform: scale(1);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  margin: 32px 0 48px 0;
+  ${breakpoint("md")`
+    margin: 86px 0 126px 0;
+    min-height: 350px;
+  `};
+  &.mounted {
+    ${breakpoint("lg")`
+      transform: scale(1.2);
+    `}
+    opacity: 1;
+  }
 `
 const ArticleTitle = styled.h1`
   text-align: center;
@@ -61,14 +75,28 @@ const ArticleTitle = styled.h1`
 const ArticlePreview = styled.p`
   text-align: center;
   margin: 8px 0;
-  font-size: 22px !important;
-`;
+  font-size: 18px;
+  ${breakpoint("md")`
+    font-size: 22px !important;
+  `};
+`
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html } = markdownRemark
+  const [hasMounted, setHasMounted] = useState(false)
+  const coverImageRef = useRef(null)
+
+  useEffect(() => {
+    const onLoad = () => setHasMounted(true)
+    const coverImage = coverImageRef.current;
+    coverImage.addEventListener("load", onLoad)
+    return () => {
+      coverImage.removeEventListener("load", onLoad)
+    }
+  })
   return (
     <>
       <SEO title={frontmatter.title} />
@@ -76,6 +104,8 @@ export default function Template({
         <ArticleTitle>{frontmatter.title}</ArticleTitle>
         <ArticlePreview>{frontmatter.description}</ArticlePreview>
         <CoverImage
+          ref={coverImageRef}
+          className={hasMounted ? "mounted" : ""}
           src={frontmatter.cover_image}
           alt={`Cover of the article ${frontmatter.title}`}
         />
