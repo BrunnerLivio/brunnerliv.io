@@ -1,18 +1,25 @@
-name: Audit pull request
-on: [push, pull_request]
+name: Lighthouse
+
+on: [pull_request]
 
 jobs:
-  audit:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Sleep for 30 seconds
-      run: sleep 30
-    - name: Audit Netlify deploy preview
-      uses: jakejarvis/lighthouse-action@master
-      with:
-        netlify_site: 'brunnerlivio.netlify.com'
-        url: 'https://brunnerliv.io'
-    - uses: actions/upload-artifact@master
-      with:
-        name: report
-        path: './report'
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Waiting for 200 from the Netlify Preview
+        uses: josephduffy/wait-for-netlify-action@v1
+        id: wait-for-netflify-preview
+        with:
+          site_name: 'docs-nestjs'
+      - name: Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.3.x
+          lhci autorun --upload.target=temporary-public-storage --collect.url=${{ steps.wait-for-netflify-preview.outputs.url }} || echo "LHCI failed!"
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
