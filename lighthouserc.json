@@ -1,0 +1,10 @@
+{
+  "ci": {
+    "assert": {
+      "assertions": {
+        "preset": "lighthouse:recommended",
+        "first-contentful-paint": ["error", { "minScore": 0.9 }]
+      }
+    }
+  }
+}
