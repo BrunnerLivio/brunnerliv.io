@@ -35,7 +35,7 @@ const lightTheme = {
 
 const darkTheme = {
   name: "light",
-  primary: "#eceff1",
+  primary: "red",
   primaryDark: "#b0bec5",
   primaryDarker: color("#FFFFFF")
     .darken(0.2)
