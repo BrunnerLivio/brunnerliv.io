@@ -2,10 +2,10 @@ const color = require("color")
 
 const lightTheme = {
   name: "dark",
-  primaryLight: color("#4038a5")
+  primaryLight: color("blue")
     .lighten(0.7)
     .toString(),
-  primary: "#4038a5",
+  primary: "blue",
   primaryDark: "#38248b",
   primaryDarker: color("#4038a5")
     .darken(0.4)
@@ -15,7 +15,7 @@ const lightTheme = {
     .darken(0.08)
     .toString(),
   accentLight: "#FFA5A7",
-  text: "#FFFFFF",
+  text: "#4646ad",
   textInvert: "#000000",
   textSecondary: color("#FFFFFF")
     .alpha(0.7)
