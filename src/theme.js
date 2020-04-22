@@ -7,7 +7,7 @@ const lightTheme = {
     .toString(),
   primary: "blue",
   primaryDark: "#38248b",
-  primaryDarker: color("#4038a5")
+  primaryDarker: color("red")
     .darken(0.4)
     .toString(),
   accent: "#FF7779",
