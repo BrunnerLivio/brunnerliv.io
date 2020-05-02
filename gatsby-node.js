@@ -1,6 +1,7 @@
 const path = require(`path`)
-const siteMetadata = require('./content/site-metadata');
-const writeDenoCard = require('./tools/write-deno-card');
+const siteMetadata = require("./content/site-metadata")
+const writeDenoCard = require("./tools/write-deno-card")
+const { getNpmStats } = require("./tools/get-npm-stats")
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
@@ -14,9 +15,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         edges {
           node {
             frontmatter {
-              title,
-              description,
-              path,
+              title
+              description
+              path
               date
             }
           }
@@ -36,5 +37,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: blogPostTemplate,
       context: {}, // additional data can be passed via context
     })
+  })
+}
+
+exports.sourceNodes = async ({
+  actions: { createNode },
+  createContentDigest,
+}) => {
+  const stats = await getNpmStats()
+
+  createNode({
+    ...stats,
+    id: "npm-stats",
+    internal: {
+      type: "npmStats",
+      contentDigest: createContentDigest(stats),
+    },
   })
 }

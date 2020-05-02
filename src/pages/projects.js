@@ -6,7 +6,7 @@ import styled from "styled-components"
 import SEO from "../components/seo"
 import Project from "../components/project"
 import Content from "../components/content"
-import Me from "../components/me"
+import TotalDownloads from "../components/npm/total-downloads"
 
 const ProjectList = styled.main`
   padding: 20px;
@@ -30,7 +30,7 @@ const Projects = ({ data }) => {
   return (
     <ProjectList>
       <SEO title="Projects" />
-      <Me />
+      <TotalDownloads></TotalDownloads>
       <Content>
         {(projects || []).map((project, index) => (
           <Project key={index} project={project}></Project>
