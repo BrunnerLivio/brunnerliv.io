@@ -34,11 +34,12 @@ const PackageDownloadsSubtitle = styled.div`
   &::before {
     content: "";
     display: block;
-    width: 40px;
+    width: 25px;
     height: 2px;
     position: absolute;
     background: ${props => props.theme.accent};
     top: 12px;
+    border-radius: 4px;
   }
   &::after {
     right: 0;

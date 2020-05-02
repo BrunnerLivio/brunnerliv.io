@@ -1,8 +1,12 @@
 import React from "react"
 import styled from "styled-components"
+import color from "color"
 
 const Path = styled.path`
-  fill: ${props => props.theme.primaryLight};
+  fill: ${props =>
+    color(props.theme.primaryLight)
+      .fade(0.55)
+      .toString()};
 `
 
 function PackageIcon({ height, className }) {
