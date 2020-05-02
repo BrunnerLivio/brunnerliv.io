@@ -19,7 +19,7 @@ const EgoSection = styled.section`
   height: 100%;
   padding: 0;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 64px;
   h1 {
     font-size: 3em;
     color: ${props => props.theme.text};

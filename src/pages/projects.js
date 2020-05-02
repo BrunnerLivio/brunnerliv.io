@@ -10,6 +10,7 @@ import TotalDownloads from "../components/npm/total-downloads"
 
 const ProjectList = styled.main`
   padding: 20px;
+  overflow:hidden;
   h1 {
     margin-bottom: 2rem;
     color: ${props => props.theme.accent} !important;
