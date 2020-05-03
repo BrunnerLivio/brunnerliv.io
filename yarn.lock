@@ -5801,10 +5801,10 @@ gatsby-source-filesystem@2.1.9:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-styled-components-dark-mode@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/gatsby-styled-components-dark-mode/-/gatsby-styled-components-dark-mode-1.0.9.tgz#af668270677a3014b4c5a0541cba372bb3dcd66c"
-  integrity sha512-kgIZZrnOimcdzYctYeDHsjSiRc3JvpuimK218cyqkSaHridUhexhtvYzwAypsQE5rstySKhSaVGt83LlmcUnZw==
+gatsby-styled-components-dark-mode@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-styled-components-dark-mode/-/gatsby-styled-components-dark-mode-1.1.1.tgz#26f39d3ee5d084ac94e51fda478c911ae03b782b"
+  integrity sha512-bpSX5v/qQEGUY3FTxjIBQ8G/ptmKxzn1axx6NG8F9OiXlEzbBHFEk6Z+86tEW4qvx/wefkbKUpAoiMCvpw66Gg==
 
 gatsby-telemetry@^1.1.46, gatsby-telemetry@^1.1.47:
   version "1.1.47"
