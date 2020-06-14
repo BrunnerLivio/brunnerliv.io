@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from "styled-components"
 import colorfn from "color"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
-import { lightTheme, darkTheme } from "../../theme"
 import {
   starsBoxShadowOne,
   starsBoxShadowTwo,
@@ -11,23 +10,55 @@ import {
   starsBoxShadowFour,
 } from "./stars-constants"
 
-const generateStarsLayer = ({
-  size,
-  color,
-  opacity,
-  duration,
-  boxShadowFn,
-  top,
-}) => styled.figure`
-  opacity: ${opacity};
+/**
+ * When refactoring the stars layers, take the prod bundle in account.
+ * Best case; don't refactor ;)
+ */
+
+const StarsLayerOne = styled.figure`
   animation: starsAnimation linear infinite;
   border-radius: 200px;
   position: relative;
-  box-shadow: ${boxShadowFn(color)};
-  width: ${size}px;
-  height: ${size}px;
-  top: ${top}px;
-  animation-duration: ${duration}s;
+  box-shadow: ${(props) =>
+    starsBoxShadowOne(colorfn(props.theme.primary).lighten(0.05))};
+  width: 4px;
+  height: 4px;
+  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
+  animation-duration: 200s;
+`
+
+const StarsLayerTwo = styled.figure`
+  animation: starsAnimation linear infinite;
+  border-radius: 200px;
+  position: relative;
+  box-shadow: ${(props) =>
+    starsBoxShadowTwo(colorfn(props.theme.primary).lighten(0.1))};
+  width: 8px;
+  height: 8px;
+  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
+  animation-duration: 160s;
+`
+const StarsLayerThree = styled.figure`
+  opacity: 0.1;
+  animation: starsAnimation linear infinite;
+  border-radius: 200px;
+  position: relative;
+  box-shadow: ${(props) => starsBoxShadowThree(props.theme.accent)};
+  width: 12px;
+  height: 12px;
+  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
+  animation-duration: 120s;
+`
+const StarsLayerFour = styled.figure`
+  animation: starsAnimation linear infinite;
+  border-radius: 200px;
+  position: relative;
+  box-shadow: ${(props) =>
+    starsBoxShadowFour(colorfn(props.theme.primary).lighten(0.15))};
+  width: 16px;
+  height: 16px;
+  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
+  animation-duration: 100s;
 `
 
 const Stars = () => {
@@ -37,7 +68,6 @@ const Stars = () => {
   const starsLayerFourRef = useRef(null)
 
   const themeContext = useContext(ThemeManagerContext)
-  const theme = themeContext.isDark ? darkTheme : lightTheme
 
   const GlobalStyle = createGlobalStyle`
     @keyframes starsAnimation {
@@ -50,45 +80,7 @@ const Stars = () => {
     }
   `
 
-  const top = themeContext.isDark ? -1800 : 0
-
-  const StarsLayerOne = generateStarsLayer({
-    size: 4,
-    color: colorfn(theme.primary).lighten(0.05),
-    opacity: 1,
-    duration: 200,
-    boxShadowFn: starsBoxShadowOne,
-    top,
-  })
-
-  const StarsLayerTwo = generateStarsLayer({
-    size: 8,
-    color: colorfn(theme.primary).lighten(0.1),
-    opacity: 1,
-    duration: 160,
-    boxShadowFn: starsBoxShadowTwo,
-    top,
-  })
-
-  const StarsLayerThree = generateStarsLayer({
-    size: 12,
-    color: theme.accent,
-    opacity: 0.1,
-    duration: 120,
-    boxShadowFn: starsBoxShadowThree,
-    top,
-  })
-
-  const StarsLayerFour = generateStarsLayer({
-    size: 16,
-    color: colorfn(theme.primary).lighten(0.15),
-    opacity: 1,
-    duration: 100,
-    boxShadowFn: starsBoxShadowFour,
-    top,
-  })
-
-  const updateStars = e => {
+  const updateStars = (e) => {
     if (!starsLayerOneRef.current) return
     const x = e.pageX - starsLayerOneRef.current.offsetLeft
     const windowWidth = window.innerWidth
@@ -102,8 +94,8 @@ const Stars = () => {
   // Do not use hooks because we do not want to
   // rerender the bubbles
   if (typeof window !== "undefined") {
-    window.addEventListener("mousemove", e => updateStars(e))
-    window.addEventListener("touchmove", e => updateStars(e))
+    window.addEventListener("mousemove", (e) => updateStars(e))
+    window.addEventListener("touchmove", (e) => updateStars(e))
   }
 
   useEffect(() => {
