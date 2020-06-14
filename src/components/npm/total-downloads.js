@@ -17,10 +17,16 @@ const PackagesDownloads = styled.div`
   flex-direction: column;
   margin-bottom: 92px;
   margin-top: 32px;
-  width: 300px;
+  width: 380px;
+  @media only screen and (max-width: 450px)  {
+    width: 100%;
+  }
   position: relative;
   .count-up {
     font-size: 84px;
+    @media only screen and (max-width: 450px)  {
+      font-size: 64px
+    }
     color: ${props => props.theme.accent};
     position: relative;
     z-index: 1;
@@ -34,12 +40,15 @@ const PackageDownloadsSubtitle = styled.div`
   &::before {
     content: "";
     display: block;
-    width: 25px;
+    width: 64px;
     height: 2px;
     position: absolute;
     background: ${props => props.theme.accent};
     top: 12px;
     border-radius: 4px;
+    @media only screen and (max-width: 450px)  {
+      width: 32px;
+    }
   }
   &::after {
     right: 0;

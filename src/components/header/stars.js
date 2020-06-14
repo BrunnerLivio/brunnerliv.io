@@ -30,7 +30,7 @@ const generateStarsLayer = ({
   animation-duration: ${duration}s;
 `
 
-const Stars = React.memo(() => {
+const Stars = () => {
   const starsLayerOneRef = useRef(null)
   const starsLayerTwoRef = useRef(null)
   const starsLayerThreeRef = useRef(null)
@@ -121,6 +121,6 @@ const Stars = React.memo(() => {
       <StarsLayerFour ref={starsLayerFourRef} />
     </>
   )
-})
+}
 
 export default Stars

@@ -1,11 +1,14 @@
 // @ts-check
 const NpmApi = require("npm-api")
 const stats = require("download-stats")
+const isCI = require("is-ci")
 
 const npm = new NpmApi()
 
 const BLACKLIST = ["@nestjs"]
 const WHITELIST = ["@nestjs/terminus"]
+
+const DRY_RUN = !isCI || process.env.DRY_RUN === "true"
 
 function getDownloadsOfPackage(repoName) {
   return new Promise((resolve, reject) => {
@@ -13,22 +16,30 @@ function getDownloadsOfPackage(repoName) {
     stats
       .get(new Date("2015-01-01"), new Date(), repoName)
       .on("error", reject)
-      .on("data", data => results.push(data))
+      .on("data", (data) => results.push(data))
       .on("end", () => resolve(results))
   })
 }
 
 async function getTotalDownloadsOfPackage(repoName) {
   const downloads = await getDownloadsOfPackage(repoName)
-  return downloads.map(a => a.downloads).reduce((a, b) => a + b, 0)
+  return downloads.map((a) => a.downloads).reduce((a, b) => a + b, 0)
 }
 
-const isInBlackList = value =>
-  BLACKLIST.some(blacklist => value.includes(blacklist))
-const isInWhitelist = value =>
-  WHITELIST.some(whitelist => value.includes(whitelist))
+const isInBlackList = (value) =>
+  BLACKLIST.some((blacklist) => value.includes(blacklist))
+const isInWhitelist = (value) =>
+  WHITELIST.some((whitelist) => value.includes(whitelist))
 
 async function getNpmStats() {
+  if (DRY_RUN) {
+    console.log("Running NPM stats in DRY_RUN mode.  Skip fetching")
+    return {
+      totalDownloads: 1000000,
+      repos: [{ downloads: 4, repo: "test" }],
+      totalRepos: 1,
+    }
+  }
   const repos = await npm.maintainer("brunnerlivio").repos()
 
   const allStats = []
@@ -43,7 +54,7 @@ async function getNpmStats() {
   }
 
   return {
-    totalDownloads: allStats.map(a => a.downloads).reduce((a, b) => a + b, 0),
+    totalDownloads: allStats.map((a) => a.downloads).reduce((a, b) => a + b, 0),
     totalRepos: allStats.length,
     repos: allStats.sort((a, b) => b.downloads - a.downloads),
   }
