@@ -1,14 +1,15 @@
 // @ts-check
 const NpmApi = require("npm-api")
 const stats = require("download-stats")
-const isCI = require("is-ci")
 
 const npm = new NpmApi()
 
 const BLACKLIST = ["@nestjs"]
 const WHITELIST = ["@nestjs/terminus"]
 
-const DRY_RUN = !isCI || process.env.DRY_RUN === "true"
+const IS_NETLIFY_PROD = process.env.CONTEXT === "production"
+
+const DRY_RUN = process.env.DRY_RUN === "true" || !IS_NETLIFY_PROD
 
 function getDownloadsOfPackage(repoName) {
   return new Promise((resolve, reject) => {
@@ -39,6 +40,8 @@ async function getNpmStats() {
       repos: [{ downloads: 4, repo: "test" }],
       totalRepos: 1,
     }
+  } else {
+    console.log("Running NPM stats...")
   }
   const repos = await npm.maintainer("brunnerlivio").repos()
 
