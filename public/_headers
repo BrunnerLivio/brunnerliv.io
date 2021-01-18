@@ -1,3 +1,2 @@
-/static/me.ts
-  # headers for that path:
+/static/me
   content-type: application/typescript; charset=utf-8
