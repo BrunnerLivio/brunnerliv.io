@@ -4,12 +4,11 @@ import React from "react"
 
 const textShadow = (theme) => `
 0 0 5px ${theme.accent},
-0 0 15px ${theme.accent},
-0 0 20px ${theme.accent},
-0 0 40px ${theme.accent},
-0 0 60px ${color(theme.accentDark).darken(0.2)},
 0 0 10px ${theme.accent},
-0 0 98px ${color(theme.accentDark)}`
+0 0 20px ${theme.accent},
+0 0 30px ${color(theme.accentDark).darken(0.2)},
+0 0 5px ${theme.accent},
+0 0 48px ${color(theme.accentDark)}`
 
 const NeonTextContainer = styled.span`
   text-transform: uppercase;
