@@ -126,17 +126,15 @@ function TotalDownloads() {
   return (
     <PackagesDownloadsContainer>
       <PackagesDownloads>
-        <NeonText>
-          <CountUp
-            className={"count-up"}
-            end={npmStats && npmStats.totalDownloads}
-            useEasing={true}
-            separator={","}
-            easingFn={easingFn}
-            duration={5}
-            onEnd={() => setShowConfetti(true)}
-          />
-        </NeonText>
+        <CountUp
+          className={"count-up"}
+          end={npmStats && npmStats.totalDownloads}
+          useEasing={true}
+          separator={","}
+          easingFn={easingFn}
+          duration={5}
+          onEnd={() => setShowConfetti(true)}
+        />
         <Pkg d={0} x={-150} y={40} />
         <Pkg d={0.5} x={255} y={48} />
         <Pkg d={1} x={-300} y={-40} />

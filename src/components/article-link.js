@@ -58,7 +58,7 @@ const ArticleLink = ({ post }) => {
     <ArticleItem>
       <Link to={post.frontmatter.path}>
         <ArticleTitle>
-          <NeonText>{post.frontmatter.title}</NeonText>
+          <NeonText text={post.frontmatter.title}></NeonText>
         </ArticleTitle>
       </Link>
       <ArticleHeader>

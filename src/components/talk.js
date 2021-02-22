@@ -1,16 +1,16 @@
 import styled from "styled-components"
 import React from "react"
-import _NeonText from "./neon-text"
+import NeonText from "./neon-text"
 
 const Card = styled.div`
   width: 500px;
   height: 500px;
 `
 
-const NeonText = styled(_NeonText)`
+const CardTitle = styled.div`
   text-align: center;
-  font-size: 1.5em;
   margin-bottom: 16px;
+  font-size: 1.5em;
 `
 
 const CardHeader = styled.header`
@@ -32,8 +32,9 @@ const Talk = ({ talk }) => {
   return (
     <Card>
       <CardHeader>
-        <NeonText>{talk.title}</NeonText>
-
+        <CardTitle>
+          <NeonText text={talk.title}></NeonText>
+        </CardTitle>
         <Date>{talk.date}</Date>
       </CardHeader>
 
