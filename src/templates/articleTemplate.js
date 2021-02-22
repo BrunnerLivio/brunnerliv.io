@@ -103,7 +103,7 @@ export default function Template({
       <SEO title={frontmatter.title} />
       <Article>
         <ArticleTitle>
-          <NeonText>{frontmatter.title}</NeonText>
+          <NeonText text={frontmatter.title}></NeonText>
         </ArticleTitle>
         <ArticlePreview>{frontmatter.description}</ArticlePreview>
         <CoverImage
