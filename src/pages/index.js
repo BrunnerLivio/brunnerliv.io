@@ -5,7 +5,6 @@ import breakpoint from "styled-components-breakpoint"
 
 import SEO from "../components/seo"
 import ArticleLink from "../components/article-link"
-import Me from "../components/me"
 
 const Main = styled.main`
   padding: 20px;
