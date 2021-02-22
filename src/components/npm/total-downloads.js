@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import CountUp from "react-countup"
 import PackageIcon from "../package"
 import Confetti from "react-dom-confetti"
-import NeonText from "../neon-text"
 
 const easingFn = function (t, b, c, d) {
   var ts = (t /= d) * t

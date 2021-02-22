@@ -41,6 +41,7 @@ const Talk = ({ talk }) => {
       <iframe
         width="500"
         height="400"
+        title={talk.title}
         src={talk.youtube}
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
