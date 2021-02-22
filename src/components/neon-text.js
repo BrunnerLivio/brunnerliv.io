@@ -5,10 +5,9 @@ import React from "react"
 const textShadow = (theme) => `
 0 0 5px ${theme.accent},
 0 0 10px ${theme.accent},
-0 0 20px ${theme.accent},
-0 0 30px ${color(theme.accentDark).darken(0.2)},
+0 0 20px ${color(theme.accentDark).darken(0.2)},
 0 0 5px ${theme.accent},
-0 0 48px ${color(theme.accentDark)}`
+0 0 38px ${color(theme.accentDark)}`
 
 const NeonTextContainer = styled.span`
   text-transform: uppercase;
@@ -24,12 +23,12 @@ const NeonTextContainer = styled.span`
 const Blink = styled.span`
   animation: ${(props) =>
     props.theme.name === "dark"
-      ? "blink " + props.animationTime+ "s infinite"
+      ? "blink " + props.animationTime + "s infinite"
       : "none"};
   animation-delay: ${(props) => props.animationDelay}s;
 `
 
-const NeonText = ({ text }) => {
+const NeonText = React.memo(({ text }) => {
   const characters = text.split("")
 
   // Get how many characters can blink in a text. The longer the text the more
@@ -59,6 +58,6 @@ const NeonText = ({ text }) => {
       )}
     </NeonTextContainer>
   )
-}
+})
 
 export default NeonText
