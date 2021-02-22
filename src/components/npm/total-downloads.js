@@ -4,8 +4,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import CountUp from "react-countup"
 import PackageIcon from "../package"
 import Confetti from "react-dom-confetti"
+import NeonText from "../neon-text"
 
-const easingFn = function(t, b, c, d) {
+const easingFn = function (t, b, c, d) {
   var ts = (t /= d) * t
   var tc = ts * t
   return b + c * (tc + -3 * ts + 3 * t)
@@ -18,16 +19,16 @@ const PackagesDownloads = styled.div`
   margin-bottom: 92px;
   margin-top: 32px;
   width: 380px;
-  @media only screen and (max-width: 450px)  {
+  @media only screen and (max-width: 450px) {
     width: 100%;
   }
   position: relative;
   .count-up {
+    font-weight: 200;
     font-size: 84px;
-    @media only screen and (max-width: 450px)  {
-      font-size: 64px
+    @media only screen and (max-width: 450px) {
+      font-size: 64px;
     }
-    color: ${props => props.theme.accent};
     position: relative;
     z-index: 1;
   }
@@ -43,10 +44,10 @@ const PackageDownloadsSubtitle = styled.div`
     width: 64px;
     height: 2px;
     position: absolute;
-    background: ${props => props.theme.accent};
+    background: ${(props) => props.theme.accent};
     top: 12px;
     border-radius: 4px;
-    @media only screen and (max-width: 450px)  {
+    @media only screen and (max-width: 450px) {
       width: 32px;
     }
   }
@@ -121,19 +122,21 @@ function TotalDownloads() {
     height: "10px",
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
   }
-  
+
   return (
     <PackagesDownloadsContainer>
       <PackagesDownloads>
-        <CountUp
-          className={"count-up"}
-          end={npmStats && npmStats.totalDownloads}
-          useEasing={true}
-          separator={","}
-          easingFn={easingFn}
-          duration={5}
-          onEnd={() => setShowConfetti(true)}
-        />
+        <NeonText>
+          <CountUp
+            className={"count-up"}
+            end={npmStats && npmStats.totalDownloads}
+            useEasing={true}
+            separator={","}
+            easingFn={easingFn}
+            duration={5}
+            onEnd={() => setShowConfetti(true)}
+          />
+        </NeonText>
         <Pkg d={0} x={-150} y={40} />
         <Pkg d={0.5} x={255} y={48} />
         <Pkg d={1} x={-300} y={-40} />
@@ -148,8 +151,11 @@ function TotalDownloads() {
           Package Downloads via npm
         </PackageDownloadsSubtitle>
         <Confetti active={showConfetti} config={config} />
-        <Confetti active={showConfetti} config={{...config, angle: 30}} />
-        <Confetti active={showConfetti} config={{...config, startVelocity: 30, angle: 20}} />
+        <Confetti active={showConfetti} config={{ ...config, angle: 30 }} />
+        <Confetti
+          active={showConfetti}
+          config={{ ...config, startVelocity: 30, angle: 20 }}
+        />
       </PackagesDownloads>
     </PackagesDownloadsContainer>
   )
