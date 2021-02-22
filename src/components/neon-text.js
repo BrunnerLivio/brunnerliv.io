@@ -49,7 +49,7 @@ const NeonText = ({ text }) => {
         animatedCharacterIndexes.includes(index) ? (
           <Blink
             key={index}
-            animationDelay={Math.floor(Math.random() * 16) + 0}
+            animationDelay={Math.floor(Math.random() * 5) + 0}
             animationTime={Math.floor(Math.random() * 16) + 8}
           >
             {char}
