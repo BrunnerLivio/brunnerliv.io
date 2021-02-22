@@ -50,7 +50,7 @@ const NeonText = ({ text }) => {
           <Blink
             key={index}
             animationDelay={Math.floor(Math.random() * 5) + 0}
-            animationTime={Math.floor(Math.random() * 16) + 8}
+            animationTime={Math.floor(Math.random() * 32) + 8}
           >
             {char}
           </Blink>
