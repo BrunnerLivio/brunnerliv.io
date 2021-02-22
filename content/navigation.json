@@ -6,5 +6,9 @@
   {
     "to": "/projects",
     "name": "Projects"
+  },
+  {
+    "to": "/talks",
+    "name": "Talks"
   }
 ]

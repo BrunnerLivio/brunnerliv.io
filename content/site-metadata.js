@@ -1,5 +1,6 @@
 const projects = require("./projects.json")
 const navigation = require("./navigation.json")
+const talks = require("./talks.json")
 
 module.exports = {
   title: `brunnerliv.io`,
@@ -7,6 +8,7 @@ module.exports = {
   author: `@BunnerLivio`,
   navigation: navigation,
   projects: projects,
+  talks: talks,
   social: {
     twitter: {
       username: "brunnerlivio",

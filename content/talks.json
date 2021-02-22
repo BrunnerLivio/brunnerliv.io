@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Ok Google, create me a VM, please",
+    "description": "Every big IT organisation relies heavily on processes. It can take days, if not weeks, to obtain a VM for your new service. If this is not hard enough, all these steps are usually done manually through a ticketing system where teams are siloed over roles and responsibilities. In this talk we would like to demonstrate that technologies, like Openstack, can empower self-service for any R&D team. In the end, creating a VM & deploying an application can be as simple as talking to an assistant.",
+    "youtube": "https://www.youtube.com/embed/Vp2u6hy0yy0",
+    "slides": "talks/Ok-Google-create-me-a-VM-Presentation.pdf",
+    "date": "November 30, 2018"
+  }
+]

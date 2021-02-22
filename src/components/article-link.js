@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
+import NeonText from "./neon-text"
 
 const ArticleItem = styled.article`
   a {
@@ -14,20 +15,16 @@ const ArticleItem = styled.article`
 `
 
 const ArticleTitle = styled.h2`
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-bottom: 24px;
+  margin-top: 16px;
   font-size: 1.4em;
+  text-align: center;
   ${breakpoint("sm")`
-      font-size: 1.5em;
+      font-size: 1.3em;
     `}
   ${breakpoint("md")`
-      font-size: 2em;
+      font-size: 1.7em;
     `}
-  font-weight: bold;
-  color: ${props => props.theme.accent} !important;
-  &:hover {
-    color: ${props => props.theme.accentDark} !important;
-  }
 `
 
 const ArticleHeader = styled.header`
@@ -35,19 +32,20 @@ const ArticleHeader = styled.header`
   flex-direction: row;
   align-items: center;
   margin: 16px 0 8px 0;
+  justify-content: center;
 
   span {
     margin-right: 8px;
     margin-left: 0%;
-    color: ${props => props.theme.textSecondary};
-    font-size: 13px;
+    color: ${(props) => props.theme.textSecondary};
+    font-size: 0.9em;
   }
 `
 
 const ArticleBody = styled.section`
   padding: 0 0 20px 0;
   p {
-    text-align: justify;
+    text-align: center;
     font-size: 18px;
   }
   .read-more {
@@ -59,7 +57,9 @@ const ArticleLink = ({ post }) => {
   return (
     <ArticleItem>
       <Link to={post.frontmatter.path}>
-        <ArticleTitle>{post.frontmatter.title}</ArticleTitle>
+        <ArticleTitle>
+          <NeonText>{post.frontmatter.title}</NeonText>
+        </ArticleTitle>
       </Link>
       <ArticleHeader>
         <span className="date">{post.frontmatter.date}</span>

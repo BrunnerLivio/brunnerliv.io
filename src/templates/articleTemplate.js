@@ -5,6 +5,7 @@ import breakpoint from "styled-components-breakpoint"
 
 import SEO from "../components/seo"
 import Me from "../components/me"
+import NeonText from "../components/neon-text"
 
 const Article = styled.article`
   padding: 1.3125rem;
@@ -33,7 +34,7 @@ const Article = styled.article`
 
   p > .language-text {
     background: none;
-    color: ${props => props.theme.text};
+    color: ${(props) => props.theme.text};
   }
 
   .gatsby-highlight {
@@ -69,8 +70,8 @@ const CoverImage = styled.img`
 `
 const ArticleTitle = styled.h1`
   text-align: center;
-  margin-bottom: 0px;
-  color: ${props => props.theme.accent};
+  margin-bottom: 32px;
+  font-weight: normal;
 `
 const ArticlePreview = styled.p`
   text-align: center;
@@ -91,7 +92,7 @@ export default function Template({
 
   useEffect(() => {
     const onLoad = () => setHasMounted(true)
-    const coverImage = coverImageRef.current;
+    const coverImage = coverImageRef.current
     coverImage.addEventListener("load", onLoad)
     return () => {
       coverImage.removeEventListener("load", onLoad)
@@ -101,7 +102,9 @@ export default function Template({
     <>
       <SEO title={frontmatter.title} />
       <Article>
-        <ArticleTitle>{frontmatter.title}</ArticleTitle>
+        <ArticleTitle>
+          <NeonText>{frontmatter.title}</NeonText>
+        </ArticleTitle>
         <ArticlePreview>{frontmatter.description}</ArticlePreview>
         <CoverImage
           ref={coverImageRef}

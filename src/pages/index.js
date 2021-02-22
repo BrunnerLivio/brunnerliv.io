@@ -10,6 +10,7 @@ import Me from "../components/me"
 const Main = styled.main`
   padding: 20px;
   width: 100%;
+  margin: 32px 0;
   ${breakpoint("md")`
     width: 740px;
   `}
@@ -28,7 +29,6 @@ const IndexPage = ({
       <SEO title="Home" />
 
       <Main>
-        <Me />
         {posts}
       </Main>
     </>
