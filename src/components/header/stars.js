@@ -47,8 +47,6 @@ class Stars extends React.Component {
   state = {
     width: 0,
     height: 0,
-    isDark: false,
-    colors: { primaryLight: "", primaryLighter: "", accentFaded: "" },
   }
 
   starDensity = 100
@@ -74,7 +72,7 @@ class Stars extends React.Component {
       case 1:
         return new Bubble(1, x, y, 7, this.ctx, this.frameNumber)
       default:
-        return;
+        return
     }
   }
 

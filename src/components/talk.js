@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import React from "react"
+import React, { useState, useEffect } from "react"
 import NeonText from "./neon-text"
 
 const Card = styled.div`
-  width: 500px;
-  height: 500px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const CardTitle = styled.div`
@@ -28,7 +30,40 @@ const Date = styled.span`
   font-size: 0.9em;
 `
 
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize)
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize()
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize)
+  }, []) // Empty array ensures that effect is only run on mount
+
+  return windowSize
+}
+
 const Talk = ({ talk }) => {
+  const size = useWindowSize()
+
   return (
     <Card>
       <CardHeader>
@@ -39,7 +74,7 @@ const Talk = ({ talk }) => {
       </CardHeader>
 
       <iframe
-        width="500"
+        width={size.width > 480 ? 480 : size.width - 80}
         height="400"
         title={talk.title}
         src={talk.youtube}
