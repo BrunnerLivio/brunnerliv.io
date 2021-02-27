@@ -1,118 +1,148 @@
-import React, { useRef, useEffect, useContext } from "react"
-import styled, { createGlobalStyle } from "styled-components"
+import React from "react"
+import styled from "styled-components"
 import colorfn from "color"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
+import { lightTheme, darkTheme } from "../../theme"
 
-import {
-  starsBoxShadowOne,
-  starsBoxShadowTwo,
-  starsBoxShadowThree,
-  starsBoxShadowFour,
-} from "./stars-constants"
+const rand = (from, to) => Math.floor(Math.random() * to) + from
 
-/**
- * When refactoring the stars layers, take the prod bundle in account.
- * Best case; don't refactor ;)
- */
-
-const StarsLayerOne = styled.figure`
-  animation: starsAnimation linear infinite;
-  border-radius: 200px;
-  position: relative;
-  box-shadow: ${(props) =>
-    starsBoxShadowOne(colorfn(props.theme.primary).lighten(0.05))};
-  width: 4px;
-  height: 4px;
-  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
-  animation-duration: 200s;
+const Canvas = styled.canvas`
+  width: 100%;
 `
 
-const StarsLayerTwo = styled.figure`
-  animation: starsAnimation linear infinite;
-  border-radius: 200px;
-  position: relative;
-  box-shadow: ${(props) =>
-    starsBoxShadowTwo(colorfn(props.theme.primary).lighten(0.1))};
-  width: 8px;
-  height: 8px;
-  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
-  animation-duration: 160s;
-`
-const StarsLayerThree = styled.figure`
-  opacity: 0.1;
-  animation: starsAnimation linear infinite;
-  border-radius: 200px;
-  position: relative;
-  box-shadow: ${(props) => starsBoxShadowThree(props.theme.accent)};
-  width: 12px;
-  height: 12px;
-  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
-  animation-duration: 120s;
-`
-const StarsLayerFour = styled.figure`
-  animation: starsAnimation linear infinite;
-  border-radius: 200px;
-  position: relative;
-  box-shadow: ${(props) =>
-    starsBoxShadowFour(colorfn(props.theme.primary).lighten(0.15))};
-  width: 16px;
-  height: 16px;
-  top: ${(props) => (props.theme.name === "dark" ? 0 : -1800)}px;
-  animation-duration: 100s;
-`
-
-const Stars = () => {
-  const starsLayerOneRef = useRef(null)
-  const starsLayerTwoRef = useRef(null)
-  const starsLayerThreeRef = useRef(null)
-  const starsLayerFourRef = useRef(null)
-
-  const themeContext = useContext(ThemeManagerContext)
-
-  const GlobalStyle = createGlobalStyle`
-    @keyframes starsAnimation {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(${themeContext.isDark ? 2000 : -2000}px);
-      }
-    }
-  `
-
-  const updateStars = (e) => {
-    if (!starsLayerOneRef.current) return
-    const x = e.pageX - starsLayerOneRef.current.offsetLeft
-    const windowWidth = window.innerWidth
-
-    starsLayerFourRef.current.style.left = `-${(x / windowWidth) * 7.5}px`
-    starsLayerThreeRef.current.style.left = `-${(x / windowWidth) * 2.5}px`
-    starsLayerTwoRef.current.style.left = `-${(x / windowWidth) * 2}px`
-    starsLayerOneRef.current.style.left = `-${(x / windowWidth) * 0.5}px`
+class Bubble {
+  init = { x: 0, y: 0, framenumber: 0 }
+  size
+  ctx
+  y
+  x
+  constructor(type, x, y, size, ctx, framenumber) {
+    this.type = type
+    this.init.x = x
+    this.init.y = y
+    this.init.framenumber = framenumber
+    this.size = size
+    this.ctx = ctx
   }
 
-  // Do not use hooks because we do not want to
-  // rerender the bubbles
-  if (typeof window !== "undefined") {
-    window.addEventListener("mousemove", (e) => updateStars(e))
-    window.addEventListener("touchmove", (e) => updateStars(e))
+  update(framenumber, colors) {
+    this.y =
+      this.init.y - (framenumber - this.init.framenumber) / (this.type * 2)
+
+    this.x = this.init.x
+    this.ctx.fillStyle = colors[this.type]
+    this.ctx.beginPath()
+
+    this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
+    this.ctx.fill()
+  }
+}
+
+class Stars extends React.Component {
+  canvas
+  ctx
+  bubbles = []
+  frameNumber = 0
+  colors
+  state = {
+    width: 0,
+    height: 0,
+    isDark: false,
+    colors: { primaryLight: "", primaryLighter: "", accentFaded: "" },
   }
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.removeEventListener("mousemove", updateStars)
-      window.removeEventListener("touchemove", updateStars)
+  starDensity = 100
+
+  static contextType = ThemeManagerContext
+
+  constructor() {
+    super()
+    this.canvasRef = React.createRef()
+  }
+
+  createRandomBubble(xval, yval) {
+    const x = xval || rand(0, this.canvas.width)
+    const y = yval || 440
+
+    switch (rand(1, 4)) {
+      case 4:
+        return new Bubble(4, x, y, 3, this.ctx, this.frameNumber)
+      case 3:
+        return new Bubble(3, x, y, 4, this.ctx, this.frameNumber)
+      case 2:
+        return new Bubble(2, x, y, 5, this.ctx, this.frameNumber)
+      case 1:
+        return new Bubble(1, x, y, 7, this.ctx, this.frameNumber)
+      default:
+        return;
     }
-  }, [])
-  return (
-    <>
-      <GlobalStyle />
-      <StarsLayerOne ref={starsLayerOneRef} />
-      <StarsLayerTwo ref={starsLayerTwoRef} />
-      <StarsLayerThree ref={starsLayerThreeRef} />
-      <StarsLayerFour ref={starsLayerFourRef} />
-    </>
-  )
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+    if (this.bubbles.length < this.starDensity) {
+      this.bubbles.push(this.createRandomBubble())
+    }
+
+    this.bubbles.forEach((bubble) =>
+      bubble.update(this.frameNumber, this.colors)
+    )
+
+    this.frameNumber++
+    this.bubbles = this.bubbles.filter((b) => b.y > -40)
+    window.requestAnimationFrame(this.draw.bind(this))
+  }
+
+  updateDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight })
+  }
+
+  updateColors() {
+    const accent = this.context.isDark ? darkTheme.accent : lightTheme.accent
+    const primary = this.context.isDark ? darkTheme.primary : lightTheme.primary
+
+    const accentFaded = colorfn(accent).fade(0.9).toString()
+    const primaryLight = colorfn(primary).lighten(0.1).toString()
+    const primaryLighter = colorfn(primary).lighten(0.2).toString()
+
+    this.colors = [accentFaded, primaryLight, accentFaded, primaryLighter]
+  }
+
+  componentDidMount() {
+    this.updateDimensions()
+    window.addEventListener("resize", this.updateDimensions.bind(this))
+    this.updateColors()
+
+    this.canvas = this.canvasRef.current
+    this.ctx = this.canvas.getContext("2d")
+
+    this.bubbles = new Array(this.starDensity)
+      .fill()
+      .map(() =>
+        this.createRandomBubble(rand(0, window.innerWidth), rand(30, 440))
+      )
+
+    this.draw()
+  }
+
+  componentDidUpdate() {
+    this.updateColors()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this))
+  }
+
+  render() {
+    return (
+      <Canvas
+        width={this.state.width}
+        height={this.state.width}
+        ref={this.canvasRef}
+      ></Canvas>
+    )
+  }
 }
 
 export default Stars
