@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components"
 import breakpoint from "styled-components-breakpoint"
-import color from "color"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -49,8 +48,7 @@ const GlobalStyle = createGlobalStyle`
     20%,
     24%,
     55% {
-      color: ${(props) => props.theme.primaryDark};
-      text-shadow: none;
+      opacity: 0.1;
     }
 
     0%,
@@ -61,8 +59,7 @@ const GlobalStyle = createGlobalStyle`
     54%,
     56%,
     100% {
-      text-shadow: textShadow(${(props) => props.theme});
-      color: ${(props) => color(props.theme.accentLight).lighten(0.1)};
+      opacity: 1;
     }
   }
 `

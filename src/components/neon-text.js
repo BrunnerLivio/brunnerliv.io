@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import color from "color"
-import React from "react"
+import React, { useContext } from "react"
+import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 const textShadow = (theme) => `
 0 0 5px ${theme.accent},
@@ -21,43 +22,51 @@ const NeonTextContainer = styled.span`
 `
 
 const Blink = styled.span`
-  animation: ${(props) =>
-    props.theme.name === "dark"
-      ? "blink " + props.animationTime + "s infinite"
-      : "none"};
+  animation: ${(props) => "blink " + props.animationTime + "s infinite"};
   animation-delay: ${(props) => props.animationDelay}s;
 `
 
-const NeonText = React.memo(({ text }) => {
+const NeonText = ({ text }) => {
   const characters = text.split("")
 
-  // Get how many characters can blink in a text. The longer the text the more
-  // items will blink
-  const amountOfPossibleCharacters = Math.round(characters.length / 14)
+  const themeContext = useContext(ThemeManagerContext);
 
-  // Generate a random number for each possible character which will be the
-  // index which should blink
-  const animatedCharacterIndexes = new Array(amountOfPossibleCharacters)
-    .fill(0, 0, amountOfPossibleCharacters)
-    .map(() => Math.floor(Math.random() * characters.length - 1) + 1)
+  if(!themeContext.isDark) {
+
+    // Get how many characters can blink in a text. The longer the text the more
+    // items will blink
+    const amountOfPossibleCharacters = Math.round(characters.length / 14)
+
+    // Generate a random number for each possible character which will be the
+    // index which should blink
+    const animatedCharacterIndexes = new Array(amountOfPossibleCharacters)
+      .fill(0, 0, amountOfPossibleCharacters)
+      .map(() => Math.floor(Math.random() * characters.length - 1) + 1)
+
+    return (
+      <NeonTextContainer>
+        {characters.map((char, index) =>
+          animatedCharacterIndexes.includes(index) ? (
+            <Blink
+              key={index}
+              animationDelay={Math.floor(Math.random() * 5) + 0}
+              animationTime={Math.floor(Math.random() * 32) + 8}
+            >
+              {char}
+            </Blink>
+          ) : (
+            <span>{char}</span>
+          )
+        )}
+      </NeonTextContainer>
+    )
+  }
 
   return (
     <NeonTextContainer>
-      {characters.map((char, index) =>
-        animatedCharacterIndexes.includes(index) ? (
-          <Blink
-            key={index}
-            animationDelay={Math.floor(Math.random() * 5) + 0}
-            animationTime={Math.floor(Math.random() * 32) + 8}
-          >
-            {char}
-          </Blink>
-        ) : (
-          <span>{char}</span>
-        )
-      )}
+      {text}
     </NeonTextContainer>
   )
-})
+}
 
 export default NeonText
