@@ -25,6 +25,7 @@ const PackagesDownloads = styled.div`
   .count-up {
     font-weight: 200;
     font-size: 84px;
+    color: ${props => props.theme.accent};
     @media only screen and (max-width: 450px) {
       font-size: 64px;
     }
