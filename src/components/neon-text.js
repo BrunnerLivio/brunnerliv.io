@@ -19,54 +19,31 @@ const NeonTextContainer = styled.span`
       : props.theme.accentDark};
   text-shadow: ${(props) =>
     props.theme.name === "dark" ? textShadow(props.theme) : "none"};
+  font-family: "Exo", sans-serif;
+  font-style: italic;
+  font-weight: 100;
 `
 
-const Blink = styled.span`
+const BlinkingNeonTextContainer = styled(NeonTextContainer)`
   animation: ${(props) => "blink " + props.animationTime + "s infinite"};
   animation-delay: ${(props) => props.animationDelay}s;
 `
 
 const NeonText = ({ text }) => {
-  const characters = text.split("")
+  const themeContext = useContext(ThemeManagerContext)
 
-  const themeContext = useContext(ThemeManagerContext);
-
-  if(!themeContext.isDark) {
-
-    // Get how many characters can blink in a text. The longer the text the more
-    // items will blink
-    const amountOfPossibleCharacters = Math.round(characters.length / 14)
-
-    // Generate a random number for each possible character which will be the
-    // index which should blink
-    const animatedCharacterIndexes = new Array(amountOfPossibleCharacters)
-      .fill(0, 0, amountOfPossibleCharacters)
-      .map(() => Math.floor(Math.random() * characters.length - 1) + 1)
-
+  if (!themeContext.isDark) {
     return (
-      <NeonTextContainer>
-        {characters.map((char, index) =>
-          animatedCharacterIndexes.includes(index) ? (
-            <Blink
-              key={index}
-              animationDelay={Math.floor(Math.random() * 5) + 0}
-              animationTime={Math.floor(Math.random() * 32) + 8}
-            >
-              {char}
-            </Blink>
-          ) : (
-            <span>{char}</span>
-          )
-        )}
-      </NeonTextContainer>
+      <BlinkingNeonTextContainer
+        animationDelay={Math.floor(Math.random() * 6) + 0}
+        animationTime={Math.floor(Math.random() * 9) + 2}
+      >
+        {text}
+      </BlinkingNeonTextContainer>
     )
   }
 
-  return (
-    <NeonTextContainer>
-      {text}
-    </NeonTextContainer>
-  )
+  return <NeonTextContainer>{text}</NeonTextContainer>
 }
 
 export default NeonText

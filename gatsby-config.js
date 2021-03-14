@@ -45,12 +45,12 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Roboto']
-        }
-      }
+          families: ["Roboto", "Exo"],
+        },
+      },
     },
     `react-static-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
