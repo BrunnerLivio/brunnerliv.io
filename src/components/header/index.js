@@ -5,6 +5,7 @@ import breakpoint from "styled-components-breakpoint"
 import Stars from "./stars"
 import Sunset from "./sunset"
 import Mountain from "./mountain"
+import VHS from "./vhs"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -47,28 +48,9 @@ const HeaderBackground = styled.div`
   overflow: hidden;
 `
 
-function drawVhsLines(color) {
-  let boxShadow = []
-
-  for (let i = 0; i <= 380; i += 8) {
-    boxShadow.push(`0 ${i}px 0 ${color}`)
-  }
-
-  return boxShadow.join(",")
-}
-
-const VHSLines = styled.div`
-  position: absolute;
-  width: 100%;
-  background: ${(props) => props.color};
-  top: 4px;
-  height: 1px;
-  box-shadow: ${(props) => drawVhsLines(props.color)};
-`
-
 const Header = ({ children }) => (
   <HeaderWrapper>
-    <VHSLines color="rgba(0,0,0,0.2)" />
+    <VHS />
     <HeaderContent>{children}</HeaderContent>
     <Mountain />
     <HeaderBackground>
