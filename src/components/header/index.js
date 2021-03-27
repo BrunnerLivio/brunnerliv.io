@@ -8,11 +8,11 @@ import Mountain from "./mountain"
 
 const HeaderWrapper = styled.header`
   margin: 0;
-  background: ${props => props.theme.primary};
+  background: ${(props) => props.theme.primary};
   background: radial-gradient(
     circle,
-    ${props => props.theme.primary},
-    ${props => props.theme.primaryDark}
+    ${(props) => props.theme.primary},
+    ${(props) => props.theme.primaryDark}
   );
   background-repeat: no-repeat;
   width: 100%;
@@ -47,8 +47,28 @@ const HeaderBackground = styled.div`
   overflow: hidden;
 `
 
+function drawVhsLines(color) {
+  let boxShadow = []
+
+  for (let i = 0; i <= 380; i += 8) {
+    boxShadow.push(`0 ${i}px 0 ${color}`)
+  }
+
+  return boxShadow.join(",")
+}
+
+const VHSLines = styled.div`
+  position: absolute;
+  width: 100%;
+  background: ${(props) => props.color};
+  top: 4px;
+  height: 1px;
+  box-shadow: ${(props) => drawVhsLines(props.color)};
+`
+
 const Header = ({ children }) => (
   <HeaderWrapper>
+    <VHSLines color="rgba(0,0,0,0.2)" />
     <HeaderContent>{children}</HeaderContent>
     <Mountain />
     <HeaderBackground>
