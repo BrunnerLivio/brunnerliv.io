@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
 
 const OutrunGridPerspective = styled.div`
   perspective: 1000px;
@@ -38,7 +39,10 @@ const Vert = styled.div`
   height: 100%;
   width: 2px;
   background-color: ${(props) => props.theme.accent};
-  margin-left: 4.5%;
+  margin-left: 12%;
+  ${breakpoint("md")`
+    margin-left: 4.5%;
+  `}
   box-shadow: 0 2px 21px ${(props) => props.theme.accent};
 `
 
@@ -54,7 +58,10 @@ const Hor = styled.div`
   display: inline-block;
   width: 100%;
   height: 3px;
-  margin-top: 4.8%;
+  margin-top: 19%;
+  ${breakpoint("md")`
+    margin-top: 4.8%;
+  `}
   background-color: ${(props) => props.theme.accent};
   box-shadow: 2px 0 21px ${(props) => props.theme.accent};
 `
