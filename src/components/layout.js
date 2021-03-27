@@ -15,18 +15,20 @@ import moon from "../images/moon.png"
 import sun from "../images/sun.png"
 
 import "./layout.css"
+import OutrunGrid from "./outrun-grid"
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   transition: 0.3s ease-in-out opacity;
   opacity: 0;
+  position: relative;
 `
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  background: ${props => props.theme.primaryDarker};
+  background: ${(props) => props.theme.primaryDarker};
   flex: 1;
   height: 100%;
   position: relative;
@@ -40,8 +42,8 @@ const Container = styled.div`
     position: absolute;
     background: linear-gradient(
       180deg,
-      ${props => props.theme.primary} 0%,
-      ${props => props.theme.primaryDarker} 100%
+      ${(props) => props.theme.primary} 0%,
+      ${(props) => props.theme.primaryDarker} 100%
     );
   }
 `
@@ -92,7 +94,6 @@ const Layout = withTheme(({ children }) => {
                 height="16"
                 alt="Sun"
                 style={{ pointerEvents: "none" }}
-                
               />
             ),
           }}
@@ -116,6 +117,7 @@ const Layout = withTheme(({ children }) => {
           <Footer />
         </Content>
       </Container>
+      <OutrunGrid />
     </MainWrapper>
   )
 })
