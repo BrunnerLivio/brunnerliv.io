@@ -13,7 +13,10 @@ const Main = styled.main`
   ${breakpoint("md")`
     width: 740px;
   `}
-  
+
+  ${breakpoint("lg")`
+    width: 940px;
+  `}
 `
 const IndexPage = ({
   data: {
@@ -21,15 +24,13 @@ const IndexPage = ({
   },
 }) => {
   const posts = edges
-    .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
+    .filter((edge) => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
     .map((edge, index) => <ArticleLink key={index} post={edge.node} />)
   return (
     <>
       <SEO title="Home" />
 
-      <Main>
-        {posts}
-      </Main>
+      <Main>{posts}</Main>
     </>
   )
 }

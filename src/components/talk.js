@@ -16,7 +16,7 @@ const CardTitle = styled.div`
 `
 
 const CardHeader = styled.header`
-  height: 100px;
+  height: 180px;
   justify-content: center;
   align-items: center;
   display: flex;

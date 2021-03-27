@@ -43,7 +43,7 @@ const ArticleHeader = styled.header`
 `
 
 const ArticleBody = styled.section`
-  padding: 0 0 20px 0;
+  padding: 0 0 64px 0;
   p {
     text-align: center;
     font-size: 18px;

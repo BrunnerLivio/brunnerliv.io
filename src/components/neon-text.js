@@ -19,9 +19,9 @@ const NeonTextContainer = styled.span`
       : props.theme.accentDark};
   text-shadow: ${(props) =>
     props.theme.name === "dark" ? textShadow(props.theme) : "none"};
-  font-family: "Exo", sans-serif;
-  font-style: italic;
-  font-weight: 100;
+  font-family: "Neon", 'Roboto', 'Arial', Helvetica, sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
 `
 
 const BlinkingNeonTextContainer = styled(NeonTextContainer)`

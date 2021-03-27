@@ -1,4 +1,12 @@
-html, body, #___gatsby, #gatsby-focus-wrapper{
+@font-face {
+  font-family: "Neon";
+  src: url("../../static/Neon.ttf");
+}
+
+html,
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
   height: 100%;
 }
 html {
