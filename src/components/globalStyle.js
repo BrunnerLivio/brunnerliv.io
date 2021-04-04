@@ -45,18 +45,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @keyframes blink {
-    20.99999%,
-    55.99999% {
+    0%,
+    20.99999% {
       opacity: 0.1;
     }
 
-    0%,
     19%,
     21%,
     23%,
     25%,
     54%,
     56%,
+    99%,
     100% {
       opacity: 1;
     }

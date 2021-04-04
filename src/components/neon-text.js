@@ -10,23 +10,55 @@ const textShadow = (theme) => `
 0 0 15px ${theme.accent},
 0 0 68px ${color(theme.accentDark)}`
 
-const NeonTextContainer = styled.span`
+const NeonTextContent = styled.span`
   text-transform: uppercase;
   letter-spacing: -0.2px;
   color: ${(props) =>
     props.theme.name === "dark"
-      ? color(props.theme.accentLight).lighten(0.1)
+      ? color(props.theme.accentLight).fade(0.5).toString()
       : props.theme.accentDark};
-  text-shadow: ${(props) =>
-    props.theme.name === "dark" ? textShadow(props.theme) : "none"};
-  font-family: "Neon", 'Roboto', 'Arial', Helvetica, sans-serif;
+
+  font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
   font-size: 1.5em;
   font-weight: 700;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  top: 0;
 `
 
-const BlinkingNeonTextContainer = styled(NeonTextContainer)`
-  animation: ${(props) => "blink " + props.animationTime + "s infinite"};
+const BlinkingNeonText = styled(NeonTextContent)`
+  text-shadow: ${(props) => textShadow(props.theme)};
+  color: ${(props) =>
+    props.theme.name === "dark"
+      ? color(props.theme.accentLight).lighten(0.1)
+      : props.theme.accentDark};
+  animation: ${(props) => "blink " + props.animationTime + "s"};
   animation-delay: ${(props) => props.animationDelay}s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  opacity: 0.1;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  top: 0;
+`
+
+const NeonTextContainer = styled.div`
+  position: relative;
+  width: 100%;
+  .hidden-text {
+    visibility: hidden;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+    font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+  }
 `
 
 const NeonText = ({ text }) => {
@@ -34,16 +66,23 @@ const NeonText = ({ text }) => {
 
   if (!themeContext.isDark) {
     return (
-      <BlinkingNeonTextContainer
-        animationDelay={Math.floor(Math.random() * 6) + 0}
-        animationTime={Math.floor(Math.random() * 9) + 2}
-      >
-        {text}
-      </BlinkingNeonTextContainer>
+      <NeonTextContainer>
+        {/* The hidden text is used since the elements are position absolute in order to still have auto-height */}
+        <span className="hidden-text">{text}</span>
+        <NeonTextContent>{text}</NeonTextContent>
+        <BlinkingNeonText animationDelay={Math.random() * 1} animationTime={1}>
+          {text}
+        </BlinkingNeonText>
+      </NeonTextContainer>
     )
   }
 
-  return <NeonTextContainer>{text}</NeonTextContainer>
+  return (
+    <NeonTextContainer>
+      <span className="hidden-text">{text}</span>
+      <NeonTextContent>{text}</NeonTextContent>
+    </NeonTextContainer>
+  )
 }
 
 export default NeonText
