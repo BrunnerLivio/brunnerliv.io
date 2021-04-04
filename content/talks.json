@@ -1,5 +1,11 @@
 [
   {
+    "title": "Design Uniformity 101 for Engineers",
+    "description": "Design Tokens allow us to define Design Specification in a technology-agnostic way. In many Design Systems, Tokens are the heartbeat of its System. In this talk I will explain playfully why we have colouring systems, what the difference to theming is and ultimately how this translates to Design Tokens. This talk is interesting for everyone who is trying to build a Design System for multiple platforms and languages.",
+    "youtube": "https://www.youtube.com/embed/yq_APtAkgD8?start=3053",
+    "date": "March 31, 2021"
+  },
+  {
     "title": "Ok Google, create me a VM, please",
     "description": "Every big IT organisation relies heavily on processes. It can take days, if not weeks, to obtain a VM for your new service. If this is not hard enough, all these steps are usually done manually through a ticketing system where teams are siloed over roles and responsibilities. In this talk we would like to demonstrate that technologies, like Openstack, can empower self-service for any R&D team. In the end, creating a VM & deploying an application can be as simple as talking to an assistant.",
     "youtube": "https://www.youtube.com/embed/Vp2u6hy0yy0",
