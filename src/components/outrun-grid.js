@@ -70,12 +70,12 @@ function OutrunGrid() {
   return (
     <OutrunGridPerspective>
       <OutrunGridContainer>
-        {[...new Array(40)].map(() => (
-          <Vert />
+        {[...new Array(40)].map((_, index) => (
+          <Vert key={"Vert" + index} />
         ))}
         <MovingLines>
-          {[...new Array(40)].map(() => (
-            <Hor />
+          {[...new Array(40)].map((_, index) => (
+            <Hor key={"Hor" + index} />
           ))}
         </MovingLines>
       </OutrunGridContainer>

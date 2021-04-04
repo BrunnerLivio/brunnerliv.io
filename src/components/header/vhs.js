@@ -28,8 +28,8 @@ const VHSContainer = styled.div`
 function VHS() {
   return (
     <VHSContainer>
-      {[...new Array(30)].map(() => (
-        <VHSLine color="rgba(0,0,0,0.2)" />
+      {[...new Array(30)].map((_, index) => (
+        <VHSLine key={"VHS" + index} color="rgba(0,0,0,0.2)" />
       ))}
     </VHSContainer>
   )

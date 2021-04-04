@@ -73,15 +73,17 @@ const Talk = ({ talk }) => {
         <Date>{talk.date}</Date>
       </CardHeader>
 
-      <iframe
-        width={size.width > 480 ? 480 : size.width - 80}
-        height="400"
-        title={talk.title}
-        src={talk.youtube}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen={true}
-      ></iframe>
+      {size && size.width && (
+        <iframe
+          width={size.width > 480 ? 480 : size.width - 80}
+          height="400"
+          title={talk.title}
+          src={talk.youtube}
+          frameBorder={0}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+        ></iframe>
+      )}
     </Card>
   )
 }

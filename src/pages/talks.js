@@ -28,7 +28,7 @@ const Talks = ({ data }) => {
       <Content>
         <TalkList>
           {(talks || []).map((talk, index) => (
-            <Talk talk={talk}></Talk>
+            <Talk key={"Talk" + index} talk={talk}></Talk>
           ))}
         </TalkList>
       </Content>
