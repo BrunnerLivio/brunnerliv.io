@@ -12,11 +12,7 @@ const TalkList = styled.main`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin: 48px 0;
-
-  ${breakpoint("sm")`
-  margin: 32px 0;
-    `}
+  margin: 0px 0;
 `
 
 const Talks = ({ data }) => {

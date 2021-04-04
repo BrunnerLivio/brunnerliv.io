@@ -9,7 +9,7 @@ import ArticleLink from "../components/article-link"
 const Main = styled.main`
   padding: 20px;
   width: 100%;
-  margin: 32px 0;
+  margin: 0;
   ${breakpoint("md")`
     width: 740px;
   `}

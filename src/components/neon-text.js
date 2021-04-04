@@ -57,7 +57,7 @@ const NeonTextContainer = styled.div`
     letter-spacing: -0.2px;
     font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 900;
   }
 `
 
@@ -70,7 +70,7 @@ const NeonText = ({ text }) => {
         {/* The hidden text is used since the elements are position absolute in order to still have auto-height */}
         <span className="hidden-text">{text}</span>
         <NeonTextContent>{text}</NeonTextContent>
-        <BlinkingNeonText animationDelay={Math.random() * 1} animationTime={1}>
+        <BlinkingNeonText animationDelay={Math.random() * 3 + 2} animationTime={1}>
           {text}
         </BlinkingNeonText>
       </NeonTextContainer>

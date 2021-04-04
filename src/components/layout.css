@@ -1,6 +1,10 @@
 @font-face {
   font-family: "Neon";
-  src: url("../../static/Neon.ttf");
+  src: url("../../static/Neon.eot");
+  src: url("../../static/Neon.eot?#iefix") format("embedded-opentype"),
+    url("../../static/Neon.woff2") format("woff2"),
+    url("../../static/Neon.woff") format("woff"),
+    url("../../static/Neon.ttf") format("truetype");
 }
 
 html,
