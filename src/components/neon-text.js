@@ -34,7 +34,7 @@ const BlinkingNeonText = styled(NeonTextContent)`
   color: ${(props) =>
     props.theme.name === "dark"
       ? color(props.theme.accentLight).lighten(0.1)
-      : props.theme.accentDark};
+      : props.theme.accentDark} !important;
   animation: ${(props) => "blink " + props.animationTime + "s"};
   animation-delay: ${(props) => props.animationDelay}s;
   animation-iteration-count: 1;
@@ -70,7 +70,7 @@ const NeonText = ({ text }) => {
         {/* The hidden text is used since the elements are position absolute in order to still have auto-height */}
         <span className="hidden-text">{text}</span>
         <NeonTextContent>{text}</NeonTextContent>
-        <BlinkingNeonText animationDelay={Math.random() * 3 + 2} animationTime={1}>
+        <BlinkingNeonText animationDelay={Math.random() * 3 + 1} animationTime={1}>
           {text}
         </BlinkingNeonText>
       </NeonTextContainer>
