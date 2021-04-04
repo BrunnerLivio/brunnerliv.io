@@ -4,15 +4,16 @@ import React, { useContext } from "react"
 import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 const textShadow = (theme) => `
-0 0 5px ${theme.accent},
-0 0 20px ${theme.accent},
-0 0 30px ${color(theme.accentDark).darken(0.2)},
-0 0 15px ${theme.accent},
-0 0 68px ${color(theme.accentDark)}`
+0px 4px 0 rgba(0,0,0,0.3),
+0 0 5px ${color(theme.accentLight).fade(0.5).toString()},
+0 0 20px ${color(theme.accent).fade(0.5).toString()},
+0 0 30px ${color(theme.accentDark).darken(0.2).fade(0.5)},
+0 0 15px ${color(theme.accent).fade(0.5).toString()},
+0 0 68px ${color(theme.accentDark).fade(0.2)}`
 
 const NeonTextContent = styled.span`
   text-transform: uppercase;
-  letter-spacing: -0.2px;
+  letter-spacing: 3px;
   color: ${(props) =>
     props.theme.name === "dark"
       ? color(props.theme.accentLight).fade(0.5).toString()
@@ -31,13 +32,14 @@ const NeonTextContent = styled.span`
 
 const BlinkingNeonText = styled(NeonTextContent)`
   text-shadow: ${(props) => textShadow(props.theme)};
+  letter-spacing: 3px;
   color: ${(props) =>
     props.theme.name === "dark"
       ? color(props.theme.accentLight).lighten(0.1)
       : props.theme.accentDark} !important;
   animation: ${(props) => "blink " + props.animationTime + "s"};
   animation-delay: ${(props) => props.animationDelay}s;
-  animation-iteration-count: 1;
+  animation-iteration-count: 2;
   animation-fill-mode: forwards;
   opacity: 0.1;
   position: absolute;
@@ -54,7 +56,7 @@ const NeonTextContainer = styled.div`
   .hidden-text {
     visibility: hidden;
     text-transform: uppercase;
-    letter-spacing: -0.2px;
+    letter-spacing: 3px;
     font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
     font-size: 1.5em;
     font-weight: 900;
@@ -70,7 +72,10 @@ const NeonText = ({ text }) => {
         {/* The hidden text is used since the elements are position absolute in order to still have auto-height */}
         <span className="hidden-text">{text}</span>
         <NeonTextContent>{text}</NeonTextContent>
-        <BlinkingNeonText animationDelay={Math.random() * 3 + 1} animationTime={1}>
+        <BlinkingNeonText
+          animationDelay={Math.random() * 2 + 1}
+          animationTime={1}
+        >
           {text}
         </BlinkingNeonText>
       </NeonTextContainer>
