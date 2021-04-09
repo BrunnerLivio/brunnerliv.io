@@ -1,5 +1,5 @@
-import * as ink from "https://deno.land/x/ink/mod.ts"
-import * as cow from 'https://deno.land/x/cowsay/mod.ts'
+import * as cow from "https://cdn.deno.land/cowsay/versions/1.1/raw/mod.ts";
+import * as ink from "https://cdn.deno.land/ink/versions/1.3/raw/mod.ts";
 
 const cowsay = cow.say({ text: "https://brunnerliv.io", cow: "cat2" });
 console.log(cowsay);
