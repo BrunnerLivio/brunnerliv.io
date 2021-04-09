@@ -1,5 +1,6 @@
 const fs = require("fs")
-const template = require("lodash.template")
+const nunjucks = require("nunjucks")
+
 
 function getArticle(node) {
   return `ink.terminal.log("<b>${node.frontmatter.title}</b> (${node.frontmatter.date})");
@@ -15,18 +16,23 @@ ink.terminal.log("👨 <blue>${socialData.linkedIn.path}</blue>");
 `
 }
 
-const writeDenoCard = (nodes, socialData) => {
-  let denoCard = template(
-    fs.readFileSync(__dirname + "/deno-card-template.ts", "utf8")
+const writeDenoCard = (articles, social, npm) => {
+  let denoCardTemplate = fs.readFileSync(
+    __dirname + "/deno-card-template.ts",
+    "utf8"
   )
-
-  const articles = nodes.map(({ node }) => getArticle(node)).join("")
-  const social = getSocial(socialData)
 
   const path = __dirname + "/../static/me.ts"
   console.log(`Writing deno card to ${path}`)
 
-  fs.writeFileSync(path, denoCard({ articles, social }))
+  fs.writeFileSync(
+    path,
+    nunjucks.renderString(denoCardTemplate, {
+      articles,
+      social,
+      npm,
+    })
+  )
 }
 
 module.exports = writeDenoCard

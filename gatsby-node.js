@@ -3,6 +3,14 @@ const siteMetadata = require("./content/site-metadata")
 const writeDenoCard = require("./tools/write-deno-card")
 const { getNpmStats } = require("./tools/get-npm-stats")
 
+let npmStatsPromise = null
+async function getNpmStatsCached() {
+  if (!npmStatsPromise) {
+    npmStatsPromise = getNpmStats()
+  }
+  return await npmStatsPromise
+}
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const blogPostTemplate = path.resolve(`src/templates/articleTemplate.js`)
@@ -30,7 +38,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
-  writeDenoCard(result.data.allMarkdownRemark.edges, siteMetadata.social)
+  const npmStats = await getNpmStatsCached()
+  writeDenoCard(
+    result.data.allMarkdownRemark.edges,
+    siteMetadata.social,
+    npmStats
+  )
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
@@ -44,7 +57,7 @@ exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
-  const stats = await getNpmStats()
+  const stats = await getNpmStatsCached()
 
   createNode({
     ...stats,
