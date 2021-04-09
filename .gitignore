@@ -69,4 +69,4 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-static/me
+static/me.ts

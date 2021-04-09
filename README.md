@@ -26,7 +26,7 @@ npm run start
 ## 🦕  Deno?! 
 
 ```bash
-deno https://brunnerliv.io/me
+deno https://brunnerliv.io/me.ts
 ```
 
 ## Credits

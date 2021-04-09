@@ -23,7 +23,7 @@ const writeDenoCard = (nodes, socialData) => {
   const articles = nodes.map(({ node }) => getArticle(node)).join("")
   const social = getSocial(socialData)
 
-  const path = __dirname + "/../static/me"
+  const path = __dirname + "/../static/me.ts"
   console.log(`Writing deno card to ${path}`)
 
   fs.writeFileSync(path, denoCard({ articles, social }))
