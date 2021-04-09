@@ -1,3 +1,4 @@
+#!/usr/bin/env deno
 import * as cow from "https://cdn.deno.land/cowsay/versions/1.1/raw/mod.ts";
 import * as ink from "https://cdn.deno.land/ink/versions/1.3/raw/mod.ts";
 
