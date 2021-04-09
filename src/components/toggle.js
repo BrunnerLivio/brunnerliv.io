@@ -1,12 +1,5 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import {
-  ActivatedNeonText,
-  NeonTextContainer,
-  UnactivatedNeonText as _UnactivatedNeonText,
-  neonShadow,
-} from "./neon-text"
-import color from "color"
 
 const ToggleWrapper = styled.div`
   touch-action: pan-x;
@@ -40,7 +33,7 @@ const ToggleWrapper = styled.div`
     height: 24px;
     padding: 0;
     border-radius: 30px;
-    background-color: ${(props) => props.theme.accent};
+    background-color: ${props => props.theme.accent};
     transition: all 0.2s ease;
   }
 
@@ -92,39 +85,13 @@ const ToggleWrapper = styled.div`
     box-sizing: border-box;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     transform: translateX(0);
-    box-shadow: 0 0 0 3px ${(props) => props.theme.primaryDark};
+    box-shadow: 0 0 0 3px ${props => props.theme.primaryDark};
   }
 
   &.react-toggle--checked .react-toggle-thumb {
     transform: translateX(26px);
     border-color: #19ab27;
   }
-`
-
-const NeonTextSignBase = styled.div`
-  border: 2px solid ${() => color("#FE71AB").lighten(0.1)};
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 20px;
-  & > span {
-    margin-left: -14px;
-    background: transparent;
-  }
-`
-
-const ActivatedNeonTextSign = styled(NeonTextSignBase)`
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2),
-    0 0 5px ${color("#FE71AB").fade(0.5).toString()},
-    0 0 16px ${color("#FE71AB").fade(0.5).toString()}; ;
-`
-
-const UnactivatedNeonTextSign = styled(NeonTextSignBase)`
-  border-color: ${color("#FE71AB").lighten(0.25)};
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
-`
-
-const UnactivatedNeonText = styled(_UnactivatedNeonText)`
-  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
 `
 
 // Copyright 2015-present Drifty Co.
@@ -168,7 +135,6 @@ const Toggle = ({
   const [state, setState] = useState({
     checked: !!(checked || defaultChecked),
     hasFocus: false,
-    hasHover: false,
   })
   function handleClick(event) {
     const checkbox = input
@@ -256,6 +222,15 @@ const Toggle = ({
     setState({ ...state, hasFocus: false })
   }
 
+  function getIcon(type) {
+    if (!icons) {
+      return null
+    }
+    return icons[type] === undefined
+      ? Toggle.defaultProps.icons[type]
+      : icons[type]
+  }
+
   const classes =
     "react-toggle" +
     (state.checked ? " react-toggle--checked" : "") +
@@ -271,24 +246,16 @@ const Toggle = ({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchCancel}
-      onMouseOver={() => setState({ ...state, hasHover: true })}
-      onMouseOut={() => setState({ ...state, hasHover: false })}
     >
-      {state.checked || state.hasHover ? (
-        <ActivatedNeonTextSign>
-          <ActivatedNeonText color="#058EB6">Dark</ActivatedNeonText>
-        </ActivatedNeonTextSign>
-      ) : (
-        <UnactivatedNeonTextSign>
-          <UnactivatedNeonText color={color("#058EB6").lighten(1.1)}>
-            Dark
-          </UnactivatedNeonText>
-        </UnactivatedNeonTextSign>
-      )}
+      <div className="react-toggle-track">
+        <div className="react-toggle-track-check">{getIcon("checked")}</div>
+        <div className="react-toggle-track-x">{getIcon("unchecked")}</div>
+      </div>
+      <div className="react-toggle-thumb" />
 
       <input
         {...inputProps}
-        ref={(ref) => {
+        ref={ref => {
           input = ref
         }}
         onFocus={handleFocus}
