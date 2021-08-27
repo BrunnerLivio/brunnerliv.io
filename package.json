@@ -46,7 +46,7 @@
     "styled-components-breakpoint": "3.0.0-preview.20"
   },
   "devDependencies": {
-    "nunjucks": "^3.2.3",
+    "nunjucks": "3.2.3",
     "prettier": "2.2.1"
   },
   "keywords": [
