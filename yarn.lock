@@ -11410,10 +11410,10 @@ react-static-plugin-styled-components@7.5.0:
   resolved "https://registry.npmjs.org/react-static-plugin-styled-components/-/react-static-plugin-styled-components-7.5.0.tgz"
   integrity sha512-oZq169VBHemynzpxqIWSBjZHcccftIlenNfq7vPS8FwULGU1K9vbstLw1DnlI+NslKwIvLj9Jnasa8Df8c6H1Q==
 
-react-transition-group@4.4.1:
-  version "4.4.1"
-  resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.1.tgz"
-  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
+react-transition-group@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"
+  integrity sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==
   dependencies:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"

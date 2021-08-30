@@ -40,7 +40,7 @@
     "react-dom-confetti": "0.2.0",
     "react-helmet": "6.1.0",
     "react-static-plugin-styled-components": "7.5.0",
-    "react-transition-group": "4.4.1",
+    "react-transition-group": "4.4.2",
     "recharts": "2.0.8",
     "styled-components": "5.3.1",
     "styled-components-breakpoint": "3.0.0-preview.20"
