@@ -11332,10 +11332,10 @@ react-smooth@^1.0.6:
     raf "^3.4.0"
     react-transition-group "^2.5.0"
 
-react-static-plugin-styled-components@7.5.0:
-  version "7.5.0"
-  resolved "https://registry.npmjs.org/react-static-plugin-styled-components/-/react-static-plugin-styled-components-7.5.0.tgz"
-  integrity sha512-oZq169VBHemynzpxqIWSBjZHcccftIlenNfq7vPS8FwULGU1K9vbstLw1DnlI+NslKwIvLj9Jnasa8Df8c6H1Q==
+react-static-plugin-styled-components@7.6.2:
+  version "7.6.2"
+  resolved "https://registry.npmjs.org/react-static-plugin-styled-components/-/react-static-plugin-styled-components-7.6.2.tgz"
+  integrity sha512-j9ot395HeB5eQpFoS19y/4uw80Nbn9jg4f9kzHlghE0gvUMSMMG884nCfyLDkfAIEOLStVOp7SD+SbwjYTKrQw==
 
 react-transition-group@4.4.2:
   version "4.4.2"
