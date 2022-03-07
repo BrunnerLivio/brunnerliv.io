@@ -27,7 +27,7 @@
     "gatsby-remark-images-medium-zoom": "1.7.0",
     "gatsby-remark-prismjs": "5.9.0",
     "gatsby-source-filesystem": "3.0.0",
-    "gatsby-styled-components-dark-mode": "1.2.0",
+    "gatsby-styled-components-dark-mode": "2.0.5",
     "gatsby-transformer-remark": "4.9.0",
     "gatsby-transformer-sharp": "3.0.0",
     "gh-pages": "3.2.3",
