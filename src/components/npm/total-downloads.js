@@ -132,7 +132,7 @@ function TotalDownloads() {
           useEasing={true}
           separator={","}
           easingFn={easingFn}
-          duration={5}
+          duration={3}
           onEnd={() => setShowConfetti(true)}
         />
         <Pkg d={0} x={-150} y={40} />
