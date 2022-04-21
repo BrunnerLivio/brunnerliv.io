@@ -17,7 +17,7 @@ const PackagesDownloads = styled.div`
   flex-direction: column;
   margin-bottom: 92px;
   margin-top: 32px;
-  width: 380px;
+  width: 420px;
   @media only screen and (max-width: 450px) {
     width: 100%;
   }
