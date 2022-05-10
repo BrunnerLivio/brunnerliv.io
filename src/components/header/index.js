@@ -9,11 +9,11 @@ import VHS from "./vhs"
 
 const HeaderWrapper = styled.header`
   margin: 0;
-  background: ${(props) => props.theme.primary};
+  background: var(--primary);
   background: radial-gradient(
     circle,
-    ${(props) => props.theme.primary},
-    ${(props) => props.theme.primaryDark}
+    var(--primary),
+    var(--primary-dark)
   );
   background-repeat: no-repeat;
   width: 100%;

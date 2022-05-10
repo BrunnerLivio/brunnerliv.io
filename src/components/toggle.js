@@ -33,7 +33,7 @@ const ToggleWrapper = styled.div`
     height: 24px;
     padding: 0;
     border-radius: 30px;
-    background-color: ${props => props.theme.accent};
+    background-color: var(--accent);
     transition: all 0.2s ease;
   }
 
@@ -85,7 +85,7 @@ const ToggleWrapper = styled.div`
     box-sizing: border-box;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     transform: translateX(0);
-    box-shadow: 0 0 0 3px ${props => props.theme.primaryDark};
+    box-shadow: 0 0 0 3px var(--primary-dark);
   }
 
   &.react-toggle--checked .react-toggle-thumb {

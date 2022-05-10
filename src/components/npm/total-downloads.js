@@ -25,7 +25,7 @@ const PackagesDownloads = styled.div`
   .count-up {
     font-weight: 200;
     font-size: 84px;
-    color: ${props => props.theme.accent};
+    color: var(--accent);
     @media only screen and (max-width: 450px) {
       font-size: 64px;
     }
@@ -44,7 +44,7 @@ const PackageDownloadsSubtitle = styled.div`
     width: 64px;
     height: 2px;
     position: absolute;
-    background: ${(props) => props.theme.accent};
+    background: var(--accent);
     top: 12px;
     border-radius: 4px;
     @media only screen and (max-width: 450px) {

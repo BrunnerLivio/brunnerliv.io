@@ -3,10 +3,7 @@ import styled from "styled-components"
 import color from "color"
 
 const Path = styled.path`
-  fill: ${props =>
-    color(props.theme.primaryLight)
-      .fade(0.55)
-      .toString()};
+  fill: var(--primary-light-fade-55);
 `
 
 function PackageIcon({ height, className }) {

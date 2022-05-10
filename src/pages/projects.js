@@ -13,7 +13,7 @@ const ProjectList = styled.main`
   overflow:hidden;
   h1 {
     margin-bottom: 2rem;
-    color: ${props => props.theme.accent} !important;
+    color: var(--accent) !important;
     font-weight: bold;
     font-size: 1.4em;
     ${breakpoint("sm")`

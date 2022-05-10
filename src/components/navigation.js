@@ -20,7 +20,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   a {
     text-decoration: none;
-    color: ${props => props.theme.accent} !important;
+    color: var(--accent) !important;
     padding: 16px ${NAVITEM_HOR_PADDING}px;
     text-transform: uppercase;
     font-weight: bold;
@@ -28,16 +28,13 @@ const Li = styled.li`
 `
 
 const Underline = styled.hr`
-  background-color: ${props => props.theme.accent};
+  background-color: var(--accent);
   width: 87px;
   height: 2px;
   display: block;
   box-shadow: 0px 0px 8px
-      ${props =>
-        color(props.theme.accent)
-          .darken(0.2)
-          .toString()},
-    0px 0px 16px ${props => props.theme.accent};
+  var(--accent),
+    0px 0px 16px var(--accent);
   &.loaded {
     transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
   }

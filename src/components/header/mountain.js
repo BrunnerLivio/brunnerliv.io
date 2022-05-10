@@ -3,13 +3,13 @@ import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
 
 const PrimaryDarkPath = styled.path`
-  fill: ${(props) => props.theme.primaryDark};
+  fill: var(--primary-dark);
 `
 const PrimaryPath = styled.path`
-  fill: ${(props) => props.theme.primary};
+  fill: var(--primary);
 `
 const PrimaryDarkPolygon = styled.polygon`
-  fill: ${(props) => props.theme.primaryDark};
+  fill: var(--primary-dark);
 `
 
 const MountainPaths = () => (
@@ -88,7 +88,7 @@ const MountainSVG = styled.svg`
   margin-bottom: -140px;
   z-index: 2;
   height: 350px;
-  filter: drop-shadow(0px 0px 90px ${(props) => props.theme.accent});
+  filter: drop-shadow(0px 0px 90px var(--accent));
   ${breakpoint("md")`
     height: 380px;
   `}

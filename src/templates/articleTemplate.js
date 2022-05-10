@@ -34,7 +34,7 @@ const Article = styled.article`
 
   p > .language-text {
     background: none;
-    color: ${(props) => props.theme.text};
+    color: var(--text);
   }
 
   .gatsby-highlight {
