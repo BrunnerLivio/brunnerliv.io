@@ -14,7 +14,7 @@ const DarkModeToggle = (props) => {
       window.__setPreferredTheme(isChecked ? "dark" : "light");
       props?.onChange?.(isChecked);
     },
-    [setChecked]
+    [setChecked, props]
   )
 
   return (

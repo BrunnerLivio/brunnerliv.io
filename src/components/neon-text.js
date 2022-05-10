@@ -8,7 +8,7 @@ const NeonTextContent = styled.span`
   color: var(--neon-text-color);
 
   font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: 700;
   position: absolute;
   z-index: 1;
@@ -45,7 +45,7 @@ const NeonTextContainer = styled.div`
     text-transform: uppercase;
     letter-spacing: 3px;
     font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 900;
   }
 `

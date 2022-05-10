@@ -16,12 +16,16 @@ const GlobalStyle = createGlobalStyle`
     --accent-fade-95: ${color("#404fa6").fade(0.95).toString()};
     --accent-fade-60: ${color("#404fa6").fade(0.6).toString()};
 
-    --text: #000000;
+    --text: #0a2540;
     --text-secondary: ${color("#000000").alpha(0.7).toString()};
     --text-invert: #FFFFFF;
 
     --neon-text-color: var(--accent-dark);
-    --neon-blinking-text-color: ${color("#9fa8da").lighten(0.1)}
+    --neon-blinking-text-color: ${color("#9fa8da").lighten(0.1)};
+
+    /* SHARED */
+    --sans-serif: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+    --serif:  Georgia,Times,serif;
   }
   :root.dark {
     --primary-light: ${color("#4038a5").lighten(0.7).toString()};
@@ -42,7 +46,8 @@ const GlobalStyle = createGlobalStyle`
     --accent-light: #FFA5A7;
     --accent-light-fade-50: ${color("#FFA5A7").fade(0.5).toString()};
 
-    --text: #FFFFFF;
+    --text: ${color("#FFFFFF").alpha(0.85).toString()};
+    --title-text: #FFFFFF;
     --text-secondary: ${color("#FFFFFF").alpha(0.7).toString()};
     --text-invert: #000000;
     --link-hover: ${color("#FFFFFF").alpha(0.6).toString()};
@@ -54,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: var(--primary-darker);
     color: var(--text);
+    font-family: 'Roboto', sans-serif;
   }
 
   ::selection {
@@ -67,8 +73,9 @@ const GlobalStyle = createGlobalStyle`
 
   blockquote {
     border-left: 2px var(--accent) solid;
-    padding: 12px;
+    padding: 1em 2em;
     margin: 32px 0;
+    font-style: italic;
   }
 
   h1 {
@@ -87,7 +94,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: var(--accent);
+    color: var(--text);
+    font-weight: 600;
     &:hover {
       text-decoration: none;
     }
