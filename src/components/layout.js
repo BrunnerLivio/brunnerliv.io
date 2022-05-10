@@ -51,7 +51,7 @@ const Content = styled.div`
   flex-direction: column;
 `
 
-export const ThemeContext = React.createContext(window.__theme === "dark")
+export const ThemeContext = React.createContext(typeof window !== 'undefined' ? window.__theme === "dark": false)
 
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
@@ -70,7 +70,7 @@ const Layout = withTheme(({ children }) => {
   const [isMounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  const [darkMode, setDarkMode] = useState(window.__theme === "dark")
+  const [darkMode, setDarkMode] = useState(typeof window !== 'undefined' ? window.__theme === "dark": false)
 
   return (
     <ThemeProvider
