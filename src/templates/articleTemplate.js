@@ -180,6 +180,14 @@ export default function Template({
           alt={`Cover of the article ${frontmatter.title}`}
         /> */}
         <div dangerouslySetInnerHTML={{ __html: html }} />
+        <script src="https://utteranc.es/client.js"
+                repo="brunnerlivio/articles"
+                issue-term="title"
+                label="comments 💬"
+                theme="preferred-color-scheme"
+                crossorigin="anonymous"
+                async>
+        </script>
       </Article>
       <Me />
     </>
