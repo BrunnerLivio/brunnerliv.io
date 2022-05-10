@@ -39,8 +39,7 @@
     "react-static-plugin-styled-components": "7.6.2",
     "react-transition-group": "4.4.2",
     "recharts": "2.1.9",
-    "styled-components": "5.3.1",
-    "styled-components-breakpoint": "3.0.0-preview.20"
+    "styled-components": "5.3.1"
   },
   "devDependencies": {
     "nunjucks": "3.2.3",

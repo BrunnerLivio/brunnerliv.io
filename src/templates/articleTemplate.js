@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm, md } from "../components/breakpoints";
 
 import Seo from "../components/seo"
 import Me from "../components/me"
@@ -11,10 +11,10 @@ const Article = styled.article`
   padding: 1.3125rem;
   max-width: calc(100vw - 1rem);
   margin-top: 16px;
-  ${breakpoint("sm")`
+  ${sm`
     margin-top: 0;
   `}
-  ${breakpoint("md")`
+  ${md`
     width: 900px;
   `}
   font-family: var(--sans-serif);
@@ -32,10 +32,10 @@ const Article = styled.article`
     margin-top: 4em !important;
     margin-bottom: 4em !important;
 
-    ${breakpoint("sm")`
+    ${sm`
       border-radius: 3px !important;
     `}
-    ${breakpoint("md")`
+    ${md`
       font-size: 1.2em !important;
     `}
   }

@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm, md } from "./breakpoints"
 
 const ProjectSection = styled.section`
   border-radius: 8px;
@@ -31,10 +31,10 @@ const TitleWrapper = styled.header`
 
     font-weight: bold;
     font-size: 1.4em;
-    ${breakpoint("sm")`
+    ${sm`
       font-size: 1.5em;
     `}
-    ${breakpoint("md")`
+    ${md`
       font-size: 2em;
     `}
   }

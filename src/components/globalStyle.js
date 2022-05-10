@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm, md} from "./breakpoints"
 import color from "color"
 
 const GlobalStyle = createGlobalStyle`
@@ -84,10 +84,10 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     text-rendering: optimizeLegibility;
     font-size: 1.7em;
-    ${breakpoint("sm")`
+    ${sm`
         font-size: 2em;
       `}
-    ${breakpoint("md")`
+    ${md`
         font-size: 2.5em;
       `}
     font-weight: bold;

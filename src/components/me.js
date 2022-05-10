@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm } from "./breakpoints"
 
 import meImage from "../images/me.jpeg"
 
@@ -10,7 +10,7 @@ const MeWrapper = styled.div`
   align-items: center;
   margin-bottom: 3rem;
   margin-top: 32px;
-  ${breakpoint("sm")`
+  ${sm`
     margin-top: 0;
   `}
   p {

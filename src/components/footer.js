@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import color from "color"
 
 import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {

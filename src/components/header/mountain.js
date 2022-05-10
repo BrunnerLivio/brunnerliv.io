@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { md, lg} from "../breakpoints"
 
 const PrimaryDarkPath = styled.path`
   fill: var(--primary-dark);
@@ -89,10 +89,10 @@ const MountainSVG = styled.svg`
   z-index: 2;
   height: 350px;
   filter: drop-shadow(0px 0px 90px var(--accent));
-  ${breakpoint("md")`
+  ${md`
     height: 380px;
   `}
-  ${breakpoint("lg")`
+  ${lg`
     height: 450px;
   `}
 `

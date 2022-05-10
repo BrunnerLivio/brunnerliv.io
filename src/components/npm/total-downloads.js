@@ -141,10 +141,8 @@ function TotalDownloads() {
         <Pkg d={1.5} x={255} y={-60} />
         <Pkg d={2} x={-200} y={-20} />
         <Pkg d={2.5} x={150} y={80} />
-        <Pkg d={3} x={-320} y={100} />
-        <Pkg d={3.5} x={280} y={69} />
-        <Pkg d={4} x={-305} y={-69} />
-        <Pkg d={4.5} x={-200} y={120} />
+        <Pkg d={2.1} x={-320} y={100} />
+        <Pkg d={2.5} x={-200} y={120} />
         <PackageDownloadsSubtitle>
           Package Downloads via npm
         </PackageDownloadsSubtitle>

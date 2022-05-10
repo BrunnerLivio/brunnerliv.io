@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import color from "color"
 
 const NAVITEM_HOR_PADDING = 8
 

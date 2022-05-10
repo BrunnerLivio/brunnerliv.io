@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import color from "color"
 
 const Path = styled.path`
   fill: var(--primary-light-fade-55);

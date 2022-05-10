@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { md } from "./breakpoints"
 
 const OutrunGridPerspective = styled.div`
   perspective: 1000px;
@@ -40,7 +40,7 @@ const Vert = styled.div`
   width: 2px;
   background-color: var(--accent);
   margin-left: 12%;
-  ${breakpoint("md")`
+  ${md`
     margin-left: 4.5%;
   `}
   box-shadow: 0 2px 21px var(--accent);
@@ -59,7 +59,7 @@ const Hor = styled.div`
   width: 100%;
   height: 3px;
   margin-top: 19%;
-  ${breakpoint("md")`
+  ${md`
     margin-top: 4.8%;
   `}
   background-color: var(--accent);

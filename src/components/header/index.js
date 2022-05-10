@@ -1,11 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm, md, lg } from "../breakpoints"
 
 import Stars from "./stars"
 import Sunset from "./sunset"
 import Mountain from "./mountain"
-import VHS from "./vhs"
+import Vhs from "./vhs"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -20,13 +20,13 @@ const HeaderWrapper = styled.header`
   position: relative;
   padding: 0;
   height: 120px;
-  ${breakpoint("sm")`
+  ${sm`
     min-height: 160px;
   `}
-  ${breakpoint("md")`
+  ${md`
     min-height: 200px;
   `}
-  ${breakpoint("lg")`
+  ${lg`
     min-height: 250px;
   `}
   overflow: hidden;
@@ -50,7 +50,7 @@ const HeaderBackground = styled.div`
 
 const Header = ({ children }) => (
   <HeaderWrapper>
-    <VHS />
+    <Vhs />
     <HeaderContent>{children}</HeaderContent>
     <Mountain />
     <HeaderBackground>
