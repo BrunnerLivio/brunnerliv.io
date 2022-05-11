@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { sm, md } from "../components/breakpoints";
@@ -56,7 +56,7 @@ const Article = styled.article`
   h2 {
     line-height: 1.5em;
     font-size: 2.4em;
-    margin-top: 3em;
+    margin-top: 2.5em;
     font-weight: 700;
     font-weight: 600;
     font-family: var(--sans-serif);
@@ -76,8 +76,8 @@ const Article = styled.article`
 
   p, li {
     font-weight: 400;
-    font-size: 1.5rem;
-    line-height: 1.6em;
+    font-size: 1.3rem;
+    line-height: 1.5em;
   }
   
   ul {
@@ -95,8 +95,8 @@ const Article = styled.article`
   table {
     margin: 3em 0;
     font-family: var(--sans-serif);
-    font-size: 1.3rem;
-    line-height: 1.6em;
+    font-size: 1.2rem;
+    line-height: 1.4em;
 
     th:empty  {
       display: none;
@@ -149,11 +149,28 @@ const ArticleTitle = styled.h1`
 //   `};
 // `
 
+const CommentSection = styled.div`
+  margin: 2em 0 6em 0;
+`
+
 export default function Template({
-  data, // this prop will be injected by the GraphQL query below.
+  data,
 }) {
-  const { markdownRemark } = data // data.markdownRemark holds our post data
+  const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
+  useEffect(() => {
+    let script = document.createElement('script');
+    let anchor = document.getElementById('inject-comments-for-uterances');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.setAttribute('async', 'true');
+    script.setAttribute('repo', 'brunnerlivio/articles');
+    script.setAttribute('issue-term', frontmatter.title);
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('label', 'comments 💬');
+    anchor.appendChild(script);
+  }, [])
+
   // const [hasMounted, setHasMounted] = useState(false)
   // const coverImageRef = useRef(null)
 
@@ -180,16 +197,10 @@ export default function Template({
           alt={`Cover of the article ${frontmatter.title}`}
         /> */}
         <div dangerouslySetInnerHTML={{ __html: html }} />
-        <script src="https://utteranc.es/client.js"
-                repo="brunnerlivio/articles"
-                issue-term="title"
-                label="comments 💬"
-                theme="preferred-color-scheme"
-                crossorigin="anonymous"
-                async>
-        </script>
+
       </Article>
       <Me />
+      <CommentSection id="inject-comments-for-uterances" />
     </>
   )
 }
