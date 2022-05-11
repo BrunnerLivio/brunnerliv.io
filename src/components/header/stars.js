@@ -1,8 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import colorfn from "color"
-import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
-import { lightTheme, darkTheme } from "../../theme"
 
 const rand = (from, to) => Math.floor(Math.random() * to) + from
 
@@ -51,8 +49,6 @@ class Stars extends React.Component {
 
   starDensity = 100
 
-  static contextType = ThemeManagerContext
-
   constructor() {
     super()
     this.canvasRef = React.createRef()
@@ -97,8 +93,8 @@ class Stars extends React.Component {
   }
 
   updateColors() {
-    const accent = this.context.isDark ? darkTheme.accent : lightTheme.accent
-    const primary = this.context.isDark ? darkTheme.primary : lightTheme.primary
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    const primary =  getComputedStyle(document.documentElement).getPropertyValue('--primary');
 
     const accentFaded = colorfn(accent).fade(0.9).toString()
     const primaryLight = colorfn(primary).lighten(0.1).toString()

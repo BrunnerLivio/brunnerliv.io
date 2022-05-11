@@ -12,11 +12,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - name: Waiting for 200 from the Netlify Preview
+      - name: Waiting for Netlify Preview
         uses: josephduffy/wait-for-netlify-action@v1
         id: wait-for-netflify-preview
         with:
           site_name: 'brunnerlivio'
+          max_timeout: 300
       - name: Run Lighthouse on urls and validate with lighthouserc
         uses: treosh/lighthouse-ci-action@v2
         with:

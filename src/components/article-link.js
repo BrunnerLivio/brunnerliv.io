@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
 import NeonText from "./neon-text"
+import { sm, md } from './breakpoints';
 
 const ArticleItem = styled.article`
   a {
@@ -19,10 +19,10 @@ const ArticleTitle = styled.h2`
   margin-top: 16px;
   font-size: 1.4em;
   text-align: center;
-  ${breakpoint("sm")`
+  ${sm`
       font-size: 1.3em;
     `}
-  ${breakpoint("md")`
+  ${md`
       font-size: 1.7em;
     `}
 `
@@ -37,7 +37,7 @@ const ArticleHeader = styled.header`
   span {
     margin-right: 8px;
     margin-left: 0%;
-    color: ${(props) => props.theme.textSecondary};
+    color: var(--text-secondary);
     font-size: 0.9em;
   }
 `

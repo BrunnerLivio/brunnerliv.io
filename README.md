@@ -14,12 +14,12 @@
 
 ## 🚀  Quick start
 
-Make sure you have NodeJS and Yarn installed.
+Make sure you have NodeJS installed.
 
 ```bash
 git clone https://github.com/BrunnerLivio/brunnerliv.io.git
 cd brunnerliv.io
-yarn
+npm i
 npm run start
 ```
 

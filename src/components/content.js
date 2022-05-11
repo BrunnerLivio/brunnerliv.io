@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { md } from "./breakpoints"
 
 const Content = styled.section`
   margin-bottom: 48px;
@@ -7,7 +7,7 @@ const Content = styled.section`
   flex-wrap: wrap;
   flex-direction: column;
   width: 100%;
-  ${breakpoint("md")`
+  ${md`
     flex-direction: row;
     width: 700px;
   `}

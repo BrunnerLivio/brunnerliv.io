@@ -1,20 +1,20 @@
 import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { md, lg } from "../components/breakpoints"
 
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import ArticleLink from "../components/article-link"
 
 const Main = styled.main`
   padding: 20px;
   width: 100%;
   margin: 0;
-  ${breakpoint("md")`
+  ${md`
     width: 740px;
   `}
 
-  ${breakpoint("lg")`
+  ${lg`
     width: 940px;
   `}
 `
@@ -28,7 +28,7 @@ const IndexPage = ({
     .map((edge, index) => <ArticleLink key={index} post={edge.node} />)
   return (
     <>
-      <SEO title="Home" />
+      <Seo title="Home" />
 
       <Main>{posts}</Main>
     </>

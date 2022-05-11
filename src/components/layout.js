@@ -1,21 +1,18 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { Location } from "@reach/router"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled, { withTheme } from "styled-components"
-import { ThemeManagerContext } from "gatsby-styled-components-dark-mode"
 
 import Header from "./header"
 import Navigation from "./navigation"
 import Transition from "./transition"
-import Toggle from "./toggle"
+
 import Footer from "./footer"
 import GlobalStyle from "./globalStyle"
 
-import moon from "../images/moon.png"
-import sun from "../images/sun.png"
-
 import "./layout.css"
 import OutrunGrid from "./outrun-grid"
+import DarkModeToggle from "./dark-mode-toggle"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -28,7 +25,7 @@ const MainWrapper = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  background: ${(props) => props.theme.primaryDarker};
+  background: var(--primary-darker);
   flex: 1;
   height: 100%;
   position: relative;
@@ -42,8 +39,8 @@ const Container = styled.div`
     position: absolute;
     background: linear-gradient(
       180deg,
-      ${(props) => props.theme.primary} 0%,
-      ${(props) => props.theme.primaryDarker} 100%
+      var(--primary) 0%,
+      var(--primary-darker) 100%
     );
   }
 `
@@ -53,6 +50,10 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const ThemeContext = React.createContext(
+  typeof window !== "undefined" ? window.__theme === "dark" : false
+)
 
 const Layout = withTheme(({ children }) => {
   const data = useStaticQuery(graphql`
@@ -67,58 +68,44 @@ const Layout = withTheme(({ children }) => {
       }
     }
   `)
-  const themeContext = useContext(ThemeManagerContext)
 
   const [isMounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
+  const [darkMode, setDarkMode] = useState(
+    typeof window !== "undefined" ? window.__theme === "dark" : false
+  )
+
   return (
-    <MainWrapper style={{ opacity: isMounted ? 1 : 0 }}>
-      <GlobalStyle />
-      <Header>
-        <Toggle
-          icons={{
-            checked: (
-              <img
-                src={moon}
-                width="16"
-                height="16"
-                alt="Moon"
-                style={{ pointerEvents: "none" }}
-              />
-            ),
-            unchecked: (
-              <img
-                src={sun}
-                width="16"
-                height="16"
-                alt="Sun"
-                style={{ pointerEvents: "none" }}
-              />
-            ),
-          }}
-          checked={themeContext.isDark}
-          onChange={() => themeContext.toggleDark()}
-        />
-      </Header>
-      <Container>
-        <Content>
-          <Location>
-            {({ location }) => (
-              <>
-                <Navigation
-                  navigation={data.site.siteMetadata.navigation}
-                  active={location.pathname}
-                />
-                <Transition location={location}>{children}</Transition>
-              </>
-            )}
-          </Location>
-          <Footer />
-        </Content>
-      </Container>
-      <OutrunGrid />
-    </MainWrapper>
+    <ThemeContext.Provider value={darkMode}>
+      <MainWrapper style={{ opacity: isMounted ? 1 : 0 }}>
+        <GlobalStyle />
+        <Header>
+          {typeof window === "undefined" ? (
+            <></>
+          ) : (
+            <DarkModeToggle onChange={setDarkMode} />
+          )}
+        </Header>
+        <Container>
+          <Content>
+            <Location>
+              {({ location }) => (
+                <>
+                  <Navigation
+                    navigation={data.site.siteMetadata.navigation}
+                    active={location.pathname}
+                  />
+                  <Transition location={location}>{children}</Transition>
+                </>
+              )}
+            </Location>
+            <Footer />
+          </Content>
+        </Container>
+        <OutrunGrid />
+      </MainWrapper>
+    </ThemeContext.Provider>
   )
 })
 

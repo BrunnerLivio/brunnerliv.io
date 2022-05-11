@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { sm, md } from "./breakpoints"
 
 const ProjectSection = styled.section`
   border-radius: 8px;
-  color: ${props => props.theme.text};
+  color: var(--text);
   flex: 0 50%;
   width: 100%;
   padding-right: 30px;
@@ -16,7 +16,7 @@ const ProjectSection = styled.section`
   }
   p {
     font-size: 1rem;
-    color: ${props => props.theme.text};
+    color: var(--text);
     margin-top: 4px;
   }
 `
@@ -31,17 +31,17 @@ const TitleWrapper = styled.header`
 
     font-weight: bold;
     font-size: 1.4em;
-    ${breakpoint("sm")`
+    ${sm`
       font-size: 1.5em;
     `}
-    ${breakpoint("md")`
+    ${md`
       font-size: 2em;
     `}
   }
   a {
-    color: ${props => props.theme.accent};
+    color: var(--accent);
     &:hover {
-      color: ${props => props.theme.accentDark};
+      color:var(--accent-dark);
     }
   }
 `

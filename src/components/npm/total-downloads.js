@@ -25,7 +25,7 @@ const PackagesDownloads = styled.div`
   .count-up {
     font-weight: 200;
     font-size: 84px;
-    color: ${props => props.theme.accent};
+    color: var(--accent);
     @media only screen and (max-width: 450px) {
       font-size: 64px;
     }
@@ -44,7 +44,7 @@ const PackageDownloadsSubtitle = styled.div`
     width: 64px;
     height: 2px;
     position: absolute;
-    background: ${(props) => props.theme.accent};
+    background: var(--accent);
     top: 12px;
     border-radius: 4px;
     @media only screen and (max-width: 450px) {
@@ -141,10 +141,8 @@ function TotalDownloads() {
         <Pkg d={1.5} x={255} y={-60} />
         <Pkg d={2} x={-200} y={-20} />
         <Pkg d={2.5} x={150} y={80} />
-        <Pkg d={3} x={-320} y={100} />
-        <Pkg d={3.5} x={280} y={69} />
-        <Pkg d={4} x={-305} y={-69} />
-        <Pkg d={4.5} x={-200} y={120} />
+        <Pkg d={2.1} x={-320} y={100} />
+        <Pkg d={2.5} x={-200} y={120} />
         <PackageDownloadsSubtitle>
           Package Downloads via npm
         </PackageDownloadsSubtitle>

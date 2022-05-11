@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import color from "color"
 
 const Sunset = styled.section`
   width: 100%;
@@ -10,17 +9,11 @@ const Sunset = styled.section`
   background-image: linear-gradient(
     180deg,
     hsla(0, 0%, 100%, 0),
-    ${props =>
-        color(props.theme.accent)
-          .fade(0.95)
-          .toString()}
+    var(--accent-fade-95)
       5%,
-    ${props =>
-        color(props.theme.accent)
-          .fade(0.6)
-          .toString()}
+    var(--accent-fade-60)
       15%,
-    ${props => props.theme.accent}
+    var(--accent)
   );
   background-repeat: repeat-x;
   opacity: 0.38;

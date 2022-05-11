@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import color from "color"
 
 import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -11,7 +10,7 @@ import {
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 
 const FontAwesomeIcon = styled(_FontAwesomeIcon)`
-  color: ${props => props.theme.primary};
+  color: var(--primary);
 `
 const EgoSection = styled.section`
   display: flex;
@@ -22,13 +21,10 @@ const EgoSection = styled.section`
   margin-bottom: 64px;
   h1 {
     font-size: 3em;
-    color: ${props => props.theme.text};
+    color: var(--text);
   }
   p {
-    color: ${props =>
-      color(props.theme.text)
-        .alpha(0.7)
-        .toString()};
+    color: var(--text);
   }
 `
 
@@ -38,7 +34,7 @@ const Wrapper = styled.section`
 `
 
 const SocialButton = styled.a`
-  background: ${props => props.theme.accent};
+  background: var(--accent);
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -49,16 +45,10 @@ const SocialButton = styled.a`
   border: 0;
   cursor: pointer;
   box-shadow: 0px 0px 2px
-      ${props =>
-        color(props.theme.accent)
-          .darken(0.1)
-          .toString()},
-    0px 0px 14px ${props => props.theme.accent};
+       var(--accent),
+    0px 0px 14px var(--accent);
   &:hover {
-    background: ${props =>
-      color(props.theme.accent)
-        .alpha(0.7)
-        .toString()};
+    background: var(--accent);
   }
 `
 

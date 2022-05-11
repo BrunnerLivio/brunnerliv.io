@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import breakpoint from "styled-components-breakpoint"
+import { md } from "./breakpoints"
 
 const OutrunGridPerspective = styled.div`
   perspective: 1000px;
@@ -15,7 +15,7 @@ const OutrunGridPerspective = styled.div`
     background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.0001) 0%,
-      ${(props) => props.theme.primaryDarker} 100%
+      var(--primary-darker) 100%
     );
 
     position: absolute;
@@ -27,7 +27,7 @@ const OutrunGridPerspective = styled.div`
 const OutrunGridContainer = styled.div`
   width: 100%;
   height: 660px;
-  border: 2px solid ${(props) => props.theme.accent};
+  border: 2px solid var(--accent);
   box-sizing: border-box;
   transform-origin: top;
   transform: rotateX(70deg) translateY(10%);
@@ -38,12 +38,12 @@ const Vert = styled.div`
   display: inline-block;
   height: 100%;
   width: 2px;
-  background-color: ${(props) => props.theme.accent};
+  background-color: var(--accent);
   margin-left: 12%;
-  ${breakpoint("md")`
+  ${md`
     margin-left: 4.5%;
   `}
-  box-shadow: 0 2px 21px ${(props) => props.theme.accent};
+  box-shadow: 0 2px 21px var(--accent);
 `
 
 const MovingLines = styled.div`
@@ -59,11 +59,11 @@ const Hor = styled.div`
   width: 100%;
   height: 3px;
   margin-top: 19%;
-  ${breakpoint("md")`
+  ${md`
     margin-top: 4.8%;
   `}
-  background-color: ${(props) => props.theme.accent};
-  box-shadow: 2px 0 21px ${(props) => props.theme.accent};
+  background-color: var(--accent);
+  box-shadow: 2px 0 21px var(--accent);
 `
 
 function OutrunGrid() {

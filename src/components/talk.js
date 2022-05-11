@@ -27,7 +27,7 @@ const CardHeader = styled.header`
 const Date = styled.span`
   margin-right: 8px;
   margin-left: 0%;
-  color: ${(props) => props.theme.textSecondary};
+  color: var(--text-secondary);
   font-size: 0.9em;
 `
 

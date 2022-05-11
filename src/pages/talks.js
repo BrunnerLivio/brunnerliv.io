@@ -2,10 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Content from "../components/content"
 import Talk from "../components/talk"
-import breakpoint from "styled-components-breakpoint"
 
 const TalkList = styled.main`
   display: flex;
@@ -20,7 +19,7 @@ const Talks = ({ data }) => {
 
   return (
     <>
-      <SEO title="Talks" />
+      <Seo title="Talks" />
       <Content>
         <TalkList>
           {(talks || []).map((talk, index) => (
