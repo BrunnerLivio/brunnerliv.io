@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "nunjucks": "3.2.3",
-    "prettier": "2.2.1"
+    "prettier": "2.6.2"
   },
   "keywords": [
     "gatsby"
