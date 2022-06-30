@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import NeonIcon from "./neon-icon";
 import {
   faTwitter,
   faGithubAlt,
@@ -9,16 +9,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 import { faPen } from "@fortawesome/free-solid-svg-icons"
 
-const FontAwesomeIcon = styled(_FontAwesomeIcon)`
-  color: var(--primary);
-`
 const EgoSection = styled.section`
   display: flex;
   align-items: center;
   height: 100%;
   padding: 0;
   flex-direction: column;
-  margin-bottom: 64px;
+  margin-top: 2em;
+  margin-bottom: 8em;
   h1 {
     font-size: 3em;
     color: var(--text);
@@ -31,10 +29,10 @@ const EgoSection = styled.section`
 const Wrapper = styled.section`
   display: flex;
   flex-direction: row;
+  gap: 2em;
 `
 
 const SocialButton = styled.a`
-  background: var(--accent);
   width: 30px;
   height: 30px;
   border-radius: 100%;
@@ -44,12 +42,6 @@ const SocialButton = styled.a`
   margin-right: 16px;
   border: 0;
   cursor: pointer;
-  box-shadow: 0px 0px 2px
-       var(--accent),
-    0px 0px 14px var(--accent);
-  &:hover {
-    background: var(--accent);
-  }
 `
 
 const Footer = () => (
@@ -62,7 +54,7 @@ const Footer = () => (
           rel="noreferrer"
           aria-label="Goto Livios Github"
         >
-          <FontAwesomeIcon size="1x" icon={faGithubAlt} />
+          <NeonIcon size="2x" icon={faGithubAlt} />
         </SocialButton>
         <SocialButton
           href="https://twitter.com/brunnerlivio"
@@ -70,7 +62,7 @@ const Footer = () => (
           rel="noreferrer"
           aria-label="Goto Livios Twitter"
         >
-          <FontAwesomeIcon size="1x" icon={faTwitter} />
+          <NeonIcon size="2x" icon={faTwitter} />
         </SocialButton>
         <SocialButton
           href="https://dev.to/brunnerlivio"
@@ -78,7 +70,7 @@ const Footer = () => (
           rel="noreferrer"
           aria-label="Goto Livios Articles on dev.to"
         >
-          <FontAwesomeIcon size="1x" icon={faPen} />
+          <NeonIcon size="2x" icon={faPen} />
         </SocialButton>
         <SocialButton
           href="https://www.linkedin.com/in/livio-brunner-151667165/"
@@ -86,7 +78,7 @@ const Footer = () => (
           rel="noreferrer"
           aria-label="Goto Livios LinkedIn"
         >
-          <FontAwesomeIcon size="1x" icon={faLinkedin} />
+          <NeonIcon size="2x" icon={faLinkedin} />
         </SocialButton>
       </Wrapper>
     </EgoSection>
