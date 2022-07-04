@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { sm, md, lg } from "../breakpoints"
 
@@ -6,6 +6,7 @@ import Stars from "./stars"
 import Sunset from "./sunset"
 import Mountain from "./mountain"
 import Vhs from "./vhs"
+import { ThemeContext } from "../layout"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -48,16 +49,17 @@ const HeaderBackground = styled.div`
   overflow: hidden;
 `
 
-const Header = ({ children }) => (
-  <HeaderWrapper>
+const Header = ({ children }) => {
+  const darkMode = useContext(ThemeContext);
+  return (<HeaderWrapper>
     <Vhs />
     <HeaderContent>{children}</HeaderContent>
     <Mountain />
     <HeaderBackground>
-      <Stars />
+      <Stars direction={darkMode ? "up" : "down"} />
       <Sunset />
     </HeaderBackground>
-  </HeaderWrapper>
-)
+  </HeaderWrapper>)
+}
 
 export default Header

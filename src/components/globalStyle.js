@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-light-fade-55: ${color("#4038a5").lighten(0.7).fade(0.55).toString()};
     --primary: #eceff1;
     --primary-dark: #b0bec5;
-    --primary-darker: ${color("#FFFFFF").darken(0.2).toString()};
+    --primary-darker: #eceff1;
 
     --accent: #404fa6;
     --accent-dark: ${color("#404fa6").darken(0.08).toString()};

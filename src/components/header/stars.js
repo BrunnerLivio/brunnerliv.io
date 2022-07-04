@@ -14,18 +14,25 @@ class Bubble {
   ctx
   y
   x
-  constructor(type, x, y, size, ctx, framenumber) {
+
+  constructor(type, x, y, size, ctx, framenumber, direction) {
     this.type = type
     this.init.x = x
     this.init.y = y
     this.init.framenumber = framenumber
     this.size = size
     this.ctx = ctx
+    this.direction = direction
   }
 
   update(framenumber, colors) {
-    this.y =
-      this.init.y - (framenumber - this.init.framenumber) / (this.type * 2)
+    if (this.direction === "down") {
+      this.y =
+        this.init.y + (framenumber - this.init.framenumber) / (this.type * 2)
+    } else {
+      this.y =
+        this.init.y - (framenumber - this.init.framenumber) / (this.type * 2)
+    }
 
     this.x = this.init.x
     this.ctx.fillStyle = colors[this.type]
@@ -34,9 +41,15 @@ class Bubble {
     this.ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
     this.ctx.fill()
   }
+
+  setDirection(direction) {
+    this.direction = direction
+    this.init.y = rand(0, 440)
+  }
 }
 
 class Stars extends React.Component {
+  HEIGHT = 450
   canvas
   ctx
   bubbles = []
@@ -56,17 +69,49 @@ class Stars extends React.Component {
 
   createRandomBubble(xval, yval) {
     const x = xval || rand(0, this.canvas.width)
-    const y = yval || 440
+    const y = yval || (this.props.direction === "down" ? -20 : this.HEIGHT)
 
     switch (rand(1, 4)) {
       case 4:
-        return new Bubble(4, x, y, 3, this.ctx, this.frameNumber)
+        return new Bubble(
+          4,
+          x,
+          y,
+          3,
+          this.ctx,
+          this.frameNumber,
+          this.props.direction
+        )
       case 3:
-        return new Bubble(3, x, y, 4, this.ctx, this.frameNumber)
+        return new Bubble(
+          3,
+          x,
+          y,
+          4,
+          this.ctx,
+          this.frameNumber,
+          this.props.direction
+        )
       case 2:
-        return new Bubble(2, x, y, 5, this.ctx, this.frameNumber)
+        return new Bubble(
+          2,
+          x,
+          y,
+          5,
+          this.ctx,
+          this.frameNumber,
+          this.props.direction
+        )
       case 1:
-        return new Bubble(1, x, y, 7, this.ctx, this.frameNumber)
+        return new Bubble(
+          1,
+          x,
+          y,
+          7,
+          this.ctx,
+          this.frameNumber,
+          this.props.direction
+        )
       default:
         return
     }
@@ -79,12 +124,18 @@ class Stars extends React.Component {
       this.bubbles.push(this.createRandomBubble())
     }
 
-    this.bubbles.forEach((bubble) =>
+    this.bubbles.forEach((bubble) => {
       bubble.update(this.frameNumber, this.colors)
-    )
+    })
 
     this.frameNumber++
-    this.bubbles = this.bubbles.filter((b) => b.y > -40)
+    this.bubbles = this.bubbles.filter((b) => {
+      if (this.props.direction === "down") {
+        return b.y < this.HEIGHT + 40
+      } else {
+        return b.y > -40
+      }
+    })
     window.requestAnimationFrame(this.draw.bind(this))
   }
 
@@ -93,14 +144,28 @@ class Stars extends React.Component {
   }
 
   updateColors() {
-    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    const primary =  getComputedStyle(document.documentElement).getPropertyValue('--primary');
+    const accent = getComputedStyle(document.documentElement).getPropertyValue(
+      "--accent"
+    )
+    const primary = getComputedStyle(document.documentElement).getPropertyValue(
+      "--primary"
+    )
 
     const accentFaded = colorfn(accent).fade(0.9).toString()
     const primaryLight = colorfn(primary).lighten(0.1).toString()
     const primaryLighter = colorfn(primary).lighten(0.2).toString()
 
     this.colors = [accentFaded, primaryLight, accentFaded, primaryLighter]
+  }
+
+  registerBubbles() {
+    this.bubbles = new Array(this.starDensity)
+      .fill()
+      .map(() =>
+        this.createRandomBubble()
+      )
+    
+      this.bubbles.forEach((bubble) => bubble.setDirection(this.props.direction))
   }
 
   componentDidMount() {
@@ -111,17 +176,14 @@ class Stars extends React.Component {
     this.canvas = this.canvasRef.current
     this.ctx = this.canvas.getContext("2d")
 
-    this.bubbles = new Array(this.starDensity)
-      .fill()
-      .map(() =>
-        this.createRandomBubble(rand(0, window.innerWidth), rand(30, 440))
-      )
+    this.registerBubbles()
 
     this.draw()
   }
 
   componentDidUpdate() {
     this.updateColors()
+    this.registerBubbles()
   }
 
   componentWillUnmount() {
