@@ -181,7 +181,7 @@ class Stars extends React.Component {
     this.draw()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(...arg) {
     this.updateColors()
     this.registerBubbles()
   }
@@ -201,4 +201,6 @@ class Stars extends React.Component {
   }
 }
 
-export default Stars
+const MemoizedStars = React.memo(Stars)
+
+export default MemoizedStars

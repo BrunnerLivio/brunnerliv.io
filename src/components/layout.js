@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { Location } from "@reach/router"
 import React, { useEffect, useState } from "react"
-import styled, { withTheme } from "styled-components"
+import styled from "styled-components"
 
 import Header from "./header"
 import Navigation from "./navigation"
@@ -55,7 +55,7 @@ export const ThemeContext = React.createContext(
   typeof window !== "undefined" ? window.__theme === "dark" : false
 )
 
-const Layout = withTheme(({ children }) => {
+const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
       site {
@@ -107,6 +107,6 @@ const Layout = withTheme(({ children }) => {
       </MainWrapper>
     </ThemeContext.Provider>
   )
-})
+}
 
 export default Layout
