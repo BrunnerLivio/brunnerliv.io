@@ -32,14 +32,14 @@ const GlobalStyle = createGlobalStyle`
     --serif:  Georgia,Times,serif;
   }
   :root.dark {
-    --primary-light: ${color("#4038a5").lighten(0.7).toString()};
+    --primary-light: hsl(244, 49%, 60%);
     --primary-light-fade-55: ${color("#4038a5")
       .lighten(0.7)
       .fade(0.55)
       .toString()};
-    --primary: #4038a5;
-    --primary-dark: #38248b;
-    --primary-darker: ${color("#4038a5").darken(0.4).toString()};
+    --primary: hsl(244, 49%, 38%);
+    --primary-dark:  hsl(244, 49%, 28%);
+    --primary-darker: hsl(244, 49%, 25%);
     --header-background: var(--primary-dark);
 
     --accent: #FF7779;

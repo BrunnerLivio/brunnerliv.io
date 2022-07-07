@@ -7,7 +7,7 @@ import Seo from "../components/seo"
 import ArticleLink from "../components/article-link"
 
 const Main = styled.main`
-  padding: 20px;
+  padding: 4em 2em;
   width: 100%;
   margin: 0;
   ${md`

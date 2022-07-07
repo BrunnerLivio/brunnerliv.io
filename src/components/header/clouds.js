@@ -65,10 +65,10 @@ const Clouds = ({ opacity }) => {
       <Cloud top={0} speed={120} scale={1} delay={0} />
       <Cloud top={30} speed={110} scale={0.7} delay={30} />
       <Cloud top={50} speed={75} scale={0.3} delay={-40} />
-      <Cloud top={80} speed={100} scale={1.1} zIndex={999} delay={-5} />
+      <Cloud top={80} speed={100} scale={1.1} zIndex={9999} delay={-5} />
       <Cloud top={100} speed={170} scale={1.2} delay={-120} />
-      <Cloud top={110} speed={140} scale={0.9} delay={-80} zIndex={999} />
-      <Cloud top={150} speed={80} scale={0.6} delay={-30} zIndex={999} />
+      <Cloud top={110} speed={140} scale={0.9} delay={-80} zIndex={9999} />
+      <Cloud top={150} speed={80} scale={0.6} delay={-30} zIndex={9999} />
       <Cloud top={180} speed={90} scale={0.8} delay={-80} />
     </CloudWrapper>
   )

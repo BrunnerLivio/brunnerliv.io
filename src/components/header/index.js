@@ -53,7 +53,6 @@ const Header = ({ children }) => {
       <HeaderBackground>
         <Stars
           opacity={darkMode ? 1 : 0}
-          direction={darkMode ? "up" : "down"}
         />
         <Sunset opacity={darkMode ? 0.38 : 0} />
       </HeaderBackground>
