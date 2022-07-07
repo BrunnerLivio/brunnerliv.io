@@ -38,6 +38,7 @@ const ArticleHeader = styled.header`
     margin-right: 8px;
     margin-left: 0%;
     color: var(--text-secondary);
+    transition: color 0.5s ease-in-out;
     font-size: 0.9em;
   }
 `

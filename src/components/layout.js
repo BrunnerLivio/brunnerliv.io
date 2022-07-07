@@ -25,24 +25,26 @@ const MainWrapper = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  background: var(--primary-darker);
+  background: var(--primary);
+  transition: background 0.5s ease-in-out;
   flex: 1;
   height: 100%;
   position: relative;
   z-index: 1;
-  &:before {
+  /* &:before {
     max-height: 500px;
     min-height: 60vh;
     width: 100%;
     content: "";
     display: block;
     position: absolute;
+    transition: background 0.5s ease-in-out;
     background: linear-gradient(
       180deg,
       var(--primary) 0%,
       var(--primary-darker) 100%
     );
-  }
+  } */
 `
 
 const Content = styled.div`
@@ -103,7 +105,7 @@ const Layout = ({ children }) => {
             <Footer />
           </Content>
         </Container>
-        <OutrunGrid />
+        {/* <OutrunGrid /> */}
       </MainWrapper>
     </ThemeContext.Provider>
   )

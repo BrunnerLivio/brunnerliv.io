@@ -6,6 +6,7 @@ const NeonTextContent = styled.span`
   text-transform: uppercase;
   letter-spacing: 3px;
   color: var(--neon-text-color);
+  transition: color 0.5s ease-in-out;
 
   font-family: "Neon", "Roboto", "Arial", Helvetica, sans-serif;
   font-size: 1.4em;

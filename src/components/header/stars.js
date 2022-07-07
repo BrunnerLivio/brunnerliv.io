@@ -6,6 +6,9 @@ const rand = (from, to) => Math.floor(Math.random() * to) + from
 
 const Canvas = styled.canvas`
   width: 100%;
+  opacity: ${props => props.opacity};
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 0.5s;
 `
 
 class Bubble {
@@ -155,7 +158,12 @@ class Stars extends React.Component {
     const primaryLight = colorfn(primary).lighten(0.1).toString()
     const primaryLighter = colorfn(primary).lighten(0.2).toString()
 
-    this.colors = [accentFaded, primaryLight, accentFaded, primaryLighter]
+    if(this.props.direction === "up") 
+    {
+      this.colors = [accentFaded, primaryLight, accentFaded, primaryLighter]
+    } else {
+      this.colors = ["transparent","transparent","transparent","transparent"]
+    }
   }
 
   registerBubbles() {
@@ -196,6 +204,7 @@ class Stars extends React.Component {
         width={this.state.width}
         height={this.state.width}
         ref={this.canvasRef}
+        opacity={this.props.opacity}
       ></Canvas>
     )
   }

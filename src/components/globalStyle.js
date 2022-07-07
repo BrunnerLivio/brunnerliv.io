@@ -1,14 +1,18 @@
 import { createGlobalStyle } from "styled-components"
-import { sm, md} from "./breakpoints"
+import { sm, md } from "./breakpoints"
 import color from "color"
 
 const GlobalStyle = createGlobalStyle`
   :root {
     --primary-light: ${color("#4038a5").lighten(0.7).toString()};
-    --primary-light-fade-55: ${color("#4038a5").lighten(0.7).fade(0.55).toString()};
+    --primary-light-fade-55: ${color("#4038a5")
+      .lighten(0.7)
+      .fade(0.55)
+      .toString()};
     --primary: #eceff1;
     --primary-dark: #b0bec5;
     --primary-darker: #eceff1;
+    --header-background: #9FC0F7;
 
     --accent: #404fa6;
     --accent-dark: ${color("#404fa6").darken(0.08).toString()};
@@ -29,10 +33,14 @@ const GlobalStyle = createGlobalStyle`
   }
   :root.dark {
     --primary-light: ${color("#4038a5").lighten(0.7).toString()};
-    --primary-light-fade-55: ${color("#4038a5").lighten(0.7).fade(0.55).toString()};
+    --primary-light-fade-55: ${color("#4038a5")
+      .lighten(0.7)
+      .fade(0.55)
+      .toString()};
     --primary: #4038a5;
     --primary-dark: #38248b;
     --primary-darker: ${color("#4038a5").darken(0.4).toString()};
+    --header-background: var(--primary-dark);
 
     --accent: #FF7779;
     --accent-fade-50: ${color("#FF7779").fade(0.5).toString()};
@@ -40,8 +48,15 @@ const GlobalStyle = createGlobalStyle`
     --accent-fade-95: ${color("#FF7779").fade(0.95).toString()};
 
     --accent-dark: ${color("#FF7779").darken(0.08).toString()};
-    --accent-dark-fade-20: ${color("#FF7779").darken(0.08).fade(0.2).toString()};
-    --accent-dark-fade-50: ${color("#FF7779").darken(0.08).darken(0.2).fade(0.5).toString()};
+    --accent-dark-fade-20: ${color("#FF7779")
+      .darken(0.08)
+      .fade(0.2)
+      .toString()};
+    --accent-dark-fade-50: ${color("#FF7779")
+      .darken(0.08)
+      .darken(0.2)
+      .fade(0.5)
+      .toString()};
 
     --accent-light: #FFA5A7;
     --accent-light-fade-50: ${color("#FFA5A7").fade(0.5).toString()};
@@ -57,8 +72,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: var(--primary-darker);
+    background-color: var(--primary);
     color: var(--text);
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
     font-family: 'Roboto', sans-serif;
   }
 
@@ -87,9 +103,7 @@ const GlobalStyle = createGlobalStyle`
     ${sm`
         font-size: 2em;
       `}
-    ${md`
-        font-size: 2.5em;
-      `}
+    ${md`font-size: 2.5em;`}
     font-weight: bold;
   }
 
@@ -119,6 +133,12 @@ const GlobalStyle = createGlobalStyle`
     99%,
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0% {
+      left: -150px;
     }
   }
 `

@@ -4,12 +4,15 @@ import { md, lg} from "../breakpoints"
 
 const PrimaryDarkPath = styled.path`
   fill: var(--primary-dark);
+  transition: fill 0.5s ease-in-out;
 `
 const PrimaryPath = styled.path`
   fill: var(--primary);
+  transition: fill 0.5s ease-in-out;
 `
 const PrimaryDarkPolygon = styled.polygon`
   fill: var(--primary-dark);
+  transition: fill 0.5s ease-in-out;
 `
 
 const MountainPaths = () => (
@@ -88,7 +91,8 @@ const MountainSVG = styled.svg`
   margin-bottom: -140px;
   z-index: 2;
   height: 350px;
-  filter: drop-shadow(0px 0px 90px var(--accent));
+  transition: filter 0.5s ease-in-out;
+  filter: ${props => props.shadow ? "drop-shadow(0px 0px 90px var(--accent))" : "drop-shadow(0px 0px 90px rgba(54, 0, 161, 0.4))"};
   ${md`
     height: 380px;
   `}
@@ -97,8 +101,8 @@ const MountainSVG = styled.svg`
   `}
 `
 
-const Mountain = () => (
-  <MountainSVG x="0px" y="0px" viewBox="0 0 457.76 251.52">
+const Mountain = ({ shadow }) => (
+  <MountainSVG shadow={shadow} x="0px" y="0px" viewBox="0 0 457.76 251.52">
     <MountainPaths></MountainPaths>
   </MountainSVG>
 )

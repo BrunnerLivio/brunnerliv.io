@@ -16,8 +16,9 @@ const Sunset = styled.section`
     var(--accent)
   );
   background-repeat: repeat-x;
-  opacity: 0.38;
+  opacity: ${props => props.opacity};
   z-index: 1;
+  transition: opacity 0.5s ease-in-out;
 `
 
 export default Sunset

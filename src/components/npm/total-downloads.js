@@ -5,9 +5,9 @@ import CountUp from "react-countup"
 import PackageIcon from "../package"
 import Confetti from "react-dom-confetti"
 
-const easingFn = function (t, b, c, d) {
-  var ts = (t /= d) * t
-  var tc = ts * t
+const easingFn = (t, b, c, d) => {
+  const ts = (t /= d) * t
+  const tc = ts * t
   return b + c * (tc + -3 * ts + 3 * t)
 }
 
@@ -26,6 +26,7 @@ const PackagesDownloads = styled.div`
     font-weight: 200;
     font-size: 84px;
     color: var(--accent);
+    transition: color 0.5s ease-in-out;
     @media only screen and (max-width: 450px) {
       font-size: 64px;
     }
@@ -44,7 +45,8 @@ const PackageDownloadsSubtitle = styled.div`
     width: 64px;
     height: 2px;
     position: absolute;
-    background: var(--accent);
+    background-color: var(--accent);
+    transition: background-color 0.5s ease-in-out;
     top: 12px;
     border-radius: 4px;
     @media only screen and (max-width: 450px) {

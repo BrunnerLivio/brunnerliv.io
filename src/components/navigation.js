@@ -20,6 +20,7 @@ const Li = styled.li`
   a {
     text-decoration: none;
     color: var(--accent) !important;
+    transition: color 0.5s ease-in-out;
     padding: 16px ${NAVITEM_HOR_PADDING}px;
     text-transform: uppercase;
     font-weight: bold;
@@ -31,18 +32,17 @@ const Underline = styled.hr`
   width: 87px;
   height: 2px;
   display: block;
-  box-shadow: 0px 0px 8px
-  var(--accent),
-    0px 0px 16px var(--accent);
+  box-shadow: 0px 0px 8px var(--accent), 0px 0px 16px var(--accent);
   &.loaded {
-    transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, width 0.5s ease-in-out,
+      box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
   }
 `
 
 class Navigation extends Component {
   constructor(props) {
     super(props)
-    this.navigation = props.navigation.map(nav => ({
+    this.navigation = props.navigation.map((nav) => ({
       ...nav,
       ref: React.createRef(),
     }))
@@ -53,16 +53,16 @@ class Navigation extends Component {
 
   activateNavItem(name = this.navigation[0].name) {
     // Converts /articles/my-article to articles
-    const firstPathName = name.split("/").filter(item => !!item)[0]
+    const firstPathName = name.split("/").filter((item) => !!item)[0]
     const navItem =
       this.navigation.find(
-        nav => nav.name === name || nav.to.replace(/\//gi, "") === firstPathName
+        (nav) =>
+          nav.name === name || nav.to.replace(/\//gi, "") === firstPathName
       ) || this.navigation[0]
     const $underline = this.underlineRef.current
     const $li = navItem.ref.current
     const $wrapper = this.wrapperRef.current
-    const offset =
-      $li.offsetLeft - $wrapper.offsetLeft + NAVITEM_HOR_PADDING
+    const offset = $li.offsetLeft - $wrapper.offsetLeft + NAVITEM_HOR_PADDING
     const width = $li.getBoundingClientRect().width - NAVITEM_HOR_PADDING * 2
     $underline.style.transform = `translateX(${offset}px)`
     $underline.style.width = `${width}px`
@@ -80,7 +80,7 @@ class Navigation extends Component {
   render() {
     const activateNavItem = this.activateNavItem.bind(this)
 
-    const link = nav =>
+    const link = (nav) =>
       nav.to.startsWith("http") ? (
         <a href={nav.to}>{nav.name}</a>
       ) : (
