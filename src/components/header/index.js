@@ -16,10 +16,8 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  height: 160px;
-  ${sm`
-    min-height: 200px;
-  `}
+  min-height: 200px;
+
   ${md`
     min-height: 250px;
   `}
