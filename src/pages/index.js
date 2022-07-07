@@ -34,7 +34,7 @@ const IndexPage = ({
     .map((edge, index) => <ArticleLink key={index} post={edge.node} />)
   return (
     <>
-      <Seo title="Home" />
+      <Seo title="Blog" />
 
       <Main>{posts}</Main>
     </>

@@ -19,7 +19,7 @@ const Talks = ({ data }) => {
 
   return (
     <>
-      <Seo title="Talks" />
+      <Seo title="Speaking" />
       <Content>
         <TalkList>
           {(talks || []).map((talk, index) => (

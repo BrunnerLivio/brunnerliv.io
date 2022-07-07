@@ -3,8 +3,8 @@ const navigation = require("./navigation.json")
 const talks = require("./talks.json")
 
 module.exports = {
-  title: `brunnerliv.io`,
-  description: `The personal website of Livio Brunner.`,
+  title: `Livio Brunner`,
+  description: `Personal website by Livio Brunner. Livio scripts in Java (=JavaScript) with two spaces and semicolon. He is not the best at writing page descriptions nor at making jokes.`,
   author: `@BunnerLivio`,
   navigation: navigation,
   projects: projects,
