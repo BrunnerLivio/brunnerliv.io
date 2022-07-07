@@ -5,7 +5,7 @@
     url("../../static/Neon.woff2") format("woff2"),
     url("../../static/Neon.woff") format("woff"),
     url("../../static/Neon.ttf") format("truetype");
-  font-display: swap;
+  font-display: block;
   font-style: normal;
 }
 

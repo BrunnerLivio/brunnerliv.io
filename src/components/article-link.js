@@ -29,7 +29,7 @@ const ArticleTitle = styled.h2`
 const ArticleHeader = styled.header`
   display: flex;
   flex-direction: row;
-  margin: 4px 0 64px 0;
+  margin: 4px 0 0 0;
 
   span {
     margin-right: 8px;

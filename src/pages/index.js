@@ -10,7 +10,10 @@ const Main = styled.main`
   width: 100%;
   margin: 0;
   padding: 2em 1em;
-  
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
   ${md`
     width: 740px;
   `}
@@ -18,7 +21,7 @@ const Main = styled.main`
   ${lg`
     width: 940px;
     padding: 4em 2em;
-
+    gap: 72px;
   `}
 `
 const IndexPage = ({
