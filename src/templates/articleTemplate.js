@@ -1,16 +1,17 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { sm, md } from "../components/breakpoints";
+import { sm, md } from "../components/breakpoints"
 
 import Seo from "../components/seo"
-import Me from "../components/me"
 import NeonText from "../components/neon-text"
 
 const Article = styled.article`
   padding: 1.3125rem;
   max-width: calc(100vw - 1rem);
-  margin-top: 16px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
   ${sm`
     margin-top: 0;
   `}
@@ -70,16 +71,17 @@ const Article = styled.article`
     margin-top: 2em;
     font-weight: normal;
     margin-bottom: 0.5em;
-    font-family:  var(--sans-serif);
+    font-family: var(--sans-serif);
     color: var(--title-text);
   }
 
-  p, li {
+  p,
+  li {
     font-weight: 400;
     font-size: 1.3rem;
     line-height: 1.5em;
   }
-  
+
   ul {
     margin: 2em 1em;
   }
@@ -98,7 +100,7 @@ const Article = styled.article`
     font-size: 1.2rem;
     line-height: 1.4em;
 
-    th:empty  {
+    th:empty {
       display: none;
     }
 
@@ -110,11 +112,19 @@ const Article = styled.article`
       padding: 1em;
     }
 
-    td,th {
+    td,
+    th {
       border: 0;
     }
   }
- 
+
+  hr {
+    width: 40px;
+    border-style: dotted none none;
+    border-width: 7px;
+    margin: 3rem auto;
+    background: none;
+}
 `
 
 // const CoverImage = styled.img`
@@ -153,22 +163,20 @@ const CommentSection = styled.div`
   margin: 2em 0 6em 0;
 `
 
-export default function Template({
-  data,
-}) {
+export default function Template({ data }) {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
   useEffect(() => {
-    let script = document.createElement('script');
-    let anchor = document.getElementById('inject-comments-for-uterances');
-    script.setAttribute('src', 'https://utteranc.es/client.js');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.setAttribute('async', 'true');
-    script.setAttribute('repo', 'brunnerlivio/articles');
-    script.setAttribute('issue-term', frontmatter.title);
-    script.setAttribute('theme', 'github-light');
-    script.setAttribute('label', 'comments 💬');
-    anchor.appendChild(script);
+    let script = document.createElement("script")
+    let anchor = document.getElementById("inject-comments-for-uterances")
+    script.setAttribute("src", "https://utteranc.es/client.js")
+    script.setAttribute("crossorigin", "anonymous")
+    script.setAttribute("async", "true")
+    script.setAttribute("repo", "brunnerlivio/articles")
+    script.setAttribute("issue-term", frontmatter.title)
+    script.setAttribute("theme", "github-light")
+    script.setAttribute("label", "comments 💬")
+    anchor.appendChild(script)
   }, [])
 
   // const [hasMounted, setHasMounted] = useState(false)
@@ -184,7 +192,7 @@ export default function Template({
   // })
   return (
     <>
-      <Seo title={frontmatter.title} />
+      <Seo title={frontmatter.title} imageShare={frontmatter.cover_image} />
       <Article>
         <ArticleTitle>
           <NeonText text={frontmatter.title}></NeonText>
@@ -197,9 +205,7 @@ export default function Template({
           alt={`Cover of the article ${frontmatter.title}`}
         /> */}
         <div dangerouslySetInnerHTML={{ __html: html }} />
-
       </Article>
-      <Me />
       <CommentSection id="inject-comments-for-uterances" />
     </>
   )

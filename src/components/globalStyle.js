@@ -109,6 +109,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     color: var(--text);
+    transition: color 0.5s ease-in-out;
     font-weight: 600;
     &:hover {
       text-decoration: none;

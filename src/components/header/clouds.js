@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { sm, md, lg } from "../breakpoints"
+import { sm, md } from "../breakpoints"
 
 const CloudWrapper = styled.div`
   width: 100%;

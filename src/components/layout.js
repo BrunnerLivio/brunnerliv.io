@@ -11,7 +11,6 @@ import Footer from "./footer"
 import GlobalStyle from "./globalStyle"
 
 import "./layout.css"
-import OutrunGrid from "./outrun-grid"
 import DarkModeToggle from "./dark-mode-toggle"
 
 const MainWrapper = styled.div`

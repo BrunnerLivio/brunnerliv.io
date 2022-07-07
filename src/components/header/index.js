@@ -1,12 +1,11 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
-import { sm, md, lg } from "../breakpoints"
+import { md, lg } from "../breakpoints"
 
 import Clouds from "./clouds"
 import Stars from "./stars"
 import Sunset from "./sunset"
 import Mountain from "./mountain"
-import { ThemeContext } from "../layout"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -50,9 +49,7 @@ const Header = ({ children, darkMode }) => {
       <Mountain shadow={darkMode} />
       <Clouds opacity={darkMode ? 0 : 1} />
       <HeaderBackground>
-        <Stars
-          opacity={darkMode ? 1 : 0}
-        />
+        <Stars opacity={darkMode ? 1 : 0} />
         <Sunset opacity={darkMode ? 0.38 : 0} />
       </HeaderBackground>
     </HeaderWrapper>
