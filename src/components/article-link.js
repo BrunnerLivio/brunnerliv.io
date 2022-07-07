@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import NeonText from "./neon-text"
-import { sm, md } from './breakpoints';
+import { sm, md } from "./breakpoints"
 
 const ArticleItem = styled.article`
   a {
@@ -15,24 +15,21 @@ const ArticleItem = styled.article`
 `
 
 const ArticleTitle = styled.h2`
-  margin-bottom: 24px;
+  margin-bottom: 0em;
   margin-top: 16px;
   font-size: 1.4em;
-  text-align: center;
   ${sm`
       font-size: 1.3em;
     `}
   ${md`
-      font-size: 1.7em;
-    `}
+    font-size: 1.7em;
+  `}
 `
 
 const ArticleHeader = styled.header`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 16px 0 8px 0;
-  justify-content: center;
+  margin: 4px 0 64px 0;
 
   span {
     margin-right: 8px;
@@ -43,33 +40,45 @@ const ArticleHeader = styled.header`
   }
 `
 
-const ArticleBody = styled.section`
-  padding: 0 0 64px 0;
-  p {
-    text-align: center;
-    font-size: 18px;
-  }
-  .read-more {
-    text-decoration: underline;
-  }
+const Tag = styled.div`
+  background-color: var(--primary-light-fade-55);
+  border-radius: 1rem;
+  padding: 0.25rem 0.75rem;
+  color: var(--text-secondary);
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+`
+
+const TagWrapper = styled.div`
+  display: flex;
+  gap: 1em;
+  margin: 0.75rem 0;
 `
 
 const ArticleLink = ({ post }) => {
+  const tags = (post.frontmatter.tags || "")
+    .split(",")
+    .map((t) => t.trim().toLowerCase())
+    .filter((t) => !!t)
+
   return (
     <ArticleItem>
       <Link to={post.frontmatter.path}>
         <ArticleTitle>
           <NeonText text={post.frontmatter.title}></NeonText>
         </ArticleTitle>
+        {tags.length > 0 && (
+          <TagWrapper>
+            {tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
+          </TagWrapper>
+        )}
+        <ArticleHeader>
+          <span className="date">{post.frontmatter.date}</span>
+          <span className="divider">•</span>
+          <span className="read-time">{post.timeToRead} min read</span>
+        </ArticleHeader>
       </Link>
-      <ArticleHeader>
-        <span className="date">{post.frontmatter.date}</span>
-        <span className="divider">•</span>
-        <span className="read-time">{post.timeToRead} min read</span>
-      </ArticleHeader>
-      <ArticleBody>
-        <p>{post.frontmatter.description}</p>
-      </ArticleBody>
     </ArticleItem>
   )
 }

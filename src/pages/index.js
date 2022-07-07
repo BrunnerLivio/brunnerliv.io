@@ -7,15 +7,18 @@ import Seo from "../components/seo"
 import ArticleLink from "../components/article-link"
 
 const Main = styled.main`
-  padding: 4em 2em;
   width: 100%;
   margin: 0;
+  padding: 2em 1em;
+  
   ${md`
     width: 740px;
   `}
 
   ${lg`
     width: 940px;
+    padding: 4em 2em;
+
   `}
 `
 const IndexPage = ({
