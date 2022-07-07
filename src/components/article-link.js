@@ -46,12 +46,21 @@ const Tag = styled.div`
   padding: 0.25rem 0.75rem;
   color: var(--text-secondary);
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  font-size: 0.7em;
+  ${sm`
+    font-size: 0.8em;
+  `};
+  ${md`
+    font-size: 1em;
+  `}
 `
 
 const TagWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;;
   gap: 1em;
   margin: 0.75rem 0;
+  max-width: 100%;
 `
 
 const ArticleLink = ({ post }) => {

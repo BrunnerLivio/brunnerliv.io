@@ -30,6 +30,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: row;
   gap: 2em;
+  flex-wrap: wrap;
 `
 
 const SocialButton = styled.a`
