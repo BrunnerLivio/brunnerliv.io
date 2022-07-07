@@ -43,8 +43,7 @@ const HeaderBackground = styled.div`
   overflow: hidden;
 `
 
-const Header = ({ children }) => {
-  const darkMode = useContext(ThemeContext)
+const Header = ({ children, darkMode }) => {
   return (
     <HeaderWrapper>
       <HeaderContent>{children}</HeaderContent>

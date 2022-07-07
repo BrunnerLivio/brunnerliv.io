@@ -6,7 +6,6 @@ const CloudWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 25px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -18,7 +17,8 @@ const CloudWrapper = styled.div`
 const Cloud = styled.div`
   width: 100px;
   height: 100px;
-  animation: float ${(props) => props.speed}s linear infinite forwards reverse;
+  animation: float linear infinite forwards reverse;
+  animation-duration: ${(props) => props.speed * 0.5}s;
   background-repeat: no-repeat;
   position: absolute;
   left: 100%;
@@ -27,31 +27,35 @@ const Cloud = styled.div`
   top: ${(props) => props.top}px;
   z-index: ${(props) => props.zIndex || 1};
   filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.2));
-
   transform: scale(${(props) => props.scale * 0.4});
+
   ${(props) => `
    @media screen and (min-width: 36em) {
      transform: scale(${props.scale * 0.6});
+     animation-duration: ${props.speed * 0.7}s;
    }`}
 
   ${(props) => `
    @media screen and (min-width: 48em) {
      transform: scale(${props.scale * 0.8});
+     animation-duration: ${props.speed * 0.8}s;
    }`}
+
    ${(props) => `
    @media screen and (min-width: 62em) {
+     animation-duration: ${props.speed}s;
      transform: scale(${props.scale});
    }`}
 
 
-  &:nth-child(n+5) {
+  &:nth-child(n + 6) {
     display: none;
     ${sm`
     display: block;
     `}
   }
 
-  &:nth-child(n + 6) {
+  &:nth-child(n + 7) {
     display: none;
     ${md`
       display: block;

@@ -82,7 +82,7 @@ const Layout = ({ children }) => {
     <ThemeContext.Provider value={darkMode}>
       <MainWrapper style={{ opacity: isMounted ? 1 : 0 }}>
         <GlobalStyle />
-        <Header>
+        <Header darkMode={darkMode}>
           {typeof window === "undefined" ? (
             <></>
           ) : (
