@@ -1,48 +1,24 @@
 import React, { useCallback, useState } from "react"
-import Toggle from "./toggle"
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
-import moon from "../images/moon.png"
-import sun from "../images/sun.png"
+import useIsClient from "./hooks/useIsClient"
 
 const DarkModeToggle = (props) => {
-  const [checked, setChecked] = useState(window.__theme === "dark")
+  const [checked, setChecked] = useState(props.checked)
+  const { isClient } = useIsClient()
 
   const onChange = useCallback(
-    (e) => {
-      const isChecked = e.target.checked
+    (isChecked) => {
       setChecked(isChecked)
-      window.__setPreferredTheme(isChecked ? "dark" : "light");
-      props?.onChange?.(isChecked);
+      window.__setPreferredTheme(isChecked ? "dark" : "light")
+      props?.onChange?.(isChecked)
     },
     [setChecked, props]
   )
 
-  return (
-    <Toggle
-      icons={{
-        checked: (
-          <img
-            src={moon}
-            width="16"
-            height="16"
-            alt="Moon"
-            style={{ pointerEvents: "none" }}
-          />
-        ),
-        unchecked: (
-          <img
-            src={sun}
-            width="16"
-            height="16"
-            alt="Sun"
-            style={{ pointerEvents: "none" }}
-          />
-        ),
-      }}
-      checked={checked}
-      onChange={onChange}
-    />
-  )
+  if (!isClient) return null
+
+  return <DarkModeSwitch style={{ filter: "drop-shadow(4px 2px 2px rgba(0, 0, 0, 0.3))"}} moonColor="var(--accent)" sunColor="#EFC933"  checked={checked} onChange={onChange} size={32} />
 }
 
 export default DarkModeToggle

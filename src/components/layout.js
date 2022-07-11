@@ -1,7 +1,9 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { Location } from "@reach/router"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+
+import useIsClient from "./hooks/useIsClient"
 
 import Header from "./header"
 import Navigation from "./navigation"
@@ -70,8 +72,7 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const [isMounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const { isClient } = useIsClient()
 
   const [darkMode, setDarkMode] = useState(
     typeof window !== "undefined" ? window.__theme === "dark" : false
@@ -79,13 +80,13 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={darkMode}>
-      <MainWrapper style={{ opacity: isMounted ? 1 : 0 }}>
+      <MainWrapper style={{ opacity: isClient ? 1 : 0 }}>
         <GlobalStyle />
         <Header darkMode={darkMode}>
-          {typeof window === "undefined" ? (
-            <></>
+          {isClient ? (
+            <DarkModeToggle checked={darkMode} onChange={setDarkMode} />
           ) : (
-            <DarkModeToggle onChange={setDarkMode} />
+            <></>
           )}
         </Header>
         <Container>

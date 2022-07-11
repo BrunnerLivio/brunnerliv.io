@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { md, lg } from "../breakpoints"
+import useIsClient from "../hooks/useIsClient"
 
 import Clouds from "./clouds"
 import Stars from "./stars"
@@ -43,15 +44,22 @@ const HeaderBackground = styled.div`
 `
 
 const Header = ({ children, darkMode }) => {
+  const { isClient } = useIsClient()
+
   return (
     <HeaderWrapper>
       <HeaderContent>{children}</HeaderContent>
-      <Mountain shadow={darkMode} />
-      <Clouds opacity={darkMode ? 0 : 1} />
-      <HeaderBackground>
-        <Stars opacity={darkMode ? 1 : 0} />
-        <Sunset opacity={darkMode ? 0.38 : 0} />
-      </HeaderBackground>
+      {isClient && (
+        // Somehow it does not want to render correctly on the server..
+        <>
+          <Mountain shadow={darkMode} />
+          <Clouds opacity={darkMode ? 0 : 1} />
+          <HeaderBackground>
+            <Stars opacity={darkMode ? 1 : 0} />
+            <Sunset opacity={darkMode ? 0.38 : 0} />
+          </HeaderBackground>
+        </>
+      )}
     </HeaderWrapper>
   )
 }
