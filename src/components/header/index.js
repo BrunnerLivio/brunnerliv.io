@@ -10,19 +10,18 @@ import Mountain from "./mountain"
 
 const HeaderWrapper = styled.header`
   margin: 0;
-  background-color: var(--header-background);
   background-repeat: no-repeat;
   transition: background-color ease-in-out 0.5s;
   width: 100%;
   position: relative;
   padding: 0;
-  min-height: 300px;
+  min-height: 250px;
 
   ${md`
-    min-height: 375px;
+    min-height: 300px;
   `}
   ${lg`
-    min-height: 450px;
+    min-height: 350px;
   `}
   overflow: hidden;
 `
@@ -41,6 +40,7 @@ const HeaderBackground = styled.div`
   height: 5000px;
   left: 0;
   overflow: hidden;
+  background: var(--header-background);
 `
 
 const Header = ({ children, darkMode }) => {
@@ -54,9 +54,9 @@ const Header = ({ children, darkMode }) => {
         <>
           <Mountain shadow={darkMode} />
           <Clouds opacity={darkMode ? 0 : 1} />
-          <HeaderBackground>
-            <Stars opacity={darkMode ? 1 : 0} />
-            <Sunset opacity={darkMode ? 0.38 : 0} />
+          <HeaderBackground opacity={darkMode ? 1 : 0}>
+            <Stars />
+            <Sunset />
           </HeaderBackground>
         </>
       )}

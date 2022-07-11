@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     --primary: hsl(244, 49%, 38%);
     --primary-dark:  hsl(244, 49%, 28%);
     --primary-darker: hsl(244, 49%, 25%);
-    --header-background: var(--primary-dark);
+    --header-background: var(--primary-darker);
 
     --accent: #FF7779;
     --accent-fade-50: ${color("#FF7779").fade(0.5).toString()};
@@ -103,7 +103,9 @@ const GlobalStyle = createGlobalStyle`
     ${sm`
         font-size: 2em;
       `}
-    ${md`font-size: 2.5em;`}
+    ${md`
+font-size: 2.5em;
+    `}
     font-weight: bold;
   }
 
@@ -139,7 +141,13 @@ const GlobalStyle = createGlobalStyle`
 
   @keyframes float {
     0% {
-      left: -150px;
+      transform: translateX(-150px);
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+     transform: rotate(0deg);
     }
   }
 `

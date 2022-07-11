@@ -25,18 +25,18 @@ class Particle {
 function createStars(canvas) {
   let mouseDown = false
 
-  const onScroll = () => {
-    const currentScroll = document.documentElement.scrollTop
-    if (currentScroll < 500) {
-      mouseDown = true
+//   const onScroll = () => {
+//     const currentScroll = document.documentElement.scrollTop
+//     if (currentScroll < 500) {
+//       mouseDown = true
 
-      window.setTimeout(() => {
-        if (currentScroll === document.documentElement.scrollTop) {
-          mouseDown = false
-        }
-      }, 300)
-    }
-  }
+//       window.setTimeout(() => {
+//         if (currentScroll === document.documentElement.scrollTop) {
+//           mouseDown = false
+//         }
+//       }, 300)
+//     }
+//   }
 
 //   const onResize = () => {
 //     canvas.width = window.innerWidth
@@ -50,22 +50,18 @@ function createStars(canvas) {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
-//   const mouse = {
-//     x: window.innerWidth / 2,
-//     y: window.innerHeight / 2,
-//   }
 
   const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"]
-  window.addEventListener("scroll", onScroll)
+//   window.addEventListener("scroll", onScroll)
 
   // Implementation
   let particles
   function init() {
     particles = []
 
-    for (let i = 0; i < 1000; i++) {
-      const canvasWidth = canvas.width + 1000
-      const canvasHeight = canvas.height + 2000
+    for (let i = 0; i < 900; i++) {
+      const canvasWidth = canvas.width
+      const canvasHeight = canvas.height
 
       const x = Math.random() * canvasWidth - canvasWidth / 2
       const y = Math.random() * canvasHeight - canvasHeight / 2
@@ -79,10 +75,10 @@ function createStars(canvas) {
   // Animation Loop
   let radians = 0
   let alpha = 1
-  let requestId = null
+//   let requestId = null
   function animate() {
-    requestId = requestAnimationFrame(animate)
-    c.fillStyle = `rgba(37,33,95,${alpha})`
+    // requestId = requestAnimationFrame(animate)
+    c.fillStyle = `transparent`
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     c.save()
@@ -105,14 +101,14 @@ function createStars(canvas) {
   init()
   animate()
 
-  return {
-    destroy: () => {
-      window.removeEventListener("scroll", onScroll)
-      if (requestId !== null) {
-        window.cancelAnimationFrame(requestId)
-      }
-    },
-  }
+//   return {
+//     destroy: () => {
+//       window.removeEventListener("scroll", onScroll)
+//       if (requestId !== null) {
+//         window.cancelAnimationFrame(requestId)
+//       }
+//     },
+//   }
 }
 
 export default createStars

@@ -89,7 +89,7 @@ const MountainSVG = styled.svg`
   bottom: 0;
   position: absolute;
   margin-bottom: -140px;
-  z-index: 2;
+  z-index: 4;
   height: 350px;
   transition: filter 0.5s ease-in-out;
   filter: ${props => props.shadow ? "drop-shadow(0px 0px 90px var(--accent))" : "drop-shadow(0px 0px 90px rgba(54, 0, 161, 0.4))"};
