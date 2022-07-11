@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import StarsImg from "../../images/stars.png"
 import { md } from "../breakpoints"
 
 const StarsContainer = styled.div`
