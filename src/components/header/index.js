@@ -22,7 +22,7 @@ const HeaderWrapper = styled.header`
     min-height: 250px;
   `}
   ${lg`
-    min-height: 300px;
+    min-height: 400px;
   `}
   overflow: hidden;
 `
@@ -38,7 +38,7 @@ const HeaderBackground = styled.div`
   z-index: 0;
   top: 0;
   width: 100vw;
-  height: 380px;
+  height: 5000px;
   left: 0;
   overflow: hidden;
 `
