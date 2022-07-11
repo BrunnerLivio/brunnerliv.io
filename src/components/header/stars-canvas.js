@@ -27,35 +27,36 @@ function createStars(canvas) {
 
   const onScroll = () => {
     const currentScroll = document.documentElement.scrollTop
-    mouseDown = true
+    if (currentScroll < 500) {
+      mouseDown = true
 
-    window.setTimeout(() => {
-      if (currentScroll === document.documentElement.scrollTop) {
-        mouseDown = false
-      }
-    }, 300)
+      window.setTimeout(() => {
+        if (currentScroll === document.documentElement.scrollTop) {
+          mouseDown = false
+        }
+      }, 300)
+    }
   }
 
-  const onResize = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+//   const onResize = () => {
+//     canvas.width = window.innerWidth
+//     canvas.height = window.innerHeight
 
-    init()
-  }
+//     init()
+//   }
 
   const c = canvas.getContext("2d")
 
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
-  const mouse = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  }
+//   const mouse = {
+//     x: window.innerWidth / 2,
+//     y: window.innerHeight / 2,
+//   }
 
   const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"]
   window.addEventListener("scroll", onScroll)
-  window.addEventListener("resize", onResize)
 
   // Implementation
   let particles
@@ -107,7 +108,6 @@ function createStars(canvas) {
   return {
     destroy: () => {
       window.removeEventListener("scroll", onScroll)
-      window.removeEventListener("resize", onResize)
       if (requestId !== null) {
         window.cancelAnimationFrame(requestId)
       }

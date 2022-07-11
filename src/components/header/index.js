@@ -16,10 +16,10 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  min-height: 200px;
+  min-height: 250px;
 
   ${md`
-    min-height: 250px;
+    min-height: 350px;
   `}
   ${lg`
     min-height: 400px;
