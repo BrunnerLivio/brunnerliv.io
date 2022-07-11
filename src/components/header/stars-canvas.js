@@ -63,7 +63,7 @@ function createStars(canvas) {
   function init() {
     particles = []
 
-    for (let i = 0; i < 1500; i++) {
+    for (let i = 0; i < 1000; i++) {
       const canvasWidth = canvas.width + 1000
       const canvasHeight = canvas.height + 2000
 

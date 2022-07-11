@@ -16,13 +16,13 @@ const HeaderWrapper = styled.header`
   width: 100%;
   position: relative;
   padding: 0;
-  min-height: 250px;
+  min-height: 300px;
 
   ${md`
-    min-height: 350px;
+    min-height: 375px;
   `}
   ${lg`
-    min-height: 400px;
+    min-height: 450px;
   `}
   overflow: hidden;
 `
