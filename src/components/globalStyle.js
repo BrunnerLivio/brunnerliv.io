@@ -147,7 +147,12 @@ font-size: 2.5em;
 
   @keyframes rotate {
     0% {
-     transform: rotate(0deg);
+      transform-origin: 50% 50%;
+      transform: rotate(0deg);
+    }
+    100% {
+      transform-origin: 50% 50%;
+      transform: rotate(360deg);
     }
   }
 `
