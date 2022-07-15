@@ -7,6 +7,7 @@ import Clouds from "./clouds"
 import Stars from "./stars"
 import Sunset from "./sunset"
 import Mountain from "./mountain"
+import Rain from "./rain"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -24,6 +25,7 @@ const HeaderWrapper = styled.header`
     min-height: 350px;
   `}
   overflow: hidden;
+  background: var(--header-background);
 `
 
 const HeaderContent = styled.div`
@@ -58,6 +60,7 @@ const Header = ({ children, darkMode }) => {
             <Stars />
             <Sunset />
           </HeaderBackground>
+          {/* <Rain /> */}
         </>
       )}
     </HeaderWrapper>

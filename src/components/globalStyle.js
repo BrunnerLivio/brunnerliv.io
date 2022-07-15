@@ -155,6 +155,54 @@ font-size: 2.5em;
       transform: rotate(360deg);
     }
   }
+
+  @keyframes drop {
+    0% {
+      transform: translateY(0vh);
+    }
+    75% {
+      transform: translateY(90vh);
+    }
+    100% {
+      transform: translateY(90vh);
+    }
+  }
+
+  @keyframes stem {
+    0% {
+      opacity: 1;
+    }
+    65% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes splat {
+    0% {
+      opacity: 1;
+      transform: scale(0);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(0);
+    }
+    90% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+  }
+
+
 `
 
 export default GlobalStyle

@@ -56,7 +56,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "build:prod": "gatsby build --prefix-paths"
+    "build:prod": "gatsby build --prefix-paths",
+    "update-data": "node tools/update-data.js"
   },
   "repository": {
     "type": "git",

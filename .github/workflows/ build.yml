@@ -1,4 +1,4 @@
-name: Node CI
+name: Build
 
 on: [push]
 
@@ -15,10 +15,10 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: true
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 14.x
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 14.x
     - name: npm install, build, and test
       run: |
         yarn add gatsby --global
