@@ -12,7 +12,6 @@ const CloudWrapper = styled.div`
   overflow: hidden;
   opacity: ${(props) => props.opacity};
   transition: 0.5s ease-in-out opacity;
-  background-color: var(--header-background);
   z-index: 2;
 `
 

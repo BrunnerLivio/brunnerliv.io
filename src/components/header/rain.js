@@ -30,7 +30,6 @@ const Drop = styled.div`
   animation: drop 0.5s linear infinite;
 `
 
-
 const Stem = styled.div`
   width: 1px;
   height: 60%;
@@ -52,6 +51,11 @@ const Splat = styled.div`
   transform: scale(0);
   animation: splat 0.5s linear infinite;
   display: none;
+`
+
+const RainWrapper = styled.div`
+  opacity: ${(props) => props.opacity};
+  animation: 0.5s ease-in-out opacity;
 `
 
 function RainDrops() {
@@ -97,10 +101,10 @@ function RainDrops() {
   return { drops, backDrops }
 }
 
-function Rain() {
+function Rain({ opacity }) {
   const { drops, backDrops } = RainDrops()
   return (
-    <>
+    <RainWrapper opacity={opacity}>
       <RainFrontRow>
         {drops.map((drop) => (
           <Drop style={drop.drop}>
@@ -117,7 +121,7 @@ function Rain() {
           </Drop>
         ))}
       </RainBackRow>
-    </>
+    </RainWrapper>
   )
 }
 

@@ -32,7 +32,7 @@ const HeaderContent = styled.div`
   position: absolute;
   right: 16px;
   top: 16px;
-  z-index: 4;
+  z-index: 99;
 `
 const HeaderBackground = styled.div`
   position: fixed;
@@ -45,8 +45,11 @@ const HeaderBackground = styled.div`
   background: var(--header-background);
 `
 
-const Header = ({ children, darkMode }) => {
+const Header = ({ children, darkMode, weather }) => {
   const { isClient } = useIsClient()
+
+  const hasClouds = weather?.includes("Clouds") || !darkMode
+  const hasRain = weather?.includes("Rain") || weather?.includes("Drizzle")
 
   return (
     <HeaderWrapper>
@@ -55,12 +58,12 @@ const Header = ({ children, darkMode }) => {
         // Somehow it does not want to render correctly on the server..
         <>
           <Mountain shadow={darkMode} />
-          <Clouds opacity={darkMode ? 0 : 1} />
+          <Clouds opacity={hasClouds ? 1 : 0} />
           <HeaderBackground opacity={darkMode ? 1 : 0}>
-            <Stars />
+            <Stars opacity={darkMode ? 1 : 0} />
             <Sunset />
           </HeaderBackground>
-          {/* <Rain /> */}
+          <Rain opacity={hasRain ? 1 : 0} />
         </>
       )}
     </HeaderWrapper>
