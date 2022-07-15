@@ -13,7 +13,8 @@ export const initializer = (initialValue = initialState) =>
 export const weatherReducer = (state, action) => {
   switch (action.type) {
     case "SET_DARK_MODE":
-      window.__setPreferredTheme(action.payload ? "dark" : "light")
+      typeof window !== "undefined" &&
+        window.__setPreferredTheme(action.payload ? "dark" : "light")
       if (!action.payload && state.controller === "darkMode") {
         return {
           ...state,
