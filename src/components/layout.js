@@ -13,9 +13,8 @@ import Footer from "./footer"
 import GlobalStyle from "./globalStyle"
 
 import "./layout.css"
-import DarkModeToggle from "./dark-mode-toggle"
-import LocationToggle from "./location-toggle"
-import useWeather from "./hooks/useWeather"
+
+import { WeatherProvider } from "./weather/weatherProvider"
 
 const MainWrapper = styled.div`
   display: flex;
@@ -56,16 +55,6 @@ const Content = styled.div`
   flex-direction: column;
 `
 
-const ToggleContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-export const ThemeContext = React.createContext(
-  typeof window !== "undefined" ? window.__theme === "dark" : false
-)
-
-
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query NavigationQuery {
@@ -81,29 +70,25 @@ const Layout = ({ children }) => {
   `)
 
   const { isClient } = useIsClient()
-  const [{ darkMode, weather }, setDarkMode, activateLocation] = useWeather()
+  // const [state, dispatch] = useWeather()
+
+  // function activateLocation() {
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     const coords = {
+  //       lat: position.coords.latitude,
+  //       lon: position.coords.longitude,
+  //     }
+  //     localStorage.setItem("user-location", JSON.stringify(coords))
+  //     _setDarkMode(null)
+  //     _setUserLocation(coords)
+  //   })
+  // }
 
   return (
-    <ThemeContext.Provider value={darkMode}>
+    <WeatherProvider>
       <MainWrapper style={{ opacity: isClient ? 1 : 0 }}>
         <GlobalStyle />
-        <Header darkMode={darkMode} weather={weather}>
-          {isClient ? (
-            <ToggleContainer>
-              <LocationToggle
-                active={!!weather}
-                onClick={() => activateLocation()}
-              />
-              <DarkModeToggle
-                checked={darkMode}
-                active={weather === null}
-                onChange={setDarkMode}
-              />
-            </ToggleContainer>
-          ) : (
-            <></>
-          )}
-        </Header>
+        <Header />
         <Container>
           <Content>
             <Location>
@@ -121,7 +106,7 @@ const Layout = ({ children }) => {
           </Content>
         </Container>
       </MainWrapper>
-    </ThemeContext.Provider>
+    </WeatherProvider>
   )
 }
 

@@ -3,7 +3,7 @@ import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon as _FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext } from "react"
-import { ThemeContext } from "./layout"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const DarkModeAwesomeIcon = styled(_FontAwesomeIcon)`
   color: var(--accent-light);
@@ -33,9 +33,9 @@ const AwesomeIcon = styled(_FontAwesomeIcon)`
 `
 
 const NeonIcon = (props) => {
-  const darkMode = useContext(ThemeContext)
+  const { state } = useContext(WeatherContext)
 
-  if (darkMode) {
+  if (state.darkMode) {
     return (
       <DarkModeAwesomeIcon
         animationDelay={Math.random() * 2 + 1}
