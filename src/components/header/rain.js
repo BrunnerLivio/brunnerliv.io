@@ -112,7 +112,7 @@ function Rain() {
     <RainWrapper opacity={hasRain ? 1 : 0}>
       <RainFrontRow>
         {drops.map((drop) => (
-          <Drop style={drop.drop}>
+          <Drop key={`drop-${JSON.stringify(drop.drop)}`} style={drop.drop}>
             <Stem style={drop.stem}></Stem>
             <Splat style={drop.stem}></Splat>
           </Drop>
@@ -120,7 +120,7 @@ function Rain() {
       </RainFrontRow>
       <RainBackRow>
         {backDrops.map((drop) => (
-          <Drop style={drop.drop}>
+          <Drop key={`small-drop-${JSON.stringify(drop.drop)}`} style={drop.drop}>
             <Stem style={drop.stem}></Stem>
             <Splat style={drop.stem}></Splat>
           </Drop>

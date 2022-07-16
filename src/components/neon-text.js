@@ -25,8 +25,8 @@ const BlinkingNeonText = styled(NeonTextContent)`
     0 0 15px var(--accent-fade-50), 0 0 68px var(--accent-dark-fade-20);
   letter-spacing: 3px;
   color: var(--neon-blinking-text-color) !important;
-  animation: ${(props) => "blink " + props.animationTime + "s"};
-  animation-delay: ${(props) => props.animationDelay}s;
+  animation: ${(props) => "blink " + props.animationtime + "s"};
+  animation-delay: ${(props) => props.animationdelay}s;
   animation-iteration-count: 2;
   animation-fill-mode: forwards;
   opacity: 0.1;
@@ -61,8 +61,8 @@ const NeonText = ({ text }) => {
         <span className="hidden-text">{text}</span>
         <NeonTextContent>{text}</NeonTextContent>
         <BlinkingNeonText
-          animationDelay={Math.random() * 2 + 1}
-          animationTime={1}
+          animationdelay={Math.random() * 2 + 1}
+          animationtime={1}
         >
           {text}
         </BlinkingNeonText>

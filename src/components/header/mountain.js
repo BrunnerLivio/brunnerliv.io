@@ -116,7 +116,6 @@ const Mountain = () => {
       shadow = `drop-shadow(0px 0px 90px rgba(54, 0, 161, 0.4))`
     }
   }
-  console.log(shadow)
   return (
     <MountainSVG shadow={shadow} x="0px" y="0px" viewBox="0 0 457.76 251.52">
       <MountainPaths></MountainPaths>

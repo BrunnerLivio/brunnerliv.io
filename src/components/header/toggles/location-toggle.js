@@ -28,6 +28,7 @@ const Button = styled.button`
 `
 
 function LocationToggle({ onClick, active }) {
+
   return (
     <Button active={active} onClick={onClick}>
       <svg

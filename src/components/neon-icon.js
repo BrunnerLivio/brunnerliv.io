@@ -13,8 +13,8 @@ const DarkModeAwesomeIcon = styled(_FontAwesomeIcon)`
     drop-shadow(0px 0px 20px var(--accent-dark-fade-50));
   width: 1.5rem !important;
 
-  animation: ${(props) => "blink " + props.animationTime + "s"};
-  animation-delay: ${(props) => props.animationDelay}s;
+  animation: ${(props) => "blink " + props.animationtime + "s"};
+  animation-delay: ${(props) => props.animationdelay}s;
   animation-iteration-count: 2;
   animation-fill-mode: forwards;
 
@@ -38,8 +38,8 @@ const NeonIcon = (props) => {
   if (state.lights) {
     return (
       <DarkModeAwesomeIcon
-        animationDelay={Math.random() * 2 + 1}
-        animationTime={1}
+      animationdelay={Math.random() * 2 + 1}
+        animationtime={1}
         {...props}
       />
     )

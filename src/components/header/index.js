@@ -55,12 +55,84 @@ const ToggleContainer = styled.div`
   align-items: center;
 `
 
+function getWeather(userLocation) {
+  return new Promise((resolve, reject) => {
+    let weatherCache = null
+    try {
+      weatherCache =
+        typeof window !== "undefined" &&
+        JSON.parse(sessionStorage.getItem("weather-cache"))
+    } catch (e) {}
+
+    if (weatherCache) {
+      return resolve(weatherCache)
+    }
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.lat}&lon=${userLocation.lon}&appid=9c41d9e7901b6a542535bb8b793cf038&units=metric`
+    )
+      .then((res) => res.json())
+      .then(({ weather }) => weather.map((w) => w.main))
+      .then((weather) => {
+        sessionStorage.setItem("weather-cache", JSON.stringify(weather))
+        resolve(weather)
+      })
+  })
+}
+
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined" || !window.navigator) {
+      return reject()
+    }
+
+    let locationCache = null
+    try {
+      locationCache =
+        typeof window !== "undefined" &&
+        JSON.parse(sessionStorage.getItem("user-location"))
+    } catch (e) {}
+
+    if (locationCache) {
+      return resolve(locationCache)
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }
+      sessionStorage.setItem("user-location", JSON.stringify(coords))
+      resolve(coords)
+    })
+  })
+}
+
 const Header = () => {
   const { isClient } = useIsClient()
-  const { state = {}, setDarkMode, setController } = useContext(WeatherContext)
+  const {
+    state = {},
+    setDarkMode,
+    setController,
+    setWeather,
+  } = useContext(WeatherContext)
 
   const hasRain =
     state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
+
+  function activateLocation() {
+    getLocation()
+      .then((coords) => getWeather(coords))
+      .then((weather) => {
+        setController("location")
+        const h = new Date().getHours()
+        setDarkMode(h > 16 || h < 8)
+        setWeather(weather)
+      })
+      .catch((err) => {
+        console.error({ msg: "What", err })
+      })
+  }
 
   return (
     <HeaderWrapper rain={hasRain}>
@@ -71,7 +143,7 @@ const Header = () => {
             <ToggleContainer>
               <LocationToggle
                 active={state.controller === "location"}
-                onClick={() => setController("location")}
+                onClick={() => activateLocation()}
               />
               <DarkModeToggle
                 checked={state.darkMode}
