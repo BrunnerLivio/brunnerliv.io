@@ -41,6 +41,8 @@ const GlobalStyle = createGlobalStyle`
     --primary: hsl(244, 49%, 38%);
     --primary-dark:  hsl(244, 49%, 28%);
     --primary-darker: hsl(244, 49%, 25%);
+    --primary-darkerer: hsl(244, 49%, 15%);
+    --primary-darkest: hsl(244, 49%, 10%);
     --header-background: var(--primary-darker);
     --header-background--rainy: var(--primary-darker);
 
