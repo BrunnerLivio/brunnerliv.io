@@ -1,12 +1,16 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { md, lg } from "../breakpoints"
 import useIsClient from "../hooks/useIsClient"
 
 import Clouds from "./clouds"
 import Stars from "./stars"
-import Sunset from "./sunset"
 import Mountain from "./mountain"
+import Rain from "./rain"
+import { WeatherContext } from "./weather/weatherProvider"
+import DarkModeToggle from "./toggles/dark-mode-toggle"
+import LocationToggle from "./toggles/location-toggle"
+import WeatherSettings from "./toggles/weather-settings"
 
 const HeaderWrapper = styled.header`
   margin: 0;
@@ -24,13 +28,17 @@ const HeaderWrapper = styled.header`
     min-height: 350px;
   `}
   overflow: hidden;
+  background: ${(props) =>
+    props.rain
+      ? "var(--header-background--rainy)"
+      : "var(--header-background)"};
 `
 
 const HeaderContent = styled.div`
   position: absolute;
   right: 16px;
   top: 16px;
-  z-index: 4;
+  z-index: 99;
 `
 const HeaderBackground = styled.div`
   position: fixed;
@@ -40,24 +48,135 @@ const HeaderBackground = styled.div`
   height: 5000px;
   left: 0;
   overflow: hidden;
-  background: var(--header-background);
 `
 
-const Header = ({ children, darkMode }) => {
+const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+function getWeather(userLocation) {
+  return new Promise((resolve, reject) => {
+    let weatherCache = null
+    try {
+      weatherCache =
+        typeof window !== "undefined" &&
+        JSON.parse(sessionStorage.getItem("weather-cache"))
+    } catch (e) {}
+
+    if (weatherCache) {
+      return resolve(weatherCache)
+    }
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.lat}&lon=${userLocation.lon}&appid=9c41d9e7901b6a542535bb8b793cf038&units=metric`
+    )
+      .then((res) => res.json())
+      .then(({ weather }) => weather.map((w) => w.main))
+      .then((weather) => {
+        sessionStorage.setItem("weather-cache", JSON.stringify(weather))
+        resolve(weather)
+      })
+      .catch((err) => {
+        console.log(err)
+        reject("Couldn't fetch weather")
+      })
+  })
+}
+
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined" || !window.navigator) {
+      return reject("Location tracking is not enabled")
+    }
+
+    let locationCache = null
+    try {
+      locationCache =
+        typeof window !== "undefined" &&
+        JSON.parse(sessionStorage.getItem("user-location"))
+    } catch (e) {}
+
+    if (locationCache) {
+      return resolve(locationCache)
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }
+      sessionStorage.setItem("user-location", JSON.stringify(coords))
+      resolve(coords)
+    })
+  })
+}
+
+const Header = () => {
   const { isClient } = useIsClient()
+  const {
+    state = {},
+    setDarkMode,
+    setController,
+    setWeather,
+    turnLightsOn,
+    turnLightsOff,
+  } = useContext(WeatherContext)
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const hasRain =
+    state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
+
+  function activateLocation() {
+    setIsLoading(true)
+    getLocation()
+      .then((coords) => getWeather(coords))
+      .then((weather) => {
+        setController("location")
+        const h = new Date().getHours()
+        const isDark = h > 16 || h < 8
+        setDarkMode(isDark)
+        isDark ? turnLightsOn() : turnLightsOff()
+        setWeather(weather)
+      })
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false))
+  }
 
   return (
-    <HeaderWrapper>
-      <HeaderContent>{children}</HeaderContent>
+    <HeaderWrapper rain={hasRain}>
       {isClient && (
         // Somehow it does not want to render correctly on the server..
         <>
-          <Mountain shadow={darkMode} />
-          <Clouds opacity={darkMode ? 0 : 1} />
-          <HeaderBackground opacity={darkMode ? 1 : 0}>
+          <HeaderContent>
+            <ToggleContainer>
+              <LocationToggle
+                active={state.controller === "location"}
+                onClick={() => activateLocation()}
+                isLoading={isLoading}
+              />
+              <DarkModeToggle
+                checked={state.darkMode}
+                active={state.controller === "darkMode"}
+                disabled={isLoading}
+                onChange={() => {
+                  setController("darkMode")
+                  setDarkMode(!state.darkMode)
+                }}
+              />
+              <WeatherSettings
+                disabled={isLoading}
+                active={state.controller === "settings"}
+              />
+            </ToggleContainer>
+          </HeaderContent>
+          <Mountain />
+          <Clouds />
+          <HeaderBackground opacity={state.darkMode ? 1 : 0}>
             <Stars />
-            <Sunset />
           </HeaderBackground>
+          <Rain />
         </>
       )}
     </HeaderWrapper>

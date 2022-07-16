@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
-import { md, lg} from "../breakpoints"
+import { md, lg } from "../breakpoints"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const PrimaryDarkPath = styled.path`
   fill: var(--primary-dark);
@@ -92,7 +93,7 @@ const MountainSVG = styled.svg`
   z-index: 4;
   height: 350px;
   transition: filter 0.5s ease-in-out;
-  filter: ${props => props.shadow ? "drop-shadow(0px 0px 90px var(--accent))" : "drop-shadow(0px 0px 90px rgba(54, 0, 161, 0.4))"};
+  filter: ${(props) => props.shadow};
   ${md`
     height: 380px;
   `}
@@ -101,10 +102,25 @@ const MountainSVG = styled.svg`
   `}
 `
 
-const Mountain = ({ shadow }) => (
-  <MountainSVG shadow={shadow} x="0px" y="0px" viewBox="0 0 457.76 251.52">
-    <MountainPaths></MountainPaths>
-  </MountainSVG>
-)
+const Mountain = () => {
+  const { state = {} } = useContext(WeatherContext)
+
+  let shadow = `drop-shadow(0px 0px 90px var(--accent))`
+
+  if (!state.darkMode) {
+    const hasRain =
+      state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
+    if (hasRain) {
+      shadow = `drop-shadow(0px 0px 90px rgba(0, 0, 0, 0.4))`
+    } else {
+      shadow = `drop-shadow(0px 0px 90px rgba(54, 0, 161, 0.4))`
+    }
+  }
+  return (
+    <MountainSVG shadow={shadow} x="0px" y="0px" viewBox="0 0 457.76 251.52">
+      <MountainPaths></MountainPaths>
+    </MountainSVG>
+  )
+}
 
 export default Mountain

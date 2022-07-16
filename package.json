@@ -9,6 +9,7 @@
     "@fortawesome/free-brands-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.15",
+    "@szhsin/react-menu": "^3.1.1",
     "babel-plugin-styled-components": "2.0.7",
     "color": "4.2.3",
     "download-stats": "0.3.4",
@@ -56,7 +57,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "build:prod": "gatsby build --prefix-paths"
+    "build:prod": "gatsby build --prefix-paths",
+    "update-data": "node tools/update-data.js"
   },
   "repository": {
     "type": "git",

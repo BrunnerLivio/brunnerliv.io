@@ -12,7 +12,7 @@ exports.onRenderBody = ({ setHeadComponents }) => {
               (document.documentElement.className = "dark" === e ? "dark" : ""),
               window.dispatchEvent(new CustomEvent("theme", { detail: e }));
           }
-          let t;
+          let t, l, ul, h = new Date().getHours();
           window.__setPreferredTheme = function (t) {
             e(t);
             try {
@@ -22,10 +22,14 @@ exports.onRenderBody = ({ setHeadComponents }) => {
           try {
             t = localStorage.getItem("preferred-theme");
           } catch (e) {}
+          try {
+            ul = !!localStorage.getItem("user-location")
+            if(ul) l = (h > 16 || h < 8) ? "dark" : "light";
+          } catch (e) {}
           let r = window.matchMedia("(prefers-color-scheme: dark)");
-          e(t || (r.matches ? "dark" : "light"));
+          e(l || t || (r.matches ? "dark" : "light"));
         })();
-        `
+        `,
       }}
     />,
   ])

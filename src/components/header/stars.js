@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { md } from "../breakpoints"
 import background from "../../images/stars_small.png"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const StarsContainer = styled.div`
   display: flex;
@@ -28,7 +29,8 @@ const Canvas = styled.div`
   `}
 `
 
-const Stars = ({ opacity }) => {
+const Stars = () => {
+  const { state } = useContext(WeatherContext)
   // const $canvas = useRef(null)
 
   // useEffect(() => {
@@ -41,7 +43,7 @@ const Stars = ({ opacity }) => {
   // }, [$canvas])
 
   return (
-    <StarsContainer style={{ opacity }}>
+    <StarsContainer style={{ opacity: state.darkMode ? 1 : 0 }}>
       <Canvas />
     </StarsContainer>
   )
