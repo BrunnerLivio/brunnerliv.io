@@ -18,7 +18,6 @@ export const WeatherProvider = ({ children }) => {
     <WeatherContext.Provider
       value={{
         state: weather,
-        dispatch,
         setDarkMode: (payload) => dispatch({ type: "SET_DARK_MODE", payload }),
         setController: (payload) =>
           dispatch({ type: "SET_CONTROLLER", payload }),

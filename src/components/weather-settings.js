@@ -37,6 +37,7 @@ function WeatherSettings({ active }) {
     useContext(WeatherContext)
   return (
     <Menu
+      onItemClick={(e) => (e.keepOpen = true)}
       menuButton={
         <Button active={active} onClick={() => setController("settings")}>
           <svg version="1.1" x="0px" y="0px" viewBox="0 0 489.802 489.802">

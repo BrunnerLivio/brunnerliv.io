@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { sm, md } from "../breakpoints"
+import { WeatherContext } from "../weather/weatherProvider"
 
 const CloudWrapper = styled.div`
   width: 100%;
@@ -60,9 +61,12 @@ const Cloud = styled.div`
   }
 `
 
-const Clouds = ({ opacity }) => {
+const Clouds = () => {
+  const { state } = useContext(WeatherContext)
+
+  const hasClouds = state.weather?.includes("Clouds")
   return (
-    <CloudWrapper opacity={opacity}>
+    <CloudWrapper opacity={hasClouds ? 1 : 0}>
       <>
         <Cloud top={0} speed={120} scale={1} delay={0} />
         <Cloud top={40} speed={110} scale={0.7} delay={30} />

@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-dark: #b0bec5;
     --primary-darker: #eceff1;
     --header-background: #9FC0F7;
+    --header-background--rainy: #9c9c9c;
 
     --accent: #404fa6;
     --accent-dark: ${color("#404fa6").darken(0.08).toString()};
@@ -41,6 +42,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-dark:  hsl(244, 49%, 28%);
     --primary-darker: hsl(244, 49%, 25%);
     --header-background: var(--primary-darker);
+    --header-background--rainy: var(--primary-darker);
 
     --accent: #FF7779;
     --accent-fade-50: ${color("#FF7779").fade(0.5).toString()};

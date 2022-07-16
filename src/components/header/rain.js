@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled, { css } from "styled-components"
+import { WeatherContext } from "../weather/weatherProvider"
 
 const rain = css`
   position: absolute;
@@ -101,10 +102,14 @@ function RainDrops() {
   return { drops, backDrops }
 }
 
-function Rain({ opacity }) {
+function Rain() {
+  const { state } = useContext(WeatherContext)
+  const hasRain =
+    state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
+
   const { drops, backDrops } = RainDrops()
   return (
-    <RainWrapper opacity={opacity}>
+    <RainWrapper opacity={hasRain ? 1 : 0}>
       <RainFrontRow>
         {drops.map((drop) => (
           <Drop style={drop.drop}>

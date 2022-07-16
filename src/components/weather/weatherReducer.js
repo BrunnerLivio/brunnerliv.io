@@ -19,18 +19,14 @@ export const weatherReducer = (state, action) => {
         return {
           ...state,
           darkMode: action.payload,
-          weather: state.weather.includes("Clouds")
-            ? state.weather
-            : [...state.weather, "Clouds"],
+          weather: ["Clouds"],
         }
       }
       if (action.payload && state.controller === "darkMode") {
         return {
           ...state,
           darkMode: action.payload,
-          weather: state.weather.includes("Clouds")
-            ? state.weather.filter((w) => w !== "Clouds")
-            : state.weather,
+          weather: [],
         }
       }
       return { ...state, darkMode: action.payload }

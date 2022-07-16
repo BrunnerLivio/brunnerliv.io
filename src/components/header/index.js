@@ -5,7 +5,6 @@ import useIsClient from "../hooks/useIsClient"
 
 import Clouds from "./clouds"
 import Stars from "./stars"
-import Sunset from "./sunset"
 import Mountain from "./mountain"
 import Rain from "./rain"
 import { WeatherContext } from "../weather/weatherProvider"
@@ -29,7 +28,10 @@ const HeaderWrapper = styled.header`
     min-height: 350px;
   `}
   overflow: hidden;
-  background: var(--header-background);
+  background: ${(props) =>
+    props.rain
+      ? "var(--header-background--rainy)"
+      : "var(--header-background)"};
 `
 
 const HeaderContent = styled.div`
@@ -46,7 +48,6 @@ const HeaderBackground = styled.div`
   height: 5000px;
   left: 0;
   overflow: hidden;
-  background: var(--header-background);
 `
 
 const ToggleContainer = styled.div`
@@ -56,14 +57,13 @@ const ToggleContainer = styled.div`
 
 const Header = () => {
   const { isClient } = useIsClient()
-  const { dispatch, state = {}, setDarkMode } = useContext(WeatherContext)
+  const { state = {}, setDarkMode, setController } = useContext(WeatherContext)
 
-  const hasClouds = state.weather?.includes("Clouds") || !state.darkMode
   const hasRain =
     state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper rain={hasRain}>
       {isClient && (
         // Somehow it does not want to render correctly on the server..
         <>
@@ -71,21 +71,13 @@ const Header = () => {
             <ToggleContainer>
               <LocationToggle
                 active={state.controller === "location"}
-                onClick={() =>
-                  dispatch({
-                    type: "SET_CONTROLLER",
-                    payload: "location",
-                  })
-                }
+                onClick={() => setController("location")}
               />
               <DarkModeToggle
                 checked={state.darkMode}
                 active={state.controller === "darkMode"}
                 onChange={() => {
-                  dispatch({
-                    type: "SET_CONTROLLER",
-                    payload: "darkMode",
-                  })
+                  setController("darkMode")
                   setDarkMode(!state.darkMode)
                 }}
               />
@@ -93,12 +85,11 @@ const Header = () => {
             </ToggleContainer>
           </HeaderContent>
           <Mountain shadow={state.darkMode} />
-          <Clouds opacity={hasClouds ? 1 : 0} />
+          <Clouds />
           <HeaderBackground opacity={state.darkMode ? 1 : 0}>
-            <Stars opacity={state.darkMode ? 1 : 0} />
-            <Sunset />
+            <Stars />
           </HeaderBackground>
-          <Rain opacity={hasRain ? 1 : 0} />
+          <Rain />
         </>
       )}
     </HeaderWrapper>
