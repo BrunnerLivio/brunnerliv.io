@@ -84,7 +84,7 @@ const Header = () => {
               <WeatherSettings active={state.controller === "settings"} />
             </ToggleContainer>
           </HeaderContent>
-          <Mountain shadow={state.darkMode} />
+          <Mountain />
           <Clouds />
           <HeaderBackground opacity={state.darkMode ? 1 : 0}>
             <Stars />
