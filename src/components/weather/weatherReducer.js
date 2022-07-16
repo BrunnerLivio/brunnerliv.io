@@ -6,7 +6,7 @@ export const initialState = {
 }
 
 export const initializer = (initialValue = initialState) =>
-  (typeof window !== undefined &&
+  (typeof window !== "undefined" &&
     JSON.parse(localStorage.getItem("weather"))) ||
   initialValue
 
