@@ -16,17 +16,29 @@ const GlobalStyle = createGlobalStyle`
     --header-background--rainy: #9c9c9c;
 
     --accent: #404fa6;
-    --accent-dark: ${color("#404fa6").darken(0.08).toString()};
-    --accent-light: #9fa8da;
     --accent-fade-95: ${color("#404fa6").fade(0.95).toString()};
     --accent-fade-60: ${color("#404fa6").fade(0.6).toString()};
+    --accent-fade-50: ${color("#404fa6").fade(0.5).toString()};
+
+    --accent-dark: ${color("#404fa6").darken(0.08).toString()};
+    --accent-dark-fade-50: ${color("#404fa6")
+      .darken(0.08)
+      .fade(0.5)
+      .toString()};
+    --accent-dark-fade-20: ${color("#404fa6")
+      .darken(0.08)
+      .fade(0.2)
+      .toString()};
+
+    --accent-light: #9fa8da;
+    --accent-light-fade-50: ${color("#9fa8da").fade(0.5).toString()};
 
     --text: #0a2540;
     --text-secondary: ${color("#000000").alpha(0.7).toString()};
     --text-invert: #FFFFFF;
 
-    --neon-text-color: var(--accent-dark);
-    --neon-blinking-text-color: ${color("#9fa8da").lighten(0.1)};
+    --neon-text-color: var(--accent-light);
+    --neon-blinking-text-color: #d1d8ff;
 
     /* SHARED */
     --sans-serif: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;

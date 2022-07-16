@@ -115,6 +115,8 @@ const Header = () => {
     setDarkMode,
     setController,
     setWeather,
+    turnLightsOn,
+    turnLightsOff,
   } = useContext(WeatherContext)
 
   const hasRain =
@@ -126,7 +128,9 @@ const Header = () => {
       .then((weather) => {
         setController("location")
         const h = new Date().getHours()
-        setDarkMode(h > 16 || h < 8)
+        const isDark = h > 16 || h < 8
+        setDarkMode(isDark)
+        isDark ? turnLightsOn() : turnLightsOff()
         setWeather(weather)
       })
       .catch((err) => {
