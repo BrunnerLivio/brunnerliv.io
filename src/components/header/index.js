@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { md, lg } from "../breakpoints"
 import useIsClient from "../hooks/useIsClient"
@@ -77,13 +77,17 @@ function getWeather(userLocation) {
         sessionStorage.setItem("weather-cache", JSON.stringify(weather))
         resolve(weather)
       })
+      .catch((err) => {
+        console.log(err)
+        reject("Couldn't fetch weather")
+      })
   })
 }
 
 function getLocation() {
   return new Promise((resolve, reject) => {
     if (typeof window === "undefined" || !window.navigator) {
-      return reject()
+      return reject("Location tracking is not enabled")
     }
 
     let locationCache = null
@@ -119,10 +123,13 @@ const Header = () => {
     turnLightsOff,
   } = useContext(WeatherContext)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const hasRain =
     state.weather?.includes("Rain") || state.weather?.includes("Drizzle")
 
   function activateLocation() {
+    setIsLoading(true)
     getLocation()
       .then((coords) => getWeather(coords))
       .then((weather) => {
@@ -133,9 +140,8 @@ const Header = () => {
         isDark ? turnLightsOn() : turnLightsOff()
         setWeather(weather)
       })
-      .catch((err) => {
-        console.error({ msg: "What", err })
-      })
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -148,16 +154,21 @@ const Header = () => {
               <LocationToggle
                 active={state.controller === "location"}
                 onClick={() => activateLocation()}
+                isLoading={isLoading}
               />
               <DarkModeToggle
                 checked={state.darkMode}
                 active={state.controller === "darkMode"}
+                disabled={isLoading}
                 onChange={() => {
                   setController("darkMode")
                   setDarkMode(!state.darkMode)
                 }}
               />
-              <WeatherSettings active={state.controller === "settings"} />
+              <WeatherSettings
+                disabled={isLoading}
+                active={state.controller === "settings"}
+              />
             </ToggleContainer>
           </HeaderContent>
           <Mountain />

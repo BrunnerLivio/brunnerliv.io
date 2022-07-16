@@ -30,16 +30,25 @@ const Button = styled.button`
   svg {
     width: 24px;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: initial;
+  }
 `
 
-function WeatherSettings({ active }) {
+function WeatherSettings({ active, disabled }) {
   const { state, setDarkMode, toggleWeather, setController, toggleLights } =
     useContext(WeatherContext)
   return (
     <Menu
       onItemClick={(e) => (e.keepOpen = true)}
       menuButton={
-        <Button active={active} onClick={() => setController("settings")}>
+        <Button
+          disabled={disabled}
+          active={active}
+          onClick={() => setController("settings")}
+        >
           <svg version="1.1" x="0px" y="0px" viewBox="0 0 489.802 489.802">
             <g>
               <path
