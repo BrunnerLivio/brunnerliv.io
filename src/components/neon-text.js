@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React, { useContext } from "react"
-import { WeatherContext } from "./weather/weatherProvider"
+import { WeatherContext } from "./header/weather/weatherProvider"
 
 const NeonTextContent = styled.span`
   text-transform: uppercase;
@@ -54,7 +54,7 @@ const NeonTextContainer = styled.div`
 const NeonText = ({ text }) => {
   const { state } = useContext(WeatherContext)
 
-  if (state.darkMode) {
+  if (state.lights) {
     return (
       <NeonTextContainer>
         {/* The hidden text is used since the elements are position absolute in order to still have auto-height */}

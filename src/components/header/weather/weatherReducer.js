@@ -3,6 +3,7 @@ export const initialState = {
   weather: [],
   // Controllers: location, darkMode, settings
   controller: "darkMode",
+  lights: typeof window !== "undefined" ? window.__theme === "dark" : false,
 }
 
 export const initializer = (initialValue = initialState) =>
@@ -20,6 +21,7 @@ export const weatherReducer = (state, action) => {
           ...state,
           darkMode: action.payload,
           weather: ["Clouds"],
+          lights: false,
         }
       }
       if (action.payload && state.controller === "darkMode") {
@@ -27,9 +29,11 @@ export const weatherReducer = (state, action) => {
           ...state,
           darkMode: action.payload,
           weather: [],
+          lights: true,
         }
       }
       return { ...state, darkMode: action.payload }
+
     case "SET_CONTROLLER":
       return { ...state, controller: action.payload }
     case "SET_WEATHER":
@@ -41,6 +45,12 @@ export const weatherReducer = (state, action) => {
           ? state.weather.filter((w) => w !== action.payload)
           : [...state.weather, action.payload],
       }
+    case "TURN_LIGHTS_ON":
+      return { ...state, lights: true }
+    case "TURN_LIGHTS_OFF":
+      return { ...state, lights: false }
+    case "TOGGLE_LIGHTS":
+      return { ...state, lights: !state.lights }
     default:
       return state
   }

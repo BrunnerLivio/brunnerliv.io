@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { sm, md } from "../breakpoints"
-import { WeatherContext } from "../weather/weatherProvider"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const CloudWrapper = styled.div`
   width: 100%;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import styled, { css } from "styled-components"
-import { WeatherContext } from "../weather/weatherProvider"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const rain = css`
   position: absolute;

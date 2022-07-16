@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import "@szhsin/react-menu/dist/index.css"
 import "@szhsin/react-menu/dist/transitions/slide.css"
-import { WeatherContext } from "./weather/weatherProvider"
+import { WeatherContext } from "../weather/weatherProvider"
 
 const Button = styled.button`
   position: relative;
@@ -33,7 +33,7 @@ const Button = styled.button`
 `
 
 function WeatherSettings({ active }) {
-  const { state, setDarkMode, toggleWeather, setController } =
+  const { state, setDarkMode, toggleWeather, setController, toggleLights } =
     useContext(WeatherContext)
   return (
     <Menu
@@ -79,6 +79,13 @@ function WeatherSettings({ active }) {
         type="checkbox"
       >
         Rain
+      </MenuItem>
+      <MenuItem
+        onClick={() => toggleLights()}
+        checked={state.lights}
+        type="checkbox"
+      >
+        Lights
       </MenuItem>
     </Menu>
   )

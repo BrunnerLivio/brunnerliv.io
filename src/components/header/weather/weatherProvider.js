@@ -21,7 +21,11 @@ export const WeatherProvider = ({ children }) => {
         setDarkMode: (payload) => dispatch({ type: "SET_DARK_MODE", payload }),
         setController: (payload) =>
           dispatch({ type: "SET_CONTROLLER", payload }),
-        toggleWeather: (payload) => dispatch({ type: "TOGGLE_WEATHER", payload }),
+        toggleWeather: (payload) =>
+          dispatch({ type: "TOGGLE_WEATHER", payload }),
+        turnLightsOn: () => dispatch({ type: "TURN_LIGHTS_ON" }),
+        turnLightsOff: () => dispatch({ type: "TURN_LIGHTS_OFF" }),
+        toggleLights: () => dispatch({ type: "TOGGLE_LIGHTS" }),
       }}
     >
       {children}

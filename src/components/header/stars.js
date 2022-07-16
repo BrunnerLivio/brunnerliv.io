@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import styled from "styled-components"
 import { md } from "../breakpoints"
 import background from "../../images/stars_small.png"
-import { WeatherContext } from "../weather/weatherProvider"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const StarsContainer = styled.div`
   display: flex;

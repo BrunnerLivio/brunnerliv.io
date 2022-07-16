@@ -14,7 +14,7 @@ import GlobalStyle from "./globalStyle"
 
 import "./layout.css"
 
-import { WeatherProvider } from "./weather/weatherProvider"
+import { WeatherProvider } from "./header/weather/weatherProvider"
 
 const MainWrapper = styled.div`
   display: flex;

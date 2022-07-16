@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { md, lg } from "../breakpoints"
-import { WeatherContext } from "../weather/weatherProvider"
+import { WeatherContext } from "./weather/weatherProvider"
 
 const PrimaryDarkPath = styled.path`
   fill: var(--primary-dark);

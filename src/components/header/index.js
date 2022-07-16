@@ -7,10 +7,10 @@ import Clouds from "./clouds"
 import Stars from "./stars"
 import Mountain from "./mountain"
 import Rain from "./rain"
-import { WeatherContext } from "../weather/weatherProvider"
-import DarkModeToggle from "../dark-mode-toggle"
-import LocationToggle from "../location-toggle"
-import WeatherSettings from "../weather-settings"
+import { WeatherContext } from "./weather/weatherProvider"
+import DarkModeToggle from "./toggles/dark-mode-toggle"
+import LocationToggle from "./toggles/location-toggle"
+import WeatherSettings from "./toggles/weather-settings"
 
 const HeaderWrapper = styled.header`
   margin: 0;
