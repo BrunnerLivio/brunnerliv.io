@@ -5,9 +5,9 @@
   "version": "1.0.0",
   "author": "Livio Brunner <livio.brunner.lb1@gmail.com>",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-brands-svg-icons": "5.15.4",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
+    "@fortawesome/fontawesome-svg-core": "6.5.1",
+    "@fortawesome/free-brands-svg-icons": "6.5.1",
+    "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "0.1.15",
     "@szhsin/react-menu": "^3.1.1",
     "babel-plugin-styled-components": "2.0.7",
