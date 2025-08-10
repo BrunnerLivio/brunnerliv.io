@@ -39,7 +39,7 @@
     "react-helmet": "6.1.0",
     "react-static-plugin-styled-components": "7.6.2",
     "react-toggle-dark-mode": "^1.1.0",
-    "react-transition-group": "4.4.2",
+    "react-transition-group": "4.4.5",
     "recharts": "2.1.9",
     "styled-components": "5.3.1"
   },
