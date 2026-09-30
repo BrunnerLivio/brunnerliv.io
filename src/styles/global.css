@@ -324,9 +324,8 @@
   }
 }
 
-/* View transitions: morphs of the sign and switch into the article nav */
-::view-transition-group(logo),
-::view-transition-group(switch) {
+/* View transition: the sign's "Livio" morphs into the article nav logo */
+::view-transition-group(logo) {
   animation-duration: 1s;
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }

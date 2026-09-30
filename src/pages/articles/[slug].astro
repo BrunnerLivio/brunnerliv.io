@@ -2,7 +2,6 @@
 import { render } from "astro:content";
 import { slide } from "astro:transitions";
 import Base from "../../layouts/Base.astro";
-import LightSwitch from "../../components/LightSwitch.astro";
 import SocialLinks from "../../components/SocialLinks.astro";
 import NeonH2 from "../../components/mdx/NeonH2.astro";
 import Figure from "../../components/mdx/Figure.astro";
@@ -43,7 +42,6 @@ const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.
     >
       Livio
     </a>
-    <LightSwitch />
   </nav>
 
   <article
