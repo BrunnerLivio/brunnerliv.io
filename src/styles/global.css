@@ -20,6 +20,7 @@
   --color-cyan-mid: #5ee7ff;
   --color-cyan-tube: #e8fbff;
   --color-white: #fff;
+  --color-nest: #e0234e;
   --color-plate: #efe9e2;
   --color-plate-dark: #d9d1c8;
   --color-screw: #b8aea4;
@@ -366,6 +367,16 @@
   [data-stutter] {
     display: inline-block;
     animation: stutter 11s linear 5s infinite;
+  }
+
+  .nest-led {
+    box-shadow:
+      0 0 6px var(--color-nest),
+      0 0 12px color-mix(in srgb, var(--color-nest) 60%, transparent);
+  }
+  html[data-lights="off"] .nest-led {
+    box-shadow: none;
+    opacity: 0.4;
   }
 
   .room {
