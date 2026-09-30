@@ -30,7 +30,7 @@
   --font-script: "Yellowtail", cursive;
   --font-neon: "Tilt Neon", sans-serif;
   --font-sans: "Instrument Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-mono: "Chivo Mono", monospace;
 
   --text-sign-script: clamp(88px, 11vw, 168px);
   --text-sign-block: clamp(34px, 4.2vw, 60px);

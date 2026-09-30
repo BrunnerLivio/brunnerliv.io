@@ -23,7 +23,7 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.4
         version: 3.7.4
-      '@fontsource/ibm-plex-mono':
+      '@fontsource/chivo-mono':
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource/instrument-sans':
@@ -546,8 +546,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource/ibm-plex-mono@5.3.0':
-    resolution: {integrity: sha512-eTgnZjZEGk1QtD3ZstF+Vclo2HLAni8YMy34/DxllwZvyz1lR/1RF/xTiAquOBO7MvqBx8D2Ig2WCPMVfdZu7Q==}
+  '@fontsource/chivo-mono@5.3.0':
+    resolution: {integrity: sha512-JhGFmYUkWc/jQ5yQt8tp02VO1gouolfnSfNbo8qCuET7Cu6X2VieLpic2ZXQPvDQBcqjjrmruPnkGnoYmxMlaQ==}
 
   '@fontsource/instrument-sans@5.3.0':
     resolution: {integrity: sha512-QwXc4hb/px3XvSPS2CPAOgey8nyrQFxgxrmXQQ+pN+P51hKdAcchxpg8rSbjANFfPu6VKXhDqkVDucXMZ9CM5g==}
@@ -3126,7 +3126,7 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@fontsource/ibm-plex-mono@5.3.0': {}
+  '@fontsource/chivo-mono@5.3.0': {}
 
   '@fontsource/instrument-sans@5.3.0': {}
 
