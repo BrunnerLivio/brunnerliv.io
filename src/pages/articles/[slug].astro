@@ -14,7 +14,6 @@ export async function getStaticPaths() {
   const posts = await getPosts();
   return posts.map((post, i) => ({
     params: { slug: post.id },
-    // "Next" reads down the list (older), wrapping to the newest.
     props: { post, next: posts[(i + 1) % posts.length] },
   }));
 }
