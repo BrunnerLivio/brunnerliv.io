@@ -1,0 +1,25 @@
+---
+import { fade } from "astro:transitions";
+---
+
+<div
+  data-sign
+  title="Flick the switch"
+  class="relative z-10 flex cursor-pointer flex-col items-center select-none"
+>
+  <span
+    transition:name="logo"
+    data-flicker="pink"
+    class="tube-pink font-script text-sign-script leading-[0.9] -rotate-6"
+  >
+    Livio
+  </span>
+  <span
+    transition:name="brunner"
+    transition:animate={fade({ duration: "1s" })}
+    data-flicker="cyan"
+    class="tube-cyan mt-1.5 font-neon text-sign-block tracking-[0.24em] pl-[0.24em]"
+  >
+    BRU<span data-stutter>N</span>NER
+  </span>
+</div>

@@ -1,0 +1,11 @@
+---
+import { site } from "../site";
+---
+
+<footer class:list={["flex flex-wrap gap-x-6 gap-y-3 font-mono text-meta-lg text-muted", Astro.props.class]}>
+  {site.social.map((s) => (
+    <a href={s.href} target="_blank" rel="noopener">
+      {s.label}
+    </a>
+  ))}
+</footer>

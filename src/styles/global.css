@@ -1,0 +1,688 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (source of truth: design handoff README) ---------- */
+@theme {
+  --color-*: initial;
+  --color-wall: #140f17;
+  --color-text: #ece6ea;
+  --color-body: #ddd5db;
+  --color-muted: #a79ca6;
+  --color-hairline: #2a222c;
+  --color-border: #4a3f4c;
+  --color-code-bg: #221a25;
+  --color-code: #8ef0ff;
+  --color-link: #ff7aa8;
+  --color-link-hover: #ffc2d6;
+  --color-pink: #ff2f78;
+  --color-pink-mid: #ff4f8b;
+  --color-pink-tube: #ffe6ef;
+  --color-cyan: #1fc8ff;
+  --color-cyan-mid: #5ee7ff;
+  --color-cyan-tube: #e8fbff;
+  --color-white: #fff;
+  --color-plate: #efe9e2;
+  --color-plate-dark: #d9d1c8;
+  --color-screw: #b8aea4;
+  --color-recess: #c9c0b6;
+  --color-lever: #fbf8f4;
+  --color-lever-dark: #e2dad1;
+
+  --text-sign-script: clamp(88px, 11vw, 168px);
+  --text-sign-block: clamp(34px, 4.2vw, 60px);
+  --text-h1: clamp(44px, 7.5vw, 84px);
+  --text-h1--line-height: 1.02;
+  --text-h2: 30px;
+  --text-section: 28px;
+  --text-quote: clamp(30px, 4vw, 40px);
+  --text-quote--line-height: 1.25;
+  --text-next: clamp(24px, 3.4vw, 32px);
+  --text-next--line-height: 1.25;
+  --text-lede: 23px;
+  --text-lede--line-height: 1.55;
+  --text-body: 19px;
+  --text-body--line-height: 1.72;
+  --text-row: 19px;
+  --text-row--line-height: 1.35;
+  --text-sub: 15px;
+  --text-sub--line-height: 1.5;
+  --text-meta: 12px;
+  --text-meta-lg: 13px;
+  --text-logo: 34px;
+
+  --radius-pill: 999px;
+  --radius-plate: 6px;
+  --radius-lever: 3px;
+
+  --breakpoint-*: initial;
+  --breakpoint-wide: 940px;
+
+  /* Glows: exact spec values, alpha steps derived from the tube tokens */
+  --shadow-glow-pink:
+    0 0 3px #fff, 0 0 10px var(--color-pink-mid), 0 0 26px var(--color-pink), 0 0 60px var(--color-pink);
+  --shadow-glow-cyan:
+    0 0 3px #fff, 0 0 10px var(--color-cyan-mid), 0 0 24px var(--color-cyan), 0 0 54px var(--color-cyan);
+  --shadow-glow-pink-sm: 0 0 3px #fff, 0 0 10px var(--color-pink-mid), 0 0 22px var(--color-pink);
+  --shadow-glow-cyan-sm: 0 0 2px #fff, 0 0 8px var(--color-cyan-mid), 0 0 20px var(--color-cyan);
+  --shadow-glow-cyan-xs: 0 0 2px #fff, 0 0 6px var(--color-cyan-mid), 0 0 18px var(--color-cyan);
+  --shadow-glow-hover:
+    0 0 8px color-mix(in srgb, var(--color-pink-mid) 90%, transparent),
+    0 0 22px color-mix(in srgb, var(--color-pink) 50%, transparent);
+  --shadow-glow-quote: 0 0 3px #fff, 0 0 10px var(--color-pink-mid), 0 0 24px var(--color-pink);
+  --shadow-glow-bar: 0 0 6px var(--color-pink-mid), 0 0 14px var(--color-pink);
+
+  --ease-lever: ease-out;
+}
+
+/* Fonts come from Astro's Fonts API (astro.config.mjs); inline so utilities get the stack. */
+@theme inline {
+  --font-script: var(--font-yellowtail);
+  --font-neon: var(--font-tilt-neon);
+  --font-sans: var(--font-instrument-sans);
+  --font-mono: var(--font-chivo-mono);
+}
+
+/* Derived steps (kept out of @theme so they don't become utilities) */
+:root {
+  --pink-unlit: color-mix(in srgb, var(--color-pink-tube) 12%, var(--color-wall));
+  --cyan-unlit: color-mix(in srgb, var(--color-cyan-tube) 12%, var(--color-wall));
+  --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 45%, var(--color-wall));
+  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 95%, var(--color-wall));
+  --cyan-unlit-title: color-mix(in srgb, var(--color-cyan-tube) 20%, var(--color-wall));
+  --pink-half: color-mix(in srgb, var(--color-pink-tube) 30%, var(--color-wall));
+  --cyan-half: color-mix(in srgb, var(--color-cyan-tube) 35%, var(--color-wall));
+  --pink-room: color-mix(in srgb, var(--color-pink) 20%, transparent);
+  --pink-room-mid: color-mix(in srgb, var(--color-pink) 6%, transparent);
+  --cyan-room: color-mix(in srgb, var(--color-cyan) 12%, transparent);
+  --cyan-room-article: color-mix(in srgb, var(--color-cyan) 13%, transparent);
+  --cyan-room-article-mid: color-mix(in srgb, var(--color-cyan) 4%, transparent);
+  --link-underline: color-mix(in srgb, var(--color-link) 40%, transparent);
+  --glow-pink-40: 0 0 8px color-mix(in srgb, var(--color-pink-mid) 40%, transparent);
+  --glow-cyan-40: 0 0 8px color-mix(in srgb, var(--color-cyan-mid) 40%, transparent);
+  --cta-glow:
+    0 0 10px color-mix(in srgb, var(--color-pink-mid) 35%, transparent),
+    inset 0 0 10px color-mix(in srgb, var(--color-pink-mid) 25%, transparent);
+  --cta-glow-hover:
+    0 0 18px color-mix(in srgb, var(--color-pink-mid) 70%, transparent),
+    inset 0 0 14px color-mix(in srgb, var(--color-pink-mid) 45%, transparent);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-wall);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-link);
+  }
+  a:hover {
+    color: var(--color-link-hover);
+  }
+  ::selection {
+    background: var(--color-pink);
+    color: #fff;
+  }
+}
+
+/* ---------- Keyframes (timings from the reference files) ---------- */
+@keyframes pinkOn {
+  0%,
+  4% {
+    color: var(--pink-unlit);
+    text-shadow: none;
+  }
+  5% {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-pink);
+  }
+  7%,
+  15% {
+    color: var(--pink-unlit);
+    text-shadow: none;
+  }
+  16% {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-pink);
+  }
+  18% {
+    color: var(--pink-half);
+    text-shadow: var(--glow-pink-40);
+  }
+  24%,
+  100% {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-pink);
+  }
+}
+@keyframes cyanOn {
+  0%,
+  34% {
+    color: var(--cyan-unlit);
+    text-shadow: none;
+  }
+  36% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+  38%,
+  46% {
+    color: var(--cyan-unlit);
+    text-shadow: none;
+  }
+  48% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+  50% {
+    color: var(--cyan-half);
+    text-shadow: var(--glow-cyan-40);
+  }
+  56%,
+  100% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+}
+@keyframes roomOn {
+  0%,
+  4% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.8;
+  }
+  7%,
+  15% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 0.8;
+  }
+  18% {
+    opacity: 0.3;
+  }
+  24%,
+  34% {
+    opacity: 0.7;
+  }
+  36% {
+    opacity: 1;
+  }
+  38%,
+  46% {
+    opacity: 0.7;
+  }
+  48% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  56%,
+  100% {
+    opacity: 1;
+  }
+}
+/* Article variants: single cyan tube, 2s */
+@keyframes cyanOnSolo {
+  0%,
+  6% {
+    color: var(--cyan-unlit);
+    text-shadow: none;
+  }
+  8% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+  10%,
+  20% {
+    color: var(--cyan-unlit);
+    text-shadow: none;
+  }
+  22% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+  25% {
+    color: var(--cyan-half);
+    text-shadow: var(--glow-cyan-40);
+  }
+  34%,
+  100% {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+}
+@keyframes roomOnSolo {
+  0%,
+  6% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  10%,
+  20% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.4;
+  }
+  34%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes headOn {
+  0% {
+    opacity: 0.15;
+  }
+  12% {
+    opacity: 1;
+  }
+  18% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 1;
+  }
+  36% {
+    opacity: 0.5;
+  }
+  44%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes stutter {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  2% {
+    opacity: 0.15;
+  }
+  3% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0.25;
+  }
+  7% {
+    opacity: 1;
+  }
+}
+@keyframes grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* View transition: the sign's "Livio" morphs into the article nav logo */
+::view-transition-group(logo) {
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ---------- Neon system ----------
+   Lit by default. `html[data-lights="off"]` unlights everything.
+   [data-flicker="pink|cyan|cyan-solo|room|room-solo"] plays the switch-on flicker.
+   [data-neon-head] stays unlit until JS sets [data-lit] (IntersectionObserver). */
+@layer components {
+  .tube-pink {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-pink);
+  }
+  .tube-cyan {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan);
+  }
+  .tube-pink-sm {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-pink-sm);
+  }
+
+  [data-flicker="pink"] {
+    animation: pinkOn 2.6s linear 0.3s both;
+  }
+  [data-flicker="cyan"] {
+    animation: cyanOn 2.6s linear 0.3s both;
+  }
+  [data-flicker="room"] {
+    animation: roomOn 2.6s linear 0.3s both;
+  }
+  [data-flicker="cyan-solo"] {
+    animation: cyanOnSolo 2s linear 0.3s both;
+  }
+  [data-flicker="room-solo"] {
+    animation: roomOnSolo 2s linear 0.3s both;
+  }
+  [data-stutter] {
+    display: inline-block;
+    animation: stutter 11s linear 5s infinite;
+  }
+
+  .room {
+    opacity: 1;
+    transition: opacity 0.15s;
+    pointer-events: none;
+  }
+
+  .neon-head {
+    color: var(--cyan-unlit-head);
+    text-shadow: none;
+  }
+  .neon-head[data-lit] {
+    color: var(--color-cyan-tube);
+    text-shadow: var(--shadow-glow-cyan-sm);
+    animation: headOn 0.9s linear both;
+  }
+  .prose .neon-head {
+    color: var(--cyan-unlit-head-article);
+  }
+  .prose .neon-head[data-lit] {
+    text-shadow: var(--shadow-glow-cyan-xs);
+  }
+
+  html[data-lights="off"] {
+    .tube-pink,
+    .tube-pink-sm {
+      color: var(--pink-unlit);
+    }
+    .tube-cyan {
+      color: var(--cyan-unlit);
+    }
+    .tube-pink,
+    .tube-pink-sm,
+    .tube-cyan,
+    .neon-head[data-lit] {
+      text-shadow: none;
+      animation: none;
+    }
+    .neon-head[data-lit] {
+      color: var(--cyan-unlit-head);
+    }
+    [data-flicker],
+    [data-stutter] {
+      animation: none;
+    }
+    .room {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-flicker],
+    [data-stutter],
+    .neon-head[data-lit] {
+      animation: none;
+    }
+    .neon-head {
+      color: var(--color-cyan-tube);
+      text-shadow: var(--shadow-glow-cyan-sm);
+    }
+    html[data-lights="off"] .neon-head {
+      color: var(--cyan-unlit-head);
+      text-shadow: none;
+    }
+  }
+
+  /* Index rows */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 24px;
+    padding: 18px 0;
+    color: var(--color-text);
+  }
+  .row:hover {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-hover);
+  }
+
+  .glow-hover:hover {
+    color: var(--color-pink-tube);
+    text-shadow: var(--shadow-glow-hover);
+  }
+
+  /* CTA pills */
+  .pill {
+    padding: 12px 22px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta-lg);
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+  }
+  .pill:hover {
+    border-color: var(--color-muted);
+    color: #fff;
+  }
+  .pill-primary {
+    border-color: var(--color-link);
+    color: var(--color-pink-tube);
+    box-shadow: var(--cta-glow);
+  }
+  .pill-primary:hover {
+    border-color: var(--color-link);
+    box-shadow: var(--cta-glow-hover);
+  }
+
+  /* Article body */
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    color: var(--color-body);
+    text-wrap: pretty;
+  }
+  .prose > :first-child:is(p) {
+    font-size: var(--text-lede);
+    line-height: var(--text-lede--line-height);
+    color: var(--color-text);
+  }
+  .prose p,
+  .prose ul,
+  .prose ol,
+  .prose pre,
+  .prose dl,
+  .prose blockquote,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin: 0;
+  }
+  .prose a {
+    border-bottom: 1px solid var(--link-underline);
+  }
+  .prose a:hover {
+    border-bottom-color: currentColor;
+  }
+  .prose strong {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .prose h2 {
+    margin-top: 32px;
+    font-family: var(--font-neon);
+    font-weight: 400;
+    font-size: var(--text-h2);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .prose h3,
+  .prose h4 {
+    margin-top: 8px;
+    font-weight: 500;
+    color: var(--color-text);
+    font-size: 1.1em;
+  }
+  .prose ul,
+  .prose ol {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prose li {
+    position: relative;
+    padding-left: 28px;
+  }
+  .prose li::before {
+    position: absolute;
+    left: 0;
+    color: var(--color-link);
+  }
+  .prose ul > li::before {
+    content: "—";
+  }
+  .prose ol {
+    counter-reset: item;
+  }
+  .prose ol > li::before {
+    counter-increment: item;
+    content: counter(item);
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+  }
+  .prose li > p {
+    margin: 0;
+  }
+  .prose li :is(ul, ol) {
+    margin-top: 10px;
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--color-code-bg);
+    color: var(--color-code);
+  }
+  .prose pre {
+    padding: 20px 24px;
+    border-radius: var(--radius-plate);
+    border: 1px solid var(--color-hairline);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+  }
+  .prose img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-plate);
+    border: 1px solid var(--color-hairline);
+    background: #1c1620;
+  }
+  .prose p:has(> img:only-child) {
+    margin: 24px -24px;
+  }
+  .prose figure {
+    margin: 24px -24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .prose figcaption {
+    padding: 0 24px;
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    color: var(--color-muted);
+  }
+  /* Markdown `>` quotes are notes: quiet, with a pink rule. */
+  .prose blockquote {
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--color-link);
+    font-size: 17px;
+    color: var(--color-muted);
+  }
+  .prose blockquote a {
+    color: var(--color-link);
+  }
+  /* The design's pull quote, only via <PullQuote>. */
+  .prose .pull-quote {
+    margin: 8px 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-script);
+    font-size: var(--text-quote);
+    line-height: var(--text-quote--line-height);
+  }
+  .prose blockquote p {
+    margin: 0;
+  }
+  .prose dl {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .prose dt {
+    font-family: var(--font-mono);
+    font-size: 15px;
+  }
+  .prose dd {
+    margin: 0;
+  }
+  .prose hr {
+    border: 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .prose table {
+    font-size: 16px;
+    border-collapse: collapse;
+  }
+  .prose th,
+  .prose td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .prose th {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: var(--text-meta-lg);
+    color: var(--color-muted);
+  }
+  .prose iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-plate);
+  }
+
+  /* Reading progress: scroll-driven, no JS */
+  .progress {
+    width: 0;
+    height: 100%;
+    background: var(--color-link);
+    box-shadow: var(--shadow-glow-bar);
+    animation: grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
