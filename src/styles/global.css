@@ -67,8 +67,8 @@
   --shadow-glow-cyan:
     0 0 3px #fff, 0 0 10px var(--color-cyan-mid), 0 0 24px var(--color-cyan), 0 0 54px var(--color-cyan);
   --shadow-glow-pink-sm: 0 0 3px #fff, 0 0 10px var(--color-pink-mid), 0 0 22px var(--color-pink);
-  --shadow-glow-cyan-sm: 0 0 8px var(--color-cyan-mid), 0 0 20px var(--color-cyan);
-  --shadow-glow-cyan-xs: 0 0 6px var(--color-cyan-mid), 0 0 18px var(--color-cyan);
+  --shadow-glow-cyan-sm: 0 0 2px #fff, 0 0 8px var(--color-cyan-mid), 0 0 20px var(--color-cyan);
+  --shadow-glow-cyan-xs: 0 0 2px #fff, 0 0 6px var(--color-cyan-mid), 0 0 18px var(--color-cyan);
   --shadow-glow-hover:
     0 0 8px color-mix(in srgb, var(--color-pink-mid) 90%, transparent),
     0 0 22px color-mix(in srgb, var(--color-pink) 50%, transparent);
@@ -82,8 +82,8 @@
 :root {
   --pink-unlit: color-mix(in srgb, var(--color-pink-tube) 12%, transparent);
   --cyan-unlit: color-mix(in srgb, var(--color-cyan-tube) 12%, transparent);
-  --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 22%, transparent);
-  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 28%, transparent);
+  --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 45%, transparent);
+  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 55%, transparent);
   --cyan-unlit-title: color-mix(in srgb, var(--color-cyan-tube) 20%, transparent);
   --pink-half: color-mix(in srgb, var(--color-pink-tube) 30%, transparent);
   --cyan-half: color-mix(in srgb, var(--color-cyan-tube) 35%, transparent);
