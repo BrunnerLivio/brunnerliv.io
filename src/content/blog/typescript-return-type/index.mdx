@@ -1,0 +1,99 @@
+---
+title: "TypeScript: Crafting Custom Return Types via Parameters"
+description: "Strictly type the return type of your TypeScript functions with this nifty trick."
+date: 2022-08-19
+tags: ["webdev", "typescript", "learning", "tutorial"]
+draft: true
+devTo: "https://dev.to/brunnerlivio/typescript-crafting-custom-return-types-via-parameters-12go"
+cover: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lh86kdevd8hkroyg41ne.png"
+---
+
+Sometimes it is useful to change the return type depending on the function
+parameters. But what does this exactly mean? For that let's have a look at the following example:
+
+> **NOTE**: In order to reproduce this example, you need to enable
+> `compilerOptions.strictNullChecks = true` in your `tsconfig.json`
+
+```typescript
+// We can expect `translations` is a object of the structure Record<string, string>
+import translations from "translations.yml"
+
+function getTranslation(key: string, fallback?: string) {
+  return translations[key] || fallback;
+}
+
+const res1 = getTranslation("goodbye");
+//    ^? const res1: string | undefined
+//    ✅ Correct, the result might be string or might be undefined
+
+
+const res2 = getTranslation("goodbye", "Good bye");
+//    ^? const res2: string | undefined
+//    ❌ Incorrect, the result can only be a string
+```
+
+`getTranslation()` is a function that will try to return the translation of the given
+`key`. If the translation can not be found, it will use the given `fallback` that can
+be passed optionally as second argument.
+
+If we look at `res2` & the implementation of `getTranslation()` we can actually
+be sure that the result should always return `string`. So how do we fix this?
+
+One method I like to use is function overloading. In case you have never
+heard of function overloading; You can have multiple functions with the same
+name but different parameter types and return type. Overloading has many uses
+but in this particular case I would like to teach TypeScript "in case the 
+parameter `fallback` is actually defined, return `string`".
+
+Let's have a look how we can do this with this example.
+
+```diff
++ function getTranslation(key: string, fallback: string): string;
++ function getTranslation(key: string, fallback?: string): string | undefined;
+function getTranslation(key: string, fallback?: string) {
+  return translations[key] || fallback;
+}
+
+const res1: string | undefined = getTranslation("goodbye")
+//    ^? const res1: string | undefined
+//    ✅ Correct, the result might be string or might be undefined
+
+const res2 = getTranslation("goodbye", "Good bye");
+//    ^? const res2: string
+//    ✅ Correct, the result is always a string
+```
+
+Now we have the correct type as a result 🎉
+
+### The downsides of using explicit return types and function overloads
+
+This secret super move comes at a high price & should be used cautiously.
+The function overloads are closely coppled to the actual logic of the function itself which isn't a good practice.
+When you explicitely define types you can lie about the types. The implementation
+on the other hand can't lie. 
+
+Let's say, if we change it so that the `fallback` is not taken into
+account anymore in the actual implementation we actually get a wrong return type
+
+```diff
+function getTranslation(key: string, fallback: string): string;
+function getTranslation(key: string, fallback?: string): string | undefined;
+function getTranslation(key: string, fallback?: string) {
+-  return translations[key] || fallback
++  return translations[key]
+}
+
+const res1 = getTranslation("goodbye");
+//    ^? const res1: string | undefined
+//    ✅ Still correct
+
+const res2 = getTranslation("goodbye", "Good bye");
+//    ^? const res2: string
+//    💣💣💣 That's wrong! It can be undefined
+```
+
+In this example the function overloads are actually harmful, which might cause
+an actual bug in production. No errors from TypeScript. Everything is green.
+
+Yeah... You're playing with fire. Sometimes it's warranted to play with fire (e.g. as a library author to provide better DX), 
+sometimes it's just the better route to do an additional null check even though technically it wouldn't be needed.
