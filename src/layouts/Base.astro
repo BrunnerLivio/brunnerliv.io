@@ -1,10 +1,5 @@
 ---
-import "@fontsource/yellowtail";
-import "@fontsource/tilt-neon";
-import "@fontsource/instrument-sans/400.css";
-import "@fontsource/instrument-sans/500.css";
-import "@fontsource/instrument-sans/400-italic.css";
-import "@fontsource/chivo-mono/400.css";
+import { Font } from "astro:assets";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { site } from "../site";
@@ -44,6 +39,16 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <Font cssVariable="--font-yellowtail" preload />
+    <Font cssVariable="--font-tilt-neon" preload />
+    <Font
+      cssVariable="--font-instrument-sans"
+      preload={[
+        { weight: 400, style: "normal" },
+        { weight: 500, style: "normal" },
+      ]}
+    />
+    <Font cssVariable="--font-chivo-mono" preload />
     <ClientRouter />
     <script is:inline>
       try {

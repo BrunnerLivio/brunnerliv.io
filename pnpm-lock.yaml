@@ -23,18 +23,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.4
         version: 3.7.4
-      '@fontsource/chivo-mono':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource/instrument-sans':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource/tilt-neon':
-        specifier: ^5.3.0
-        version: 5.3.0
-      '@fontsource/yellowtail':
-        specifier: ^5.3.0
-        version: 5.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -545,18 +533,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@fontsource/chivo-mono@5.3.0':
-    resolution: {integrity: sha512-JhGFmYUkWc/jQ5yQt8tp02VO1gouolfnSfNbo8qCuET7Cu6X2VieLpic2ZXQPvDQBcqjjrmruPnkGnoYmxMlaQ==}
-
-  '@fontsource/instrument-sans@5.3.0':
-    resolution: {integrity: sha512-QwXc4hb/px3XvSPS2CPAOgey8nyrQFxgxrmXQQ+pN+P51hKdAcchxpg8rSbjANFfPu6VKXhDqkVDucXMZ9CM5g==}
-
-  '@fontsource/tilt-neon@5.3.0':
-    resolution: {integrity: sha512-A9C6HZEwi8TWuLiSzJQdpeb7F3rbB+nfe5MswkiR27iZVgZ9DAAB3fORtYIkAbndhH9ydnwfOJC2oR04HXyW5w==}
-
-  '@fontsource/yellowtail@5.3.0':
-    resolution: {integrity: sha512-atz4CIdbP7otppxRaObJiygnkyJzIuLFpPRjWspXvXhBWLB0sk35cCu5r6gSkDomRtEWakJ8//bWbyBjJbilGg==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -3125,14 +3101,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.2':
     optional: true
-
-  '@fontsource/chivo-mono@5.3.0': {}
-
-  '@fontsource/instrument-sans@5.3.0': {}
-
-  '@fontsource/tilt-neon@5.3.0': {}
-
-  '@fontsource/yellowtail@5.3.0': {}
 
   '@img/colour@1.1.0':
     optional: true

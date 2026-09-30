@@ -27,11 +27,6 @@
   --color-lever: #fbf8f4;
   --color-lever-dark: #e2dad1;
 
-  --font-script: "Yellowtail", cursive;
-  --font-neon: "Tilt Neon", sans-serif;
-  --font-sans: "Instrument Sans", system-ui, sans-serif;
-  --font-mono: "Chivo Mono", monospace;
-
   --text-sign-script: clamp(88px, 11vw, 168px);
   --text-sign-block: clamp(34px, 4.2vw, 60px);
   --text-h1: clamp(44px, 7.5vw, 84px);
@@ -76,6 +71,14 @@
   --shadow-glow-bar: 0 0 6px var(--color-pink-mid), 0 0 14px var(--color-pink);
 
   --ease-lever: ease-out;
+}
+
+/* Fonts come from Astro's Fonts API (astro.config.mjs); inline so utilities get the stack. */
+@theme inline {
+  --font-script: var(--font-yellowtail);
+  --font-neon: var(--font-tilt-neon);
+  --font-sans: var(--font-instrument-sans);
+  --font-mono: var(--font-chivo-mono);
 }
 
 /* Derived steps (kept out of @theme so they don't become utilities) */
