@@ -1,39 +1,32 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="src/images/lb-icon.png" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  brunnerliv.io
-</h1>
+# brunnerliv.io
 
-<p align="center">
-  <img src="screenshot.png" alt="Screenshot">
-</p>
+Personal website of Livio Brunner. Astro, MDX, Tailwind v4, deployed on Netlify.
 
-## 🚀  Quick start
-
-Make sure you have NodeJS installed.
-
-```bash
-git clone https://github.com/BrunnerLivio/brunnerliv.io.git
-cd brunnerliv.io
-npm i
-npm run start
+```sh
+pnpm install
+pnpm dev      # local dev server
+pnpm build    # static build to dist/
+pnpm check    # astro check
+pnpm lint     # oxlint
+pnpm format   # prettier
 ```
 
-## 🦕  Deno?! 
+## Writing
 
-```bash
-deno https://brunnerliv.io/me.ts
+Articles live in `src/content/blog/<slug>/index.mdx`. The folder name is the URL: `/articles/<slug>/`.
+
+```mdx
+---
+title: "Title"
+description: "One sentence for the list and meta tags."
+date: 2026-01-31
+tags: ["typescript"] # optional, not rendered
+draft: true # optional, excluded from the build
+devTo: "https://dev.to/…" # optional, shows "Also on DEV"
+cover: ./featured-img.png # optional, used for OG image; a URL also works
+---
 ```
 
-## Credits
+Components available in every article without importing: `<PullQuote>`, `<Figure src alt caption>`, `<Cta links={[{ href, label, primary }]} />`.
 
-- Dark mode color scheme inspired by [Reddit Account Analyser](https://www.reddit.com/r/web_design/comments/5t8qfg/gif_of_a_reddit_account_analyser_im_building_with/)
-- Page structure inspired by [overreacted.io](https://overreacted.io/)
-- Light/Dark mode switch adopted from [overreacted.io](https://overreacted.io/)
-- Header stars technique adopted from [getgrav.org](https://getgrav.org/)
-- Mountain ([Rigi](https://www.rigi.ch/)) SVG image by my friend Tanja <3
-- Built with [GatsbyJS](https://www.gatsbyjs.org/)
+Projects and talks are in `src/data/*.json`. Design tokens are in `src/styles/global.css` under `@theme`.
