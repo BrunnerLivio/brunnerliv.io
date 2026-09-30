@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { slide } from "astro:transitions";
 import Base from "../layouts/Base.astro";
 import Sign from "../components/Sign.astro";
 import LightSwitch from "../components/LightSwitch.astro";
@@ -70,7 +71,7 @@ const sections = [
 
     <main
       transition:name="content"
-      transition:animate="slide"
+      transition:animate={slide({ duration: "1s" })}
       class="relative flex min-w-0 flex-1 basis-[460px] flex-col gap-[12vh] px-[clamp(24px,6vw,96px)] pt-[14vh] pb-[10vh]"
     >
       {sections.map((sec) => (

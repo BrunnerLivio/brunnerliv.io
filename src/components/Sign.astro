@@ -1,4 +1,5 @@
 ---
+import { fade } from "astro:transitions";
 // The neon sign. Click replays the flicker (wired in Base.astro).
 ---
 
@@ -12,6 +13,7 @@
   </span>
   <span
     transition:name="brunner"
+    transition:animate={fade({ duration: "1s" })}
     data-flicker="cyan"
     class="tube-cyan mt-1.5 font-neon text-sign-block tracking-[0.24em] pl-[0.24em]"
   >

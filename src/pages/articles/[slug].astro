@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { slide } from "astro:transitions";
 import Base from "../../layouts/Base.astro";
 import LightSwitch from "../../components/LightSwitch.astro";
 import SocialLinks from "../../components/SocialLinks.astro";
@@ -47,7 +48,7 @@ const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.
 
   <article
     transition:name="content"
-    transition:animate="slide"
+    transition:animate={slide({ duration: "1s" })}
     class="relative mx-auto max-w-[700px] px-6 pt-[12vh]"
   >
     <header class="mb-[9vh] flex flex-col gap-7">

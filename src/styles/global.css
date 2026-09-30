@@ -324,6 +324,13 @@
   }
 }
 
+/* View transitions: morphs of the sign and switch into the article nav */
+::view-transition-group(logo),
+::view-transition-group(switch) {
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
 /* ---------- Neon system ----------
    Lit by default. `html[data-lights="off"]` unlights everything.
    [data-flicker="pink|cyan|cyan-solo|room|room-solo"] plays the switch-on flicker.
