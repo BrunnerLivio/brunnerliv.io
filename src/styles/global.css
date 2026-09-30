@@ -80,13 +80,13 @@
 
 /* Derived steps (kept out of @theme so they don't become utilities) */
 :root {
-  --pink-unlit: color-mix(in srgb, var(--color-pink-tube) 12%, transparent);
-  --cyan-unlit: color-mix(in srgb, var(--color-cyan-tube) 12%, transparent);
-  --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 45%, transparent);
-  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 55%, transparent);
-  --cyan-unlit-title: color-mix(in srgb, var(--color-cyan-tube) 20%, transparent);
-  --pink-half: color-mix(in srgb, var(--color-pink-tube) 30%, transparent);
-  --cyan-half: color-mix(in srgb, var(--color-cyan-tube) 35%, transparent);
+  --pink-unlit: color-mix(in srgb, var(--color-pink-tube) 12%, var(--color-wall));
+  --cyan-unlit: color-mix(in srgb, var(--color-cyan-tube) 12%, var(--color-wall));
+  --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 45%, var(--color-wall));
+  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 55%, var(--color-wall));
+  --cyan-unlit-title: color-mix(in srgb, var(--color-cyan-tube) 20%, var(--color-wall));
+  --pink-half: color-mix(in srgb, var(--color-pink-tube) 30%, var(--color-wall));
+  --cyan-half: color-mix(in srgb, var(--color-cyan-tube) 35%, var(--color-wall));
   --pink-room: color-mix(in srgb, var(--color-pink) 20%, transparent);
   --pink-room-mid: color-mix(in srgb, var(--color-pink) 6%, transparent);
   --cyan-room: color-mix(in srgb, var(--color-cyan) 12%, transparent);
