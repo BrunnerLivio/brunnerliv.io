@@ -83,7 +83,7 @@
   --pink-unlit: color-mix(in srgb, var(--color-pink-tube) 12%, var(--color-wall));
   --cyan-unlit: color-mix(in srgb, var(--color-cyan-tube) 12%, var(--color-wall));
   --cyan-unlit-head: color-mix(in srgb, var(--color-cyan-tube) 45%, var(--color-wall));
-  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 55%, var(--color-wall));
+  --cyan-unlit-head-article: color-mix(in srgb, var(--color-cyan-tube) 95%, var(--color-wall));
   --cyan-unlit-title: color-mix(in srgb, var(--color-cyan-tube) 20%, var(--color-wall));
   --pink-half: color-mix(in srgb, var(--color-pink-tube) 30%, var(--color-wall));
   --cyan-half: color-mix(in srgb, var(--color-cyan-tube) 35%, var(--color-wall));
@@ -608,9 +608,21 @@
     font-size: var(--text-meta);
     color: var(--color-muted);
   }
+  /* Markdown `>` quotes are notes: quiet, with a pink rule. */
   .prose blockquote {
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--color-link);
+    font-size: 17px;
+    color: var(--color-muted);
+  }
+  .prose blockquote a {
+    color: var(--color-link);
+  }
+  /* The design's pull quote, only via <PullQuote>. */
+  .prose .pull-quote {
     margin: 8px 0;
     padding: 0;
+    border: 0;
     font-family: var(--font-script);
     font-size: var(--text-quote);
     line-height: var(--text-quote--line-height);
