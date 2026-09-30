@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "lint": "oxlint",
+    "lint": "oxlint && eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -29,11 +29,15 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "astro-eslint-parser": "^3.2.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-better-tailwindcss": "^4.7.0",
     "oxlint": "^1.86.0",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0"
   },
   "packageManager": "pnpm@11.17.0"
 }

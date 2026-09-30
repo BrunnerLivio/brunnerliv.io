@@ -9,6 +9,6 @@ pnpm install
 pnpm dev      # local dev server
 pnpm build    # static build to dist/
 pnpm check    # astro check
-pnpm lint     # oxlint
+pnpm lint     # oxlint + eslint (Tailwind class checks in .astro)
 pnpm format   # prettier
 ```
