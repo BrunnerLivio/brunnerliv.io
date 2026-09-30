@@ -531,30 +531,30 @@
     color: var(--color-text);
     font-size: 1.1em;
   }
-  .prose ul,
-  .prose ol {
+  .prose ul:not(.not-prose *),
+  .prose ol:not(.not-prose *) {
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  .prose li {
+  .prose li:not(.not-prose *) {
     position: relative;
     padding-left: 28px;
   }
-  .prose li::before {
+  .prose li:not(.not-prose *)::before {
     position: absolute;
     left: 0;
     color: var(--color-link);
   }
-  .prose ul > li::before {
+  .prose ul > li:not(.not-prose *)::before {
     content: "—";
   }
   .prose ol {
     counter-reset: item;
   }
-  .prose ol > li::before {
+  .prose ol > li:not(.not-prose *)::before {
     counter-increment: item;
     content: counter(item);
     font-family: var(--font-mono);
@@ -574,7 +574,7 @@
     background: var(--color-code-bg);
     color: var(--color-code);
   }
-  .prose pre {
+  .prose pre:not(.not-prose *) {
     padding: 20px 24px;
     border-radius: var(--radius-plate);
     border: 1px solid var(--color-hairline);
@@ -612,7 +612,7 @@
     color: var(--color-muted);
   }
   /* Markdown `>` quotes are notes: quiet, with a pink rule. */
-  .prose blockquote {
+  .prose blockquote:not(.not-prose *) {
     padding: 4px 0 4px 22px;
     border-left: 2px solid var(--color-link);
     font-size: 17px;

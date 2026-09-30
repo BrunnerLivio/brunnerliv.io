@@ -1,0 +1,207 @@
+---
+title: "Citations a language model cannot fake"
+description: "How I built source attribution for a RAG assistant: opaque handles the model can only copy, a per-turn registry, and deterministic resolution into numbered badges."
+date: 2026-09-30
+tags: ["rag", "llm", "typescript", "langchain"]
+draft: true
+---
+
+import PipelineTrace from "../../../components/blog/rag-citations/PipelineTrace";
+import HandleDemo from "../../../components/blog/rag-citations/HandleDemo";
+import CitationResolver from "../../../components/blog/rag-citations/CitationResolver";
+import StreamingDemo from "../../../components/blog/rag-citations/StreamingDemo";
+
+For my bachelor thesis I built a conversational assistant that helps people pick a Swiss charity to donate to. Trust was the whole point of the project, and in the user study the single strongest trust cue was not the recommendation logic or the verified badges. It was the small numbered citation next to a factual claim. Eight of thirteen participants singled out visible sources as the reason they believed the assistant.
+
+That only works if the citations are real. A language model will happily produce something that looks like a citation, and a wrong citation is worse than none. This article walks through the citation system for the retrieval part of the assistant: how a retrieved passage becomes a handle, how the model is allowed to use it, and how the server makes sure nothing the model invents ever reaches the screen.
+
+## The one rule
+
+The model never creates a citation. It copies one.
+
+Everything below follows from that rule. Retrieval hands the model opaque tokens. The model may place those tokens after claims. The server resolves the tokens against what it actually retrieved in this turn and throws away everything else. The model's only degree of freedom is where to put a token, and whether to put it at all.
+
+## The trace, end to end
+
+Here is one user question travelling through all six stages. Step through it; the rest of the article explains each stage.
+
+<PipelineTrace client:idle />
+
+## Stage 0: what a chunk needs to know
+
+Retrieval runs over three corpora: organisation websites, their annual reports as PDFs, and Swiss donation-sector reports. All of it is chunked the same way, a recursive character splitter with 1,000-character chunks and 200 overlap, embedded with `text-embedding-3-large`, and stored in Postgres with pgvector.
+
+The interesting part is not the chunking. It is the metadata every chunk carries, because that is all a citation can ever be built from:
+
+```ts
+split.metadata = {
+  ...split.metadata, // includes `page` for PDFs, one document per page
+  source_type: "ngo_report",
+  source_url: report.url,
+  title: report.title,
+  year: report.year,
+  ngo_id: report.ngo_id,
+};
+```
+
+Notice what is *not* stored: no chunk id, no citation handle, no character offsets. Identity is derived at query time from the source type, the URL, the page and the passage text itself. That means re-indexing the same document produces the same handles, and there is no id table to keep in sync.
+
+## Stage 1 and 2: from passage to handle
+
+When the model calls a search tool, each returned passage gets an internal id and a handle derived from it:
+
+```ts
+export const ragPassageId = (sourceType: string, url: string, page: number | undefined, passage: string) =>
+  `${ragId(sourceType, url, page)}#s${shortHash(passage.replace(/\s+/g, " ").trim())}`;
+
+export const sourceHandle = (id: string) => `src:${shortHash(id)}`;
+```
+
+`shortHash` is the first eight hex characters of a SHA-256. Try it:
+
+<HandleDemo client:idle />
+
+Two decisions here took a few iterations to get right.
+
+**The handle is opaque on purpose.** The first version used readable ids like `rag:ngo_website:ab12#p3`. The model treated them as language. It synthesised plausible-looking ids from nearby text, and the nastiest one I saw was `[rag:score=0.31 (page 15)]`, built from the similarity score and page number that happened to sit next to the passage. Switching to hashed handles fixed this almost entirely. There is nothing in `src:0a9f90c8` to reason about, so the model copies it verbatim. The same shape was later adopted for organisation card ids for the same reason.
+
+**The id includes the passage hash.** An earlier version identified a source by URL and page. Two chunks from the same page then collapsed into one citation, and the badge showed the wrong excerpt. Hashing the normalised passage text into the id gives each retrieved passage its own handle and its own quote, while identical passages still deduplicate.
+
+## Stage 3: what the model is told
+
+The search tool returns a tuple. The first element is text, which is what the model reads. The second is a structured list of citable sources, which travels out of band as the tool message's artifact and is never shown to the model:
+
+```ts
+const searchTool = tool(
+  async (input): Promise<[string, CitableSource[]]> => {
+    const results = await store.similaritySearchWithScore(query, k ?? 4, { source_type: sourceType, ...filters });
+    return formatRagResults(results);
+  },
+  { name, description, schema, responseFormat: "content_and_artifact" },
+);
+```
+
+The text puts each passage under its handle and ends with a guide that lists every handle the model may use:
+
+```text
+[src:0a9f90c8]
+Von den Einnahmen sind 90,7 Prozent in die Projekte geflossen …
+
+---
+
+[src:b71d0a44]
+Der Verwaltungsaufwand betrug 9,3 Prozent der Gesamtausgaben …
+
+Citable sources — to cite a grounded claim, append the exact bracketed
+source handle shown here (copy it verbatim, do not build your own from
+names, categories, page numbers, or scores):
+[src:0a9f90c8] — Caritas Schweiz Jahresrechnung (p.21)
+[src:b71d0a44] — Caritas Schweiz Jahresrechnung (p.21)
+```
+
+The similarity score is deliberately left out of the text. It was only ever noise the model could build fake handles from.
+
+The system prompt adds the rules once for every agent:
+
+```md
+## Citing sources
+
+Every factual claim about an organisation must carry a source annotation.
+After a claim grounded in a tool result, append the exact opaque source
+handle that tool printed, in square brackets, with no space before it.
+
+- Copy handles verbatim. Never invent, guess, or alter a handle, and never
+  build one out of a page number, score, category, or passage text.
+- Only cite claims that are actually grounded in a tool result.
+- If one claim draws on several sources, append each handle.
+- The markers are stripped from the visible reply and rendered as compact
+  citation badges, so place them inline right after the claim.
+```
+
+Three layers say the same thing: the tool description, the guide at the end of every tool result, and the system prompt. That redundancy is cheap and it matters. The model gets the instruction at the moment it is reading the passages, not only at the top of a long context.
+
+## Stage 4: the registry
+
+While the graph streams, the server collects every tool artifact into a map from handle to source. That map is the registry for this turn:
+
+```ts
+const citations = new Map<string, HandledSource>();
+const addFrom = (message: unknown) => {
+  const artifact = (message as { artifact?: unknown })?.artifact;
+  for (const source of parseCitableSources(artifact)) {
+    citations.set(source.handle, source);
+  }
+};
+```
+
+The handle is recomputed from the id on the server. The registry never trusts anything the model wrote. It also starts empty on every turn: handles from a previous answer cannot resolve, and the assistant text replayed as history has all markers stripped first, so the model never sees old handles it could reuse.
+
+## Stage 5: resolution
+
+Once the reply is complete, one function turns markers into numbered placeholders:
+
+```ts
+export const resolveSourceAttribution = (text: string, registry: CitationRegistry) => {
+  let nextRef = 1;
+  const refByHandle = new Map<string, number>();
+  const resolved = new Map<number, ResolvedCitation>();
+
+  const content = text.replace(SOURCE_MARKER_RE, (marker) => {
+    if (!WELL_FORMED_HANDLE_RE.test(marker)) return "";
+    const handle = marker.slice(1, -1);
+    const source = registry.get(handle);
+    if (!source) return "";
+    let ref = refByHandle.get(handle);
+    if (ref === undefined) {
+      ref = nextRef++;
+      refByHandle.set(handle, ref);
+      resolved.set(ref, { ...source, handle, ref });
+    }
+    return `[[cite:${ref}]]`;
+  });
+
+  return { content, sources: [...resolved.values()].sort((a, b) => a.ref - b.ref) };
+};
+```
+
+Four properties fall out of these twenty lines. A malformed marker is removed. A handle that was not returned by a tool in this turn is removed. Repeated handles get the same number. Numbers follow first appearance, so reading order and source order agree. Play with it, the registry on top is fixed, the model output is yours to break:
+
+<CitationResolver client:idle />
+
+This is the whole trust argument in one function. The model's output is treated as untrusted text, and the set of valid citations is defined by the server's own tool calls, not by the model's memory or its sense of what a citation should look like.
+
+## Stage 6: rendering, and the streaming problem
+
+Resolution needs the full reply and the full registry, so it can only run at the end. But the reply streams token by token, and raw `[src:…]` markers are in that stream.
+
+The first attempt was a stateful streaming resolver that buffered partial markers and emitted badges as soon as their handle was known. It worked and it was the most complicated code in the project, so I deleted it. The replacement is two regexes on the client that mask handles out of the streamed text, including a half-arrived one at the end of the buffer:
+
+```ts
+const SOURCE_HANDLE_RE = /\[src:[^\]]*(\]|$)/g;
+const INCOMPLETE_TRAILING_MARKER_RE = /\[\[[a-z-]*(?::[^\]]*)?\]?$/;
+```
+
+When the final event arrives it replaces the streamed content with the resolved text, and the badges appear together:
+
+<StreamingDemo client:idle />
+
+The trade-off is visible in the demo: no badges during streaming, all of them at once after. For a chat reply of a few sentences that felt fine to participants, and it removed an entire class of bugs.
+
+On the rendered side, a small markdown plugin folds adjacent placeholders into one badge, so a claim with two sources reads as "1, 2" rather than two chips. The badge opens a drawer with the label, the source category, and the exact retrieved passage as a quote. For PDFs the link gets `#page=N` appended, so the browser opens the report on the cited page. An early design coloured the badges by source category; that was dropped because colour implied a credibility ranking the category does not justify. The badges are neutral numbers, and the category lives in the details.
+
+## What this does not do
+
+It is worth being precise about the guarantee. A resolved citation proves that the passage was retrieved in this turn and that the model attached it to this claim. It does not prove that the passage supports the claim, or that the source is correct. The prototype has no claim verification step. Groundedness is checked by an LLM judge in an evaluation harness, on the raw reply, and that is a soft check.
+
+Two smaller gaps. An invented or stale handle is dropped silently, so a claim the model tried to cite can end up with no badge and no warning. And there is no citation-precision metric; the tests cover the resolver's behaviour, not the model's habit of citing the right passage.
+
+## If you build one
+
+- Give the model opaque tokens and let it copy them. Readable ids invite creative reconstruction.
+- Keep the structured source data out of the model's context. Tool artifacts, or any out-of-band channel, are the right place for it.
+- Define validity by what the server retrieved in this turn, and resolve on the server, after the reply is complete.
+- Put the citation instructions next to the passages, not only in the system prompt.
+- Include the passage text in the identity, or two chunks from one page will share a citation.
+- Resist the streaming resolver. Mask during streaming, resolve at the end.
+
+The code is in the thesis prototype repository; the resolver, the handle helpers and their tests live under `packages/assistant/src/sourceAttribution`.
