@@ -79,9 +79,6 @@ const sections = [
           NESTJS CORE TEAM
         </a>
       </p>
-      <div class="mt-14">
-        <LightSwitch />
-      </div>
     </aside>
 
     <main
@@ -101,7 +98,12 @@ const sections = [
           </ol>
         </section>
       ))}
-      <SocialLinks />
+      <div class="flex items-end justify-between gap-6">
+        <SocialLinks />
+        <div class="[zoom:0.4]" title="Lights">
+          <LightSwitch />
+        </div>
+      </div>
     </main>
   </div>
 </Base>
