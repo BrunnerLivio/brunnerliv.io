@@ -65,15 +65,20 @@ const sections = [
   <div class="relative flex min-h-screen flex-wrap">
     <aside class="flex flex-1 basis-[460px] flex-col items-center justify-center px-6 py-12 wide:sticky wide:top-0 wide:h-screen">
       <Sign />
-      <a
-        href="https://github.com/nestjs/nest"
-        target="_blank"
-        rel="noopener"
-        class="mt-7 flex items-center gap-2.5 font-mono text-meta tracking-[0.2em] text-muted hover:text-text"
-      >
-        <span class="nest-led size-1.5 rounded-full bg-nest"></span>
-        NESTJS CORE TEAM
-      </a>
+      <p class="mt-7 flex flex-wrap justify-center gap-x-3 font-mono text-meta tracking-[0.2em] text-muted">
+        <a href="https://www.raisenow.com/" target="_blank" rel="noopener" class="text-muted hover:text-text">
+          SOFTWARE ENGINEER AT RAISENOW
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href="https://github.com/nestjs/nest"
+          target="_blank"
+          rel="noopener"
+          class="text-muted hover:text-text"
+        >
+          NESTJS CORE TEAM
+        </a>
+      </p>
       <div class="mt-14">
         <LightSwitch />
       </div>
