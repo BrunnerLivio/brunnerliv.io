@@ -6,6 +6,7 @@ import "@fontsource/instrument-sans/500.css";
 import "@fontsource/instrument-sans/400-italic.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import { site } from "../site";
 
 interface Props {
@@ -43,6 +44,7 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <ClientRouter />
     <script is:inline>
       try {
         if (localStorage.getItem("lights") === "off") document.documentElement.dataset.lights = "off";
@@ -54,6 +56,13 @@ const ogImage = new URL(image, Astro.site);
     <script>
       const html = document.documentElement;
       const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const stored = () => {
+        try {
+          return localStorage.getItem("lights");
+        } catch {
+          return null;
+        }
+      };
 
       const replay = () => {
         if (reduced) return;
@@ -73,20 +82,28 @@ const ogImage = new URL(image, Astro.site);
         }
         if (on) replay();
       };
-      setLights(html.dataset.lights !== "off");
-      for (const b of document.querySelectorAll("[data-lights-toggle]")) {
-        b.addEventListener("click", () => setLights(html.dataset.lights === "off"));
-      }
-      document.querySelector("[data-sign]")?.addEventListener("click", () => {
-        if (html.dataset.lights === "off") setLights(true);
-        else replay();
+
+      // The client router swaps <html> attributes on navigation; restore before paint.
+      document.addEventListener("astro:after-swap", () => {
+        html.dataset.lights = stored() === "off" ? "off" : "on";
       });
 
-      // Headings light up once when scrolled into view.
-      const heads = document.querySelectorAll<HTMLElement>("[data-neon-head]");
-      if (reduced) {
-        for (const h of heads) h.dataset.lit = "";
-      } else {
+      document.addEventListener("astro:page-load", () => {
+        setLights(html.dataset.lights !== "off");
+        for (const b of document.querySelectorAll("[data-lights-toggle]")) {
+          b.addEventListener("click", () => setLights(html.dataset.lights === "off"));
+        }
+        document.querySelector("[data-sign]")?.addEventListener("click", () => {
+          if (html.dataset.lights === "off") setLights(true);
+          else replay();
+        });
+
+        // Headings light up once when scrolled into view.
+        const heads = document.querySelectorAll<HTMLElement>("[data-neon-head]");
+        if (reduced) {
+          for (const h of heads) h.dataset.lit = "";
+          return;
+        }
         for (const h of heads) {
           const io = new IntersectionObserver(
             (entries) => {
@@ -98,7 +115,7 @@ const ogImage = new URL(image, Astro.site);
           );
           io.observe(h);
         }
-      }
+      });
     </script>
   </body>
 </html>

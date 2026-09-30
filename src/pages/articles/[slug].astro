@@ -8,7 +8,7 @@ import Figure from "../../components/mdx/Figure.astro";
 import PullQuote from "../../components/mdx/PullQuote.astro";
 import Cta from "../../components/mdx/Cta.astro";
 import { getPosts } from "../../lib/posts";
-import { longDate, readingTime } from "../../lib/format";
+import { longDate } from "../../lib/format";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { post, next } = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
 const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.cover?.src;
 ---
 
@@ -34,14 +34,22 @@ const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.
     style="background: radial-gradient(70vw 60vh at 50% 22%, var(--cyan-room-article) 0%, var(--cyan-room-article-mid) 45%, transparent 70%)"
   ></div>
 
-  <nav class="relative flex items-center justify-between gap-4 px-[clamp(20px,4vw,48px)] py-[22px]">
-    <a href="/" class="tube-pink-sm font-script text-logo leading-none hover:text-white">
+  <nav class="relative flex items-center gap-6 px-[clamp(20px,4vw,48px)] py-[22px]">
+    <a
+      href="/"
+      transition:name="logo"
+      class="tube-pink-sm font-script text-logo leading-none hover:text-white"
+    >
       Livio
     </a>
     <LightSwitch />
   </nav>
 
-  <article class="relative mx-auto max-w-[700px] px-6 pt-[12vh]">
+  <article
+    transition:name="content"
+    transition:animate="slide"
+    class="relative mx-auto max-w-[700px] px-6 pt-[12vh]"
+  >
     <header class="mb-[9vh] flex flex-col gap-7">
       <a href="/#writing" class="font-mono text-meta tracking-[0.2em] text-muted hover:text-text">
         ← WRITING
@@ -54,7 +62,7 @@ const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.
       </h1>
       <div class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-meta-lg text-muted">
         <span>{longDate(post.data.date)}</span>
-        <span>{readingTime(post.body)} min read</span>
+        <span>{remarkPluginFrontmatter.minutesRead}</span>
         {post.data.devTo && (
           <a href={post.data.devTo} target="_blank" rel="noopener">
             Also on DEV ↗
