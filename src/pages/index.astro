@@ -47,6 +47,7 @@ const sections = [
     rows: talks.map((t) => ({
       href: t.data.youtube,
       title: t.data.title,
+      sub: t.data.venue,
       meta: monthYear(t.data.date),
       external: true,
     })),

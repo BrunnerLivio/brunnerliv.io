@@ -34,6 +34,7 @@ const talks = defineCollection({
     id: z.string(),
     title: z.string(),
     description: z.string(),
+    venue: z.string(),
     date: z.coerce.date(),
     youtube: z.string().url(),
   }),
