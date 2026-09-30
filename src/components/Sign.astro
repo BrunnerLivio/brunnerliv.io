@@ -3,7 +3,7 @@ import { fade } from "astro:transitions";
 // The neon sign. Click replays the flicker (wired in Base.astro).
 ---
 
-<div data-sign title="Flick the switch" class="flex cursor-pointer flex-col items-center select-none">
+<div data-sign title="Flick the switch" class="relative z-10 flex cursor-pointer flex-col items-center select-none">
   <span
     transition:name="logo"
     data-flicker="pink"
