@@ -1,0 +1,15 @@
+---
+// CTA pills. Usage: <Cta links={[{ href, label, primary: true }, { href, label }]} />
+interface Props {
+  links: { href: string; label: string; primary?: boolean }[];
+}
+const { links } = Astro.props;
+---
+
+<div class="mt-6 flex flex-wrap gap-4">
+  {links.map((l) => (
+    <a href={l.href} target="_blank" rel="noopener" class:list={["pill", l.primary && "pill-primary"]}>
+      {l.label} ↗
+    </a>
+  ))}
+</div>

@@ -1,0 +1,104 @@
+---
+import "@fontsource/yellowtail";
+import "@fontsource/tilt-neon";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/instrument-sans/400-italic.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "../styles/global.css";
+import { site } from "../site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+const { title, description = site.description, image = "/og.png", type = "website" } = Astro.props;
+const fullTitle = title ? `${title} · ${site.title}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-lights="on">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#140f17" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={site.title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content={site.twitterHandle} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      try {
+        if (localStorage.getItem("lights") === "off") document.documentElement.dataset.lights = "off";
+      } catch {}
+    </script>
+  </head>
+  <body class="m-0 min-h-screen">
+    <slot />
+    <script>
+      const html = document.documentElement;
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const replay = () => {
+        if (reduced) return;
+        for (const el of document.querySelectorAll<HTMLElement>("[data-flicker]")) {
+          el.style.animation = "none";
+          void el.offsetWidth;
+          el.style.animation = "";
+        }
+      };
+      const setLights = (on: boolean) => {
+        html.dataset.lights = on ? "on" : "off";
+        try {
+          localStorage.setItem("lights", on ? "on" : "off");
+        } catch {}
+        for (const b of document.querySelectorAll("[data-lights-toggle]")) {
+          b.setAttribute("aria-label", on ? "Lights on" : "Lights off");
+        }
+        if (on) replay();
+      };
+      setLights(html.dataset.lights !== "off");
+      for (const b of document.querySelectorAll("[data-lights-toggle]")) {
+        b.addEventListener("click", () => setLights(html.dataset.lights === "off"));
+      }
+      document.querySelector("[data-sign]")?.addEventListener("click", () => {
+        if (html.dataset.lights === "off") setLights(true);
+        else replay();
+      });
+
+      // Headings light up once when scrolled into view.
+      const heads = document.querySelectorAll<HTMLElement>("[data-neon-head]");
+      if (reduced) {
+        for (const h of heads) h.dataset.lit = "";
+      } else {
+        for (const h of heads) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              if (!entries.some((e) => e.isIntersecting)) return;
+              h.dataset.lit = "";
+              io.disconnect();
+            },
+            { threshold: Number(h.dataset.neonHead || 0.25), rootMargin: h.dataset.margin || "0px" },
+          );
+          io.observe(h);
+        }
+      }
+    </script>
+  </body>
+</html>

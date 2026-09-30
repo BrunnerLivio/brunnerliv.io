@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  meta: string;
+  sub?: string;
+  external?: boolean;
+}
+const { href, title, meta, sub, external } = Astro.props;
+---
+
+<li class="border-t border-hairline">
+  <a href={href} class="row" {...(external ? { target: "_blank", rel: "noopener" } : {})}>
+    <span class="flex min-w-0 flex-1 basis-[280px] flex-col gap-1">
+      <span class="text-row font-medium text-pretty">{title}</span>
+      {sub && <span class="text-sub text-muted [text-shadow:none]">{sub}</span>}
+    </span>
+    <span class="font-mono text-meta whitespace-nowrap text-muted [text-shadow:none]">{meta}</span>
+  </a>
+</li>

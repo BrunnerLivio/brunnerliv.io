@@ -1,0 +1,79 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import LightSwitch from "../../components/LightSwitch.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import NeonH2 from "../../components/mdx/NeonH2.astro";
+import Figure from "../../components/mdx/Figure.astro";
+import PullQuote from "../../components/mdx/PullQuote.astro";
+import Cta from "../../components/mdx/Cta.astro";
+import { getPosts } from "../../lib/posts";
+import { longDate, readingTime } from "../../lib/format";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    // "Next" reads down the list (older), wrapping to the newest.
+    props: { post, next: posts[(i + 1) % posts.length] },
+  }));
+}
+
+const { post, next } = Astro.props;
+const { Content } = await render(post);
+const cover = typeof post.data.cover === "string" ? post.data.cover : post.data.cover?.src;
+---
+
+<Base title={post.data.title} description={post.data.description} image={cover} type="article">
+  <div class="pointer-events-none fixed inset-x-0 top-0 z-10 h-0.5">
+    <div class="progress"></div>
+  </div>
+  <div
+    class="room absolute inset-x-0 top-0 h-[120vh]"
+    data-flicker="room-solo"
+    style="background: radial-gradient(70vw 60vh at 50% 22%, var(--cyan-room-article) 0%, var(--cyan-room-article-mid) 45%, transparent 70%)"
+  ></div>
+
+  <nav class="relative flex items-center justify-between gap-4 px-[clamp(20px,4vw,48px)] py-[22px]">
+    <a href="/" class="tube-pink-sm font-script text-logo leading-none hover:text-white">
+      Livio
+    </a>
+    <LightSwitch />
+  </nav>
+
+  <article class="relative mx-auto max-w-[700px] px-6 pt-[12vh]">
+    <header class="mb-[9vh] flex flex-col gap-7">
+      <a href="/#writing" class="font-mono text-meta tracking-[0.2em] text-muted hover:text-text">
+        ← WRITING
+      </a>
+      <h1
+        class="tube-cyan font-neon text-h1 font-normal tracking-[0.01em] text-balance"
+        data-flicker="cyan-solo"
+      >
+        {post.data.title}
+      </h1>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-meta-lg text-muted">
+        <span>{longDate(post.data.date)}</span>
+        <span>{readingTime(post.body)} min read</span>
+        {post.data.devTo && (
+          <a href={post.data.devTo} target="_blank" rel="noopener">
+            Also on DEV ↗
+          </a>
+        )}
+      </div>
+    </header>
+
+    <div class="prose">
+      <Content components={{ h2: NeonH2, Figure, PullQuote, Cta }} />
+    </div>
+
+    <aside class="mt-[16vh] flex flex-col gap-2.5 border-t border-hairline pt-7">
+      <span class="font-mono text-meta tracking-[0.2em] text-muted">NEXT</span>
+      <a href={`/articles/${next.id}/`} class="glow-hover text-next font-medium text-balance text-text">
+        {next.data.title} →
+      </a>
+    </aside>
+
+    <SocialLinks class="pt-[12vh] pb-14" />
+  </article>
+</Base>

@@ -1,0 +1,82 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Sign from "../components/Sign.astro";
+import LightSwitch from "../components/LightSwitch.astro";
+import Row from "../components/Row.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import { getPosts } from "../lib/posts";
+import { monthYear, readingTime } from "../lib/format";
+
+const posts = await getPosts();
+const projects = (await getCollection("projects")).toSorted((a, b) => a.data.order - b.data.order);
+const talks = (await getCollection("talks")).toSorted(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const sections = [
+  {
+    id: "writing",
+    label: "WRITING",
+    rows: posts.map((p) => ({
+      href: `/articles/${p.id}/`,
+      title: p.data.title,
+      meta: `${monthYear(p.data.date)} · ${readingTime(p.body)} min`,
+    })),
+  },
+  {
+    id: "projects",
+    label: "PROJECTS",
+    rows: projects.map((p) => ({
+      href: p.data.sourceCode,
+      title: p.data.name,
+      sub: p.data.description,
+      meta: `${p.data.languages.join(" · ")} ↗`,
+      external: true,
+    })),
+  },
+  {
+    id: "talks",
+    label: "TALKS",
+    rows: talks.map((t) => ({
+      href: t.data.youtube,
+      title: t.data.title,
+      meta: monthYear(t.data.date),
+      external: true,
+    })),
+  },
+];
+---
+
+<Base>
+  <div
+    class="room fixed inset-0"
+    data-flicker="room"
+    style="background: radial-gradient(60vw 70vh at 22% 45%, var(--pink-room) 0%, var(--pink-room-mid) 45%, transparent 70%), radial-gradient(50vw 50vh at 30% 62%, var(--cyan-room) 0%, transparent 65%)"
+  ></div>
+
+  <div class="relative flex min-h-screen flex-wrap">
+    <aside class="flex flex-1 basis-[460px] flex-col items-center justify-center px-6 py-12 wide:sticky wide:top-0 wide:h-screen">
+      <Sign />
+      <div class="mt-14">
+        <LightSwitch />
+      </div>
+    </aside>
+
+    <main class="relative flex min-w-0 flex-1 basis-[460px] flex-col gap-[12vh] px-[clamp(24px,6vw,96px)] pt-[14vh] pb-[10vh]">
+      {sections.map((sec) => (
+        <section id={sec.id} class="flex flex-col gap-7">
+          <h2 class="neon-head font-neon text-section font-normal tracking-[0.2em]" data-neon-head="0.25">
+            {sec.label}
+          </h2>
+          <ol class="flex flex-col">
+            {sec.rows.map((r) => (
+              <Row {...r} />
+            ))}
+          </ol>
+        </section>
+      ))}
+      <SocialLinks />
+    </main>
+  </div>
+</Base>
